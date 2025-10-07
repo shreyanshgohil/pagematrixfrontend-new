@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  // Smooth scrolling for anchor links
+  scroll-behavior: smooth;
+}
+
+// Disable smooth scrolling during back/forward navigation for instant restoration
+html.disable-smooth-scroll {
+  scroll-behavior: auto;
+}

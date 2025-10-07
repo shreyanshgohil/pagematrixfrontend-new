@@ -1,0 +1,39 @@
+.card-horizontal {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  background: #ffffff;
+}
+
+.card-horizontal::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 1.5rem;
+  background: rgba(0, 128, 128, 0.1);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.card-horizontal:hover::before,
+.card-horizontal:focus-within::before {
+  opacity: 1;
+}
+
+.card-horizontal:hover {
+  border-color: rgba(0, 128, 128, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem 0 0 1.5rem;
+}
+
+/* Removed badge animations for better scroll performance */
+
+/* Removed property stat animations for better scroll performance */
+
+/* Removed button animations for better scroll performance */
+
+/* Removed progress bar animations for better scroll performance */
