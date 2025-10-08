@@ -29,19 +29,19 @@ const Privacy = () => {
       icon: <FaEye />,
       title: "Usage Data",
       description:
-        "Information about how you interact with our platform, including property searches and preferences.",
+        "Information about how you interact with our platform, including website URLs tested and performance preferences.",
     },
     {
       icon: <FaShieldAlt />,
       title: "Technical Data",
       description:
-        "IP address, browser type, device information and cookies to improve your experience.",
+        "IP address, browser type, device information and cookies to improve your experience and API performance.",
     },
     {
       icon: <FaEnvelope />,
       title: "Communication Data",
       description:
-        "Messages, inquiries and other communications you send through our platform.",
+        "Messages, inquiries and other communications you send through our platform or API support.",
     },
   ];
 
@@ -50,25 +50,25 @@ const Privacy = () => {
       icon: <FaCheckCircle />,
       title: "Service Provision",
       description:
-        "To provide and improve our real estate services and match you with relevant properties.",
+        "To provide and improve our website performance analysis services and deliver accurate PageSpeed insights.",
     },
     {
       icon: <FaShieldAlt />,
       title: "Security",
       description:
-        "To ensure the security and integrity of our platform and protect against fraud.",
+        "To ensure the security and integrity of our platform and protect against fraud and API abuse.",
     },
     {
       icon: <FaEnvelope />,
       title: "Communication",
       description:
-        "To communicate with you about our services, updates and relevant property information.",
+        "To communicate with you about our services, updates and relevant performance optimization information.",
     },
     {
       icon: <FaCheckCircle />,
       title: "Legal Compliance",
       description:
-        "To comply with legal obligations and regulatory requirements.",
+        "To comply with legal obligations and regulatory requirements for data processing.",
     },
   ];
 
@@ -111,29 +111,30 @@ const Privacy = () => {
   return (
     <>
       <SEO
-        title="Privacy Policy - 11yards Real Estate | Data Protection & User Privacy"
-        description="Learn how 11yards Real Estate collects, uses and protects your personal data. Comprehensive privacy policy covering data rights, security measures and user privacy protection. GDPR compliant data handling."
-        keywords="privacy policy, data protection, user privacy, GDPR compliance, data security, personal data, privacy rights, data collection, 11yards privacy, real estate privacy"
+        title="Privacy Policy - PageSpeed Performance Tool | Data Protection & User Privacy"
+        description="Learn how our PageSpeed performance tool collects, uses and protects your personal data. Comprehensive privacy policy covering data rights, security measures and user privacy protection. GDPR compliant data handling for performance analysis."
+        keywords="privacy policy, data protection, user privacy, GDPR compliance, data security, personal data, privacy rights, data collection, PageSpeed privacy, performance tool privacy, API privacy"
         url="/privacy"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Privacy Policy - 11yards Real Estate",
+          name: "Privacy Policy - PageSpeed Performance Tool",
           description:
-            "Learn how 11yards Real Estate collects, uses and protects your personal data. Comprehensive privacy policy covering data rights, security measures and user privacy protection.",
+            "Learn how our PageSpeed performance tool collects, uses and protects your personal data. Comprehensive privacy policy covering data rights, security measures and user privacy protection.",
           url: `${
-            process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com"
+            process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com"
           }/privacy`,
           isPartOf: {
             "@type": "WebSite",
-            name: "11yards Real Estate",
-            url: process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com",
+            name: "PageSpeed Performance Tool",
+            url:
+              process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com",
           },
           about: {
             "@type": "Thing",
             name: "Data Protection and Privacy",
             description:
-              "Privacy policy and data protection measures for 11yards Real Estate platform",
+              "Privacy policy and data protection measures for PageSpeed performance analysis platform",
           },
           dateModified: new Date().toISOString(),
         }}
@@ -193,8 +194,8 @@ const Privacy = () => {
 
                 <p className="text-lg sm:text-xl text-white/90 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed">
                   We take your privacy seriously. Learn how we collect, use and
-                  protect your personal data to provide you with the best real
-                  estate experience.
+                  protect your personal data to provide you with the best
+                  website performance analysis experience.
                 </p>
               </div>
             </div>
@@ -222,9 +223,10 @@ const Privacy = () => {
 
                     <p className="text-base sm:text-lg leading-relaxed">
                       The primary purpose of collecting your data is to provide
-                      you with our real estate services, whether that's finding
-                      your dream home, connecting with professionals or
-                      accessing valuable market information.
+                      you with our website performance analysis services,
+                      whether that's analyzing your website speed, providing
+                      optimization recommendations or accessing valuable
+                      performance insights through our API.
                     </p>
 
                     <div className="bg-gradient-to-r from-brand-theme/10 to-brand-theme-600/10 rounded-xl p-4 sm:p-6 border border-brand-theme/20">
@@ -392,7 +394,7 @@ const Privacy = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                   <a
-                    href="mailto:privacy@11yards.com"
+                    href="mailto:privacy@pagespeed-tool.com"
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white font-semibold py-3.5 sm:py-4 px-6 sm:px-8 rounded-xl hover:shadow-lg hover:shadow-brand-theme/25 transition-all duration-300 text-sm sm:text-base"
                   >
                     <FaEnvelope className="text-sm" />

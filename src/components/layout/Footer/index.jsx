@@ -106,7 +106,6 @@ const Footer = () => {
       { name: "Privacy Policy", href: "/privacy" },
       { name: "Terms & Conditions", href: "/terms-and-conditions" },
       { name: "Cookie Policy", href: "/cookie-policy" },
-      { name: "RERA Compliance", href: "/rera-compliance" },
     ],
   };
 

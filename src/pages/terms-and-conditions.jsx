@@ -52,12 +52,12 @@ const TermsAndConditions = () => {
     },
     {
       number: "04",
-      title: "Property Listings",
+      title: "API Usage",
       icon: <FaGavel />,
       description:
-        "Our platform allows users to list and search for real estate properties, but we do not list properties ourselves.",
+        "Our platform provides API access for website performance analysis, but we do not guarantee specific performance results.",
       details:
-        "Users are solely responsible for the details and authenticity of their property listings and must comply with all applicable laws.",
+        "Users are solely responsible for their API usage and must comply with rate limits and usage guidelines.",
     },
     {
       number: "05",
@@ -130,15 +130,15 @@ const TermsAndConditions = () => {
     },
     {
       icon: <FaGavel />,
-      title: "Legal Compliance",
+      title: "API Compliance",
       description:
-        "All users must comply with applicable laws and regulations when using our platform.",
+        "All users must comply with API usage guidelines and rate limits when using our platform.",
     },
     {
       icon: <FaCopyright />,
       title: "Intellectual Property",
       description:
-        "Our platform content is protected by copyright and trademark laws.",
+        "Our platform content and API are protected by copyright and trademark laws.",
     },
   ];
 
@@ -150,34 +150,37 @@ const TermsAndConditions = () => {
     "Upload viruses or malicious code",
     "Collect personal information of others",
     "Spam, phish or engage in fraudulent activities",
+    "Exceed API rate limits or abuse our services",
+    "Attempt to reverse engineer our API or platform",
   ];
 
   return (
     <>
       <SEO
-        title="Terms & Conditions - 11yards Real Estate | User Agreement & Legal Terms"
-        description="Read our comprehensive terms and conditions for using 11yards Real Estate platform. User agreement covering property listings, user accounts, legal terms and platform usage guidelines."
-        keywords="terms and conditions, user agreement, legal terms, platform terms, real estate terms, user guidelines, terms of service, 11yards terms, property platform terms"
+        title="Terms & Conditions - PageSpeed Performance Tool | User Agreement & Legal Terms"
+        description="Read our comprehensive terms and conditions for using our PageSpeed performance tool platform. User agreement covering API usage, user accounts, legal terms and platform usage guidelines."
+        keywords="terms and conditions, user agreement, legal terms, platform terms, PageSpeed terms, user guidelines, terms of service, performance tool terms, API terms"
         url="/terms-and-conditions"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Terms & Conditions - 11yards Real Estate",
+          name: "Terms & Conditions - PageSpeed Performance Tool",
           description:
-            "Read our comprehensive terms and conditions for using 11yards Real Estate platform. User agreement covering property listings, user accounts and legal terms.",
+            "Read our comprehensive terms and conditions for using our PageSpeed performance tool platform. User agreement covering API usage, user accounts and legal terms.",
           url: `${
-            process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com"
+            process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com"
           }/terms-and-conditions`,
           isPartOf: {
             "@type": "WebSite",
-            name: "11yards Real Estate",
-            url: process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com",
+            name: "PageSpeed Performance Tool",
+            url:
+              process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com",
           },
           about: {
             "@type": "Thing",
             name: "Terms and Conditions",
             description:
-              "Legal terms and conditions for using the 11yards Real Estate platform",
+              "Legal terms and conditions for using the PageSpeed performance analysis platform",
           },
           dateModified: new Date().toISOString(),
         }}
@@ -237,8 +240,8 @@ const TermsAndConditions = () => {
 
                 <p className="text-lg sm:text-xl text-white/90 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed">
                   Please read these terms and conditions carefully before using
-                  our real estate platform. By accessing our services, you agree
-                  to be bound by these terms.
+                  our PageSpeed performance analysis platform. By accessing our
+                  services, you agree to be bound by these terms.
                 </p>
               </div>
             </div>
@@ -403,7 +406,7 @@ const TermsAndConditions = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                   <a
-                    href="mailto:legal@11yards.com"
+                    href="mailto:legal@pagespeed-tool.com"
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white font-semibold py-3.5 sm:py-4 px-6 sm:px-8 rounded-xl hover:shadow-lg hover:shadow-brand-theme/25 transition-all duration-300 text-sm sm:text-base"
                   >
                     <FaEnvelope className="text-sm" />

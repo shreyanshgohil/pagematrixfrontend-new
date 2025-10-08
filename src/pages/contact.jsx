@@ -65,13 +65,13 @@ const Contact = () => {
       icon: <FaPhone />,
       title: "Phone",
       details: "+91 72019 28142",
-      description: "Call us for immediate assistance",
+      description: "Call us for immediate performance support",
       color: "from-brand-theme to-brand-theme-600",
     },
     {
       icon: <FaEnvelope />,
       title: "Email",
-      details: "support@11yards.com",
+      details: "support@pagespeed-tool.com",
       description: "Send us an email anytime",
       color: "from-brand-blue-700 to-brand-blue-800",
     },
@@ -92,8 +92,8 @@ const Contact = () => {
   ];
 
   const features = [
-    "24/7 Customer Support",
-    "Expert Real Estate Guidance",
+    "24/7 Developer Support",
+    "Expert Performance Guidance",
     "Quick Response Time",
     "Multiple Contact Methods",
   ];
@@ -101,30 +101,30 @@ const Contact = () => {
   return (
     <>
       <SEO
-        title="Contact Us - 11yards Real Estate | Get Expert Property Help & Support"
-        description="Contact 11yards Real Estate for expert property guidance, listings support and customer service. Multiple contact methods available including phone, email and live chat. Get help with property search, listings and real estate queries."
-        keywords="contact 11yards, real estate support, property help, real estate consultation, property guidance, real estate customer service, property expert help, real estate contact, property support India"
+        title="Contact Us - PageSpeed Performance Tool | Get Expert Performance Help & Support"
+        description="Contact our PageSpeed performance tool team for expert website optimization guidance, API support and developer assistance. Multiple contact methods available including phone, email and live chat. Get help with PageSpeed analysis, Core Web Vitals and performance optimization."
+        keywords="contact PageSpeed tool, performance support, website optimization help, PageSpeed consultation, performance guidance, developer support, PageSpeed expert help, performance contact, API support, Core Web Vitals help"
         url="/contact"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "ContactPage",
-          name: "Contact 11yards Real Estate",
+          name: "Contact PageSpeed Performance Tool",
           description:
-            "Contact 11yards Real Estate for expert property guidance, listings support and customer service.",
+            "Contact our PageSpeed performance tool team for expert website optimization guidance, API support and developer assistance.",
           url: `${
-            process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com"
+            process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com"
           }/contact`,
           mainEntity: {
             "@type": "Organization",
-            name: "11yards",
+            name: "PageSpeed Performance Tool",
             contactPoint: [
               {
                 "@type": "ContactPoint",
                 contactType: "customer service",
                 telephone: "+91 72019 28142",
-                email: "support@11yards.com",
-                areaServed: "IN",
-                availableLanguage: ["English", "Hindi"],
+                email: "support@pagespeed-tool.com",
+                areaServed: "Global",
+                availableLanguage: ["English"],
                 hoursAvailable: {
                   "@type": "OpeningHoursSpecification",
                   dayOfWeek: [
@@ -201,9 +201,9 @@ const Contact = () => {
                 </h1>
 
                 <p className="text-lg sm:text-xl text-white/90 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed">
-                  Have questions about properties, need expert guidance or want
-                  to list your property? Our team of real estate experts is
-                  ready to assist you every step of the way.
+                  Have questions about website performance, need expert guidance
+                  or want to optimize your site? Our team of performance experts
+                  is ready to assist you every step of the way.
                 </p>
 
                 {/* Features */}
@@ -375,7 +375,7 @@ const Contact = () => {
                             value={formData.phone}
                             onChange={handleChange}
                             className="w-full px-4 py-3 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300"
-                            placeholder="+91 72019 28142"
+                            placeholder="+91 98765 43210"
                           />
                         </div>
                         <div>
@@ -389,7 +389,7 @@ const Contact = () => {
                             onChange={handleChange}
                             required
                             className="w-full px-4 py-3 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300"
-                            placeholder="What's this about?"
+                            placeholder="Performance issue, API question, optimization help?"
                           />
                         </div>
                       </div>
@@ -404,7 +404,7 @@ const Contact = () => {
                           required
                           rows={6}
                           className="w-full px-4 py-3 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300 resize-none"
-                          placeholder="Tell us how we can help you..."
+                          placeholder="Tell us about your website performance challenges..."
                         />
                       </div>
                       <button
@@ -444,11 +444,11 @@ const Contact = () => {
                           </div>
                           <div>
                             <h5 className="font-semibold text-brand-blue-800 mb-1">
-                              Expert Guidance
+                              Expert Performance Guidance
                             </h5>
                             <p className="text-sm sm:text-base text-brand-gray-500">
-                              Our experienced team provides personalized real
-                              estate advice.
+                              Our experienced team provides personalized website
+                              performance optimization advice.
                             </p>
                           </div>
                         </div>
@@ -471,11 +471,11 @@ const Contact = () => {
                           </div>
                           <div>
                             <h5 className="font-semibold text-brand-blue-800 mb-1">
-                              24/7 Support
+                              24/7 Developer Support
                             </h5>
                             <p className="text-sm sm:text-base text-brand-gray-500">
-                              Round-the-clock assistance for all your real
-                              estate needs.
+                              Round-the-clock assistance for all your website
+                              performance needs.
                             </p>
                           </div>
                         </div>
@@ -484,17 +484,17 @@ const Contact = () => {
 
                     <div className="bg-gradient-to-br from-brand-blue-700 via-brand-blue-800 to-brand-theme-600 rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-white">
                       <h4 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-                        Ready to Find Your Dream Property?
+                        Ready to Optimize Your Website Performance?
                       </h4>
                       <p className="text-white/90 mb-6 sm:mb-8">
-                        Let our experts help you find the perfect property that
-                        matches your needs and budget.
+                        Let our experts help you optimize your website
+                        performance and achieve better Core Web Vitals scores.
                       </p>
                       <Link
-                        href="/properties"
+                        href="/pagespeed-test"
                         className="inline-flex items-center gap-2 bg-white text-brand-theme font-semibold py-3 px-6 rounded-xl hover:bg-brand-theme/10 transition-all duration-300"
                       >
-                        Browse Properties
+                        Test Your Website
                         <FaArrowRight className="text-sm" />
                       </Link>
                     </div>

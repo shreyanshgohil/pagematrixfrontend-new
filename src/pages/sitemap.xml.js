@@ -240,12 +240,6 @@ export const getServerSideProps = async ({ res }) => {
         <priority>1.0</priority>
       </url>
       <url>
-        <loc>${baseUrl}/rera-compliance</loc>
-        <lastmod>${staticDate}</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>1.0</priority>
-      </url>
-      <url>
         <loc>${baseUrl}/cookie-policy</loc>
         <lastmod>${staticDate}</lastmod>
         <changefreq>yearly</changefreq>

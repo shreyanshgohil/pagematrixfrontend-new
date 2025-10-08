@@ -11,7 +11,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
 
-  // Check if current page should have fixed header (home, about, blog, blog details, contact, privacy, terms-and-conditions, cookie-policy, and rera-compliance pages)
+  // Check if current page should have fixed header (home, about, blog, blog details, contact, privacy, terms-and-conditions, and cookie-policy pages)
   const isFixedHeaderPage =
     router.pathname === "/" ||
     router.pathname === "/about" ||
@@ -20,8 +20,7 @@ const Header = () => {
     router.pathname === "/contact" ||
     router.pathname === "/privacy" ||
     router.pathname === "/terms-and-conditions" ||
-    router.pathname === "/cookie-policy" ||
-    router.pathname === "/rera-compliance";
+    router.pathname === "/cookie-policy";
 
   // Handle scroll effect
   useEffect(() => {

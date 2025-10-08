@@ -93,17 +93,19 @@ const CookiePolicy = () => {
     "Improve website performance and functionality",
     "Provide personalized content and advertisements",
     "Enable social media features and sharing",
+    "Track API usage and performance metrics",
+    "Optimize PageSpeed analysis results",
   ];
 
   return (
     <>
       <Head>
         <title>
-          Cookie Policy - 11yards Real Estate | Cookie Usage & Management
+          Cookie Policy - PageSpeed Performance Tool | Cookie Usage & Management
         </title>
         <meta
           name="description"
-          content="Learn about how 11yards Real Estate uses cookies to improve your browsing experience. Our cookie policy explains what cookies we use and how you can manage them."
+          content="Learn about how our PageSpeed performance tool uses cookies to improve your browsing experience. Our cookie policy explains what cookies we use and how you can manage them."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -164,7 +166,7 @@ const CookiePolicy = () => {
                 <p className="text-lg sm:text-xl text-white/90 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed">
                   Learn about how we use cookies to enhance your browsing
                   experience and provide you with personalized content and
-                  services on our real estate platform.
+                  services on our PageSpeed performance analysis platform.
                 </p>
               </div>
             </div>
@@ -192,9 +194,10 @@ const CookiePolicy = () => {
 
                     <p className="text-base sm:text-lg leading-relaxed">
                       We use cookies to improve our website's functionality,
-                      analyze user behavior and provide personalized content.
-                      You can control which cookies you accept through your
-                      browser settings or our cookie preference center.
+                      analyze user behavior and provide personalized content for
+                      our PageSpeed performance analysis services. You can
+                      control which cookies you accept through your browser
+                      settings or our cookie preference center.
                     </p>
 
                     <div className="bg-gradient-to-r from-brand-theme/10 to-brand-theme-600/10 rounded-xl p-4 sm:p-6 border border-brand-theme/20">
@@ -349,7 +352,7 @@ const CookiePolicy = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                   <a
-                    href="mailto:privacy@11yards.com"
+                    href="mailto:privacy@pagespeed-tool.com"
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white font-semibold py-3.5 sm:py-4 px-6 sm:px-8 rounded-xl hover:shadow-lg hover:shadow-brand-theme/25 transition-all duration-300 text-sm sm:text-base"
                   >
                     <FaEnvelope className="text-sm" />
@@ -360,7 +363,7 @@ const CookiePolicy = () => {
                     href="/contact"
                     className="inline-flex items-center gap-2 border-2 border-brand-theme text-brand-theme font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl hover:bg-brand-theme hover:text-white transition-all duration-300 text-sm sm:text-base"
                   >
-                    Contact Contact
+                    Contact Us
                     <FaArrowRight className="text-sm" />
                   </Link>
                 </div>

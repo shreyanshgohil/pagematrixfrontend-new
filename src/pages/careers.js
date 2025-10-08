@@ -16,6 +16,9 @@ import {
   FaLightbulb,
   FaTrophy,
   FaBuilding,
+  FaTachometerAlt,
+  FaCode,
+  FaStar,
 } from "react-icons/fa";
 import { useState } from "react";
 import JobApplicationModal from "../components/common/JobApplicationModal";
@@ -33,10 +36,9 @@ const Careers = () => {
 
   const jobCategories = [
     { id: "all", name: "All Positions", count: 6 },
-    { id: "engineering", name: "Engineering", count: 2 },
-    { id: "sales", name: "Sales & Marketing", count: 2 },
-    { id: "operations", name: "Operations", count: 1 },
-    { id: "design", name: "Design", count: 1 },
+    { id: "engineering", name: "Engineering", count: 3 },
+    { id: "product", name: "Product & Design", count: 2 },
+    { id: "marketing", name: "Marketing", count: 1 },
   ];
 
   const jobOpenings = [
@@ -49,12 +51,12 @@ const Careers = () => {
       type: "Full-time",
       experience: "3-5 years",
       description:
-        "We're looking for a passionate frontend developer to join our team and help build amazing user experiences.",
+        "We're looking for a passionate frontend developer to join our team and help build amazing PageSpeed analysis experiences.",
       requirements: [
         "3+ years of experience with React.js and Next.js",
         "Strong knowledge of TypeScript and modern CSS",
-        "Experience with responsive design and mobile-first approach",
-        "Familiarity with state management libraries (Redux, Zustand)",
+        "Experience with performance optimization and Core Web Vitals",
+        "Familiarity with Google PageSpeed API integration",
         "Experience with testing frameworks (Jest, React Testing Library)",
       ],
       benefits: [
@@ -69,18 +71,18 @@ const Careers = () => {
       id: 2,
       title: "Product Manager",
       department: "Product",
-      category: "operations",
+      category: "product",
       location: "Gandhinagar, Gujarat, India",
       type: "Full-time",
       experience: "4-6 years",
       description:
-        "Lead product strategy and execution for our real estate platform, working closely with engineering and design teams.",
+        "Lead product strategy and execution for our PageSpeed performance platform, working closely with engineering and design teams.",
       requirements: [
         "4+ years of product management experience",
         "Strong analytical and problem-solving skills",
         "Experience with agile development methodologies",
         "Excellent communication and leadership skills",
-        "Background in real estate or fintech preferred",
+        "Background in web performance or developer tools preferred",
       ],
       benefits: [
         "Competitive salary and equity",
@@ -94,18 +96,18 @@ const Careers = () => {
       id: 3,
       title: "UX/UI Designer",
       department: "Design",
-      category: "design",
+      category: "product",
       location: "Gandhinagar, Gujarat, India",
       type: "Full-time",
       experience: "2-4 years",
       description:
-        "Create beautiful and intuitive user experiences that help people find their dream homes.",
+        "Create beautiful and intuitive user experiences that help developers analyze and optimize website performance.",
       requirements: [
         "2+ years of UX/UI design experience",
         "Proficiency in Figma, Sketch, or Adobe Creative Suite",
         "Strong portfolio showcasing user-centered design",
         "Experience with design systems and component libraries",
-        "Understanding of user research and usability testing",
+        "Understanding of developer tools and performance metrics",
       ],
       benefits: [
         "Competitive salary and equity",
@@ -117,20 +119,20 @@ const Careers = () => {
     },
     {
       id: 4,
-      title: "Sales Manager",
-      department: "Sales",
-      category: "sales",
+      title: "Backend Developer",
+      department: "Engineering",
+      category: "engineering",
       location: "Gandhinagar, Gujarat, India",
       type: "Full-time",
-      experience: "3-5 years",
+      experience: "2-4 years",
       description:
-        "Drive sales growth and build relationships with real estate partners and clients.",
+        "Build scalable backend services and APIs that power our PageSpeed analysis platform and Google API integration.",
       requirements: [
-        "3+ years of sales experience in real estate or related industry",
-        "Proven track record of meeting and exceeding sales targets",
-        "Strong communication and negotiation skills",
-        "Experience with CRM systems and sales processes",
-        "Knowledge of real estate market trends",
+        "2+ years of backend development experience",
+        "Proficiency in Node.js, Python, or Java",
+        "Experience with Google PageSpeed API integration",
+        "Knowledge of cloud platforms (AWS, GCP, Azure)",
+        "Understanding of performance monitoring and caching",
       ],
       benefits: [
         "Competitive salary and equity",
@@ -142,20 +144,20 @@ const Careers = () => {
     },
     {
       id: 5,
-      title: "Backend Developer",
+      title: "Performance Engineer",
       department: "Engineering",
       category: "engineering",
       location: "Gandhinagar, Gujarat, India",
       type: "Full-time",
-      experience: "2-4 years",
+      experience: "3-5 years",
       description:
-        "Build scalable backend services and APIs that power our real estate platform.",
+        "Specialize in web performance optimization and Core Web Vitals analysis to enhance our PageSpeed tool capabilities.",
       requirements: [
-        "2+ years of backend development experience",
-        "Proficiency in Node.js, Python, or Java",
-        "Experience with databases (PostgreSQL, MongoDB)",
-        "Knowledge of cloud platforms (AWS, GCP, Azure)",
-        "Understanding of microservices architecture",
+        "3+ years of web performance optimization experience",
+        "Deep knowledge of Core Web Vitals and PageSpeed metrics",
+        "Experience with Google PageSpeed Insights API",
+        "Proficiency in performance testing tools (Lighthouse, WebPageTest)",
+        "Understanding of CDN, caching, and optimization strategies",
       ],
       benefits: [
         "Competitive salary and equity",
@@ -167,20 +169,20 @@ const Careers = () => {
     },
     {
       id: 6,
-      title: "Marketing Specialist",
+      title: "Developer Relations Manager",
       department: "Marketing",
-      category: "sales",
+      category: "marketing",
       location: "Gandhinagar, Gujarat, India",
       type: "Full-time",
       experience: "2-3 years",
       description:
-        "Develop and execute marketing campaigns to grow our brand and user base.",
+        "Build and nurture relationships with the developer community to promote our PageSpeed performance tool and API.",
       requirements: [
-        "2+ years of digital marketing experience",
-        "Experience with social media marketing and content creation",
-        "Knowledge of SEO, SEM and email marketing",
-        "Analytical skills and experience with marketing tools",
-        "Creative thinking and attention to detail",
+        "2+ years of developer relations or technical marketing experience",
+        "Strong technical background in web development",
+        "Experience with developer communities and events",
+        "Knowledge of API documentation and developer tools",
+        "Excellent communication and presentation skills",
       ],
       benefits: [
         "Competitive salary and equity",
@@ -255,77 +257,108 @@ const Careers = () => {
       icon: <FaRocket />,
       title: "Growth Opportunities",
       description:
-        "Fast-paced environment with opportunities to learn and grow",
+        "Fast-paced environment with opportunities to learn and grow in web performance",
+      color: "from-brand-theme to-brand-theme-600",
     },
     {
       icon: <FaHeart />,
       title: "Work-Life Balance",
       description: "Flexible hours and remote work options",
+      color: "from-brand-blue-700 to-brand-blue-800",
     },
     {
       icon: <FaGraduationCap />,
       title: "Learning & Development",
-      description: "Budget for courses, conferences and skill development",
+      description:
+        "Budget for courses, conferences and performance optimization training",
+      color: "from-brand-theme-600 to-brand-theme-800",
     },
     {
       icon: <FaLightbulb />,
       title: "Innovation",
-      description: "Work on cutting-edge technology and real estate solutions",
+      description:
+        "Work on cutting-edge Google PageSpeed API and performance technology",
+      color: "from-brand-blue-800 to-brand-theme",
     },
     {
       icon: <FaTrophy />,
       title: "Recognition",
       description:
-        "Regular recognition and rewards for outstanding performance",
+        "Regular recognition and rewards for outstanding performance contributions",
+      color: "from-brand-theme to-brand-blue-700",
     },
     {
       icon: <FaBuilding />,
       title: "Great Culture",
-      description: "Collaborative, inclusive and supportive team environment",
+      description:
+        "Collaborative, inclusive and supportive developer-focused environment",
+      color: "from-brand-blue-600 to-brand-theme-600",
     },
   ];
 
   const stats = [
-    { number: "5+", label: "Team Members" },
-    { number: "5+", label: "Open Positions" },
-    { number: "95%", label: "Employee Satisfaction" },
-    { number: "4.8/5", label: "Glassdoor Rating" },
+    {
+      number: "6",
+      label: "Team Members",
+      icon: <FaUsers />,
+      color: "from-brand-theme to-brand-theme-600",
+    },
+    {
+      number: "6",
+      label: "Open Positions",
+      icon: <FaBriefcase />,
+      color: "from-brand-blue-700 to-brand-blue-800",
+    },
+    {
+      number: "100%",
+      label: "Developer Satisfaction",
+      icon: <FaTachometerAlt />,
+      color: "from-brand-theme-600 to-brand-theme-800",
+    },
+    {
+      number: "4.9/5",
+      label: "Developer Rating",
+      icon: <FaStar />,
+      color: "from-brand-blue-800 to-brand-theme",
+    },
   ];
 
   return (
     <>
       <SEO
-        title="Careers - 11yards Real Estate | Join Our Team & Build Your Career"
-        description="Join 11yards Real Estate and be part of a team that's revolutionizing the real estate industry. Explore open positions, career opportunities and benefits. Work with cutting-edge technology in real estate."
-        keywords="careers, jobs, employment, real estate jobs, tech jobs, join 11yards, career opportunities, job openings, real estate careers, tech careers, Mumbai jobs"
+        title="Careers - PageSpeed Performance Tool | Join Our Team & Build Your Career"
+        description="Join our PageSpeed performance tool team and be part of a mission to revolutionize website performance optimization. Explore open positions, career opportunities and benefits. Work with Google PageSpeed API and cutting-edge performance technology."
+        keywords="careers, jobs, employment, PageSpeed jobs, performance jobs, tech jobs, join PageSpeed team, career opportunities, job openings, performance careers, tech careers, developer jobs, API jobs"
         url="/careers"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Careers - 11yards Real Estate",
+          name: "Careers - PageSpeed Performance Tool",
           description:
-            "Join 11yards Real Estate and be part of a team that's revolutionizing the real estate industry. Explore open positions and career opportunities.",
+            "Join our PageSpeed performance tool team and be part of a mission to revolutionize website performance optimization. Explore open positions and career opportunities.",
           url: `${
-            process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com"
+            process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com"
           }/careers`,
           isPartOf: {
             "@type": "WebSite",
-            name: "11yards Real Estate",
-            url: process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com",
+            name: "PageSpeed Performance Tool",
+            url:
+              process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com",
           },
           about: {
             "@type": "Organization",
-            name: "11yards",
+            name: "PageSpeed Performance Tool",
             description:
-              "Real estate platform company offering career opportunities",
-            url: process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com",
+              "Website performance analysis platform company offering career opportunities",
+            url:
+              process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com",
             address: {
               "@type": "PostalAddress",
-              addressLocality: "Mumbai",
+              addressLocality: "Gandhinagar",
               addressCountry: "India",
             },
-            numberOfEmployees: "50+",
-            industry: "Real Estate Technology",
+            numberOfEmployees: "10+",
+            industry: "Web Performance Technology",
           },
           mainEntity: {
             "@type": "ItemList",
@@ -347,8 +380,10 @@ const Careers = () => {
               },
               hiringOrganization: {
                 "@type": "Organization",
-                name: "11yards",
-                url: process.env.NEXT_PUBLIC_SITE_URL || "https://11yards.com",
+                name: "PageSpeed Performance Tool",
+                url:
+                  process.env.NEXT_PUBLIC_SITE_URL ||
+                  "https://pagespeed-tool.com",
               },
             })),
           },
@@ -408,9 +443,10 @@ const Careers = () => {
                 </h1>
 
                 <p className="text-lg sm:text-xl text-white/90 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed">
-                  Join our mission to revolutionize real estate. We're looking
-                  for passionate, talented individuals who want to make a
-                  difference in how people find their dream homes.
+                  Join our mission to revolutionize website performance
+                  optimization. We're looking for passionate, talented
+                  developers who want to make a difference in how websites
+                  perform and load faster.
                 </p>
               </div>
             </div>
@@ -429,8 +465,12 @@ const Careers = () => {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-12 sm:gap-x-6 sm:gap-y-6 lg:gap-x-8 lg:gap-y-8 sm:mb-16">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center group">
-                    <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-brand-theme to-brand-theme-600 rounded-xl sm:rounded-2xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <FaUsers className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+                    <div
+                      className={`inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br ${stat.color} rounded-xl sm:rounded-2xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      <div className="text-white text-lg sm:text-xl">
+                        {stat.icon}
+                      </div>
                     </div>
                     <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-blue-800 mb-1 sm:mb-2">
                       {stat.number}
@@ -460,7 +500,9 @@ const Careers = () => {
                     key={index}
                     className="group bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-white/30"
                   >
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-brand-theme to-brand-theme-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white text-lg sm:text-xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div
+                      className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br ${perk.color} rounded-xl sm:rounded-2xl flex items-center justify-center text-white text-lg sm:text-xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    >
                       {perk.icon}
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold text-brand-blue-800 mb-3 sm:mb-4 group-hover:text-brand-theme transition-colors duration-300">
