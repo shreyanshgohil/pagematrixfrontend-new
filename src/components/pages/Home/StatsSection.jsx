@@ -73,9 +73,10 @@ const StatsSection = () => {
               <div className="text-brand-theme mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center">
                 <div className="text-2xl sm:text-3xl">{stat.icon}</div>
               </div>
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-blue-800 mb-2 group-hover:text-brand-theme transition-colors duration-300">
-                {stat.number}
-              </div>
+              <div
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-blue-800 mb-2 group-hover:text-brand-theme transition-colors duration-300"
+                dangerouslySetInnerHTML={{ __html: stat.number }}
+              />
               <div className="text-base sm:text-lg font-semibold text-brand-blue-800 mb-2">
                 {stat.label}
               </div>

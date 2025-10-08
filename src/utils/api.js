@@ -8,7 +8,6 @@ export const API_ENDPOINTS = {
     CONTACT: "/messages/contact",
     INQUIRE: "/messages/inquire",
   },
-  PROPERTIES: "/properties",
   NEWSLETTER: "/newsletter",
   BLOGS: {
     LIST: "/blogs",

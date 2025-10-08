@@ -1,4 +1,4 @@
-import { IoSearch, IoMenu, IoClose } from "react-icons/io5";
+import { IoMenu, IoClose } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
@@ -32,7 +32,7 @@ const Header = () => {
   }, []);
 
   const navigationItems = [
-    { name: "Properties", href: "/properties" },
+    { name: "Features", href: "/features" },
     { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
@@ -92,15 +92,23 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Search Icon Button */}
-            <div className="hidden lg:flex items-center">
+            {/* Authentication Buttons */}
+            <div className="hidden lg:flex items-center space-x-4">
               <Link
-                href={"/properties"}
-                className="group relative bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-brand-theme/25 flex items-center justify-center"
-                aria-label="Search for properties"
+                href="/signin"
+                className={`font-semibold transition-all duration-300 ${
+                  isScrolled || !isFixedHeaderPage
+                    ? "text-brand-blue-800 hover:text-brand-theme"
+                    : "text-white hover:text-brand-theme"
+                }`}
               >
-                <IoSearch className="text-xl group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                Sign In
+              </Link>
+              <Link
+                href="/signup"
+                className="bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-brand-theme/25"
+              >
+                Get Started
               </Link>
             </div>
 
@@ -232,15 +240,21 @@ const Header = () => {
                               ))}
                             </nav>
 
-                            {/* Search Button */}
-                            <div className="mt-8">
+                            {/* Authentication Buttons */}
+                            <div className="mt-8 space-y-3">
                               <Link
-                                href={"/properties"}
-                                className="flex items-center justify-center w-full bg-brand-theme text-white font-medium py-3 px-6 rounded-lg"
+                                href="/signin"
+                                className="flex items-center justify-center w-full border-2 border-brand-theme text-brand-theme font-semibold py-3 px-6 rounded-lg hover:bg-brand-theme hover:text-white transition-all duration-300"
                                 onClick={() => setIsMenuOpen(false)}
                               >
-                                <IoSearch className="text-xl mr-2" />
-                                Search Properties
+                                Sign In
+                              </Link>
+                              <Link
+                                href="/signup"
+                                className="flex items-center justify-center w-full bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-brand-theme-600 hover:to-brand-theme-800 transition-all duration-300"
+                                onClick={() => setIsMenuOpen(false)}
+                              >
+                                Get Started
                               </Link>
                             </div>
                           </div>

@@ -17,6 +17,10 @@ import {
   FaHeadset,
   FaShieldAlt,
   FaSearch,
+  FaMobile,
+  FaDesktop,
+  FaTachometerAlt,
+  FaCode,
 } from "react-icons/fa";
 import logo from "../../../../public/images/logos/logo-footer.svg";
 import { useRouter } from "next/router";
@@ -89,17 +93,14 @@ const Footer = () => {
       { name: "Contact", href: "/contact" },
     ],
     services: [
-      { name: "Property Sales", href: "/properties?listingType=sale" },
-      { name: "Property Rentals", href: "/properties?listingType=rent" },
-      {
-        name: "Commercial Properties",
-        href: "/properties?propertyType=commercial",
-      },
+      { name: "PageSpeed Analysis", href: "/pagespeed-test" },
+      { name: "API Documentation", href: "/api-docs" },
+      { name: "Performance Tools", href: "/tools" },
     ],
     resources: [
-      { name: "Property Guides", href: "/guides" },
-      { name: "Market Reports", href: "/reports" },
-      { name: "Investment Tips", href: "/tips" },
+      { name: "Performance Guides", href: "/guides" },
+      { name: "API Reference", href: "/api-reference" },
+      { name: "Best Practices", href: "/best-practices" },
       { name: "FAQ", href: "/faq" },
     ],
     legal: [
@@ -109,26 +110,26 @@ const Footer = () => {
     ],
   };
 
-  const propertyTypes = [
+  const toolFeatures = [
     {
-      name: "Apartments",
-      href: "/properties?propertyType=apartment",
-      icon: <FaBuilding />,
+      name: "Mobile Performance",
+      href: "/pagespeed-test?strategy=mobile",
+      icon: <FaMobile />,
     },
     {
-      name: "Villas",
-      href: "/properties?propertyType=villa",
-      icon: <FaHome />,
+      name: "Desktop Performance",
+      href: "/pagespeed-test?strategy=desktop",
+      icon: <FaDesktop />,
     },
     {
-      name: "Commercial",
-      href: "/properties?propertyType=commercial",
-      icon: <FaStore />,
+      name: "Core Web Vitals",
+      href: "/core-web-vitals",
+      icon: <FaTachometerAlt />,
     },
     {
-      name: "Plots",
-      href: "/properties?propertyType=plot",
-      icon: <FaMapMarkedAlt />,
+      name: "API Access",
+      href: "/api-docs",
+      icon: <FaCode />,
     },
   ];
 
@@ -265,25 +266,25 @@ const Footer = () => {
                   </ul>
                 </div>
 
-                {/* Property Types */}
+                {/* Tool Features */}
                 <div className="sm:col-span-2 lg:col-span-1">
                   <h3 className="text-white font-bold text-lg mb-6">
-                    Property Types
+                    Tool Features
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
-                    {propertyTypes.map((type) => (
+                    {toolFeatures.map((feature) => (
                       <Link
-                        key={type.name}
-                        href={type.href}
+                        key={feature.name}
+                        href={feature.href}
                         className="group bg-white/10 hover:bg-brand-theme/20 rounded-lg p-3 text-center transition-all duration-300 transform hover:scale-105"
                       >
                         <div className="flex justify-center mb-2">
                           <div className="text-brand-theme text-lg group-hover:scale-110 transition-transform duration-300">
-                            {type.icon}
+                            {feature.icon}
                           </div>
                         </div>
                         <div className="text-white text-xs font-medium text-center">
-                          {type.name}
+                          {feature.name}
                         </div>
                       </Link>
                     ))}
@@ -296,11 +297,11 @@ const Footer = () => {
             <div className="mt-12 lg:mt-16 py-8 sm:pb-0 border-t border-white/20">
               <div className="max-w-2xl mx-auto text-center px-4">
                 <h3 className="text-white font-bold text-xl lg:text-2xl mb-4">
-                  Stay Updated with Latest Properties
+                  Stay Updated with Performance Insights
                 </h3>
                 <p className="text-white/80 mb-6 text-sm lg:text-base">
-                  Get notified about new properties, market updates and
-                  exclusive offers.
+                  Get notified about performance updates, new features and
+                  optimization tips.
                 </p>
                 <form
                   onSubmit={handleNewsletterSubmit}

@@ -164,9 +164,10 @@ const HeroSection = ({ cities = [] }) => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-white">
-                    &lt; 2s
-                  </div>
+                  <div
+                    className="text-2xl sm:text-3xl font-bold text-white"
+                    dangerouslySetInnerHTML={{ __html: "&lt; 2s" }}
+                  />
                   <div className="text-xs sm:text-sm text-white/80">
                     Avg Test Time
                   </div>
@@ -284,9 +285,10 @@ const HeroSection = ({ cities = [] }) => {
                     </div>
                   </div>
                   <div>
-                    <div className="text-lg sm:text-xl font-bold text-brand-theme">
-                      &lt; 2s
-                    </div>
+                    <div
+                      className="text-lg sm:text-xl font-bold text-brand-theme"
+                      dangerouslySetInnerHTML={{ __html: "&lt; 2s" }}
+                    />
                     <div className="text-xs sm:text-sm text-brand-gray-500">
                       Avg Time
                     </div>

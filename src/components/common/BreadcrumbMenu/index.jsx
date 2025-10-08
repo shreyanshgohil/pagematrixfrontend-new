@@ -32,7 +32,7 @@ const BreadcrumbMenu = ({ items }) => {
     );
   }
 
-  // Default breadcrumb for properties page
+  // Default breadcrumb for other pages
   return (
     <div className="pt-6 pb-3 overflow-x-auto whitespace-nowrap">
       <div className="flex items-center gap-1.5">
@@ -43,7 +43,7 @@ const BreadcrumbMenu = ({ items }) => {
           Home
         </Link>
         <MdOutlineArrowBackIos className="rotate-180 shrink-0 text-xxs text-brand-gray" />
-        <span className="text-brand-gray text-xs sm:text-sm">Properties</span>
+        <span className="text-brand-gray text-xs sm:text-sm">Page</span>
       </div>
     </div>
   );
