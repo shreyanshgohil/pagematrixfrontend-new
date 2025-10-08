@@ -25,6 +25,12 @@ export const getServerSideProps = async ({ res }) => {
       priority: "0.9",
     },
     {
+      url: "/pricing",
+      lastmod: staticDate,
+      changefreq: "weekly",
+      priority: "0.9",
+    },
+    {
       url: "/about",
       lastmod: staticDate,
       changefreq: "monthly",
