@@ -15,6 +15,7 @@ const Header = () => {
   const isFixedHeaderPage =
     router.pathname === "/" ||
     router.pathname === "/about" ||
+    router.pathname === "/api" ||
     router.pathname === "/blog" ||
     router.pathname.startsWith("/blog/") ||
     router.pathname === "/contact" ||
@@ -34,6 +35,7 @@ const Header = () => {
   const navigationItems = [
     { name: "Features", href: "/features" },
     { name: "Pricing", href: "/pricing" },
+    { name: "API", href: "/api" },
     { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },

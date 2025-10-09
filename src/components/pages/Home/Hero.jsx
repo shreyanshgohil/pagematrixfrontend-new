@@ -1,82 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import {
-  IoSearch,
-  IoGlobeOutline,
-  IoSpeedometerOutline,
-  IoAnalyticsOutline,
   IoArrowForward,
   IoStar,
   IoCheckmarkCircle,
   IoShieldCheckmark,
+  IoSpeedometerOutline,
+  IoAnalyticsOutline,
+  IoGlobeOutline,
 } from "react-icons/io5";
-import {
-  FaSearch,
-  FaGlobe,
-  FaTachometerAlt,
-  FaChartLine,
-  FaRocket,
-  FaCog,
-} from "react-icons/fa";
+import { FaTachometerAlt, FaRocket, FaChartLine } from "react-icons/fa";
 
 const HeroSection = ({ cities = [] }) => {
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState({
-    websiteUrl: "",
-    testType: "mobile",
-    strategy: "desktop",
-  });
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const testTypes = [
-    {
-      name: "Mobile Performance",
-      value: "mobile",
-      icon: <IoSpeedometerOutline />,
-      description: "Mobile PageSpeed insights",
-    },
-    {
-      name: "Desktop Performance",
-      value: "desktop",
-      icon: <IoAnalyticsOutline />,
-      description: "Desktop PageSpeed insights",
-    },
-    {
-      name: "Both Mobile & Desktop",
-      value: "both",
-      icon: <IoGlobeOutline />,
-      description: "Complete performance analysis",
-    },
-  ];
-
   const features = [
     { icon: <IoShieldCheckmark />, text: "Google PageSpeed API" },
     { icon: <IoCheckmarkCircle />, text: "Real-time Analysis" },
     { icon: <IoStar />, text: "Performance Insights" },
   ];
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-
-    if (!searchQuery.websiteUrl) {
-      alert("Please enter a website URL");
-      return;
-    }
-
-    // Build query parameters for PageSpeed test
-    const queryParams = new URLSearchParams();
-    queryParams.append("url", searchQuery.websiteUrl);
-    queryParams.append("strategy", searchQuery.testType);
-
-    // Redirect to PageSpeed test results page
-    const testUrl = `/pagespeed-test?${queryParams.toString()}`;
-    router.push(testUrl);
-  };
+  const capabilities = [
+    {
+      icon: <IoSpeedometerOutline />,
+      title: "Mobile Performance",
+      description: "Comprehensive mobile PageSpeed analysis",
+    },
+    {
+      icon: <IoAnalyticsOutline />,
+      title: "Desktop Performance",
+      description: "Detailed desktop performance insights",
+    },
+    {
+      icon: <IoGlobeOutline />,
+      title: "Complete Analysis",
+      description: "Both mobile and desktop testing",
+    },
+  ];
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-brand-blue-700 via-brand-blue-800 to-brand-theme-600 pt-20 sm:pt-24 lg:pt-32">
@@ -178,95 +136,79 @@ const HeroSection = ({ cities = [] }) => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link
-                href="/pagespeed-test"
+                href="/signup"
                 className="group bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white font-semibold py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-brand-theme/30 flex items-center justify-center space-x-2 sm:space-x-3 flex-1"
               >
-                <FaTachometerAlt className="text-base sm:text-lg group-hover:scale-110 transition-transform duration-300" />
-                <span className="text-sm sm:text-base">Test Performance</span>
+                <FaRocket className="text-base sm:text-lg group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-sm sm:text-base">Get Started Free</span>
                 <IoArrowForward className="text-base sm:text-lg group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
 
               <Link
-                href="/contact"
+                href="/pricing"
                 className="group bg-white/90 flex-1 backdrop-blur-sm border-2 border-white/30 text-brand-theme hover:bg-white hover:text-brand-theme-600 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-2 sm:space-x-3"
               >
-                <span className="text-sm sm:text-base">Get API Access</span>
+                <span className="text-sm sm:text-base">View Pricing</span>
                 <IoArrowForward className="text-base  sm:text-lg group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </div>
           </div>
 
-          {/* Right Content - Search Form */}
+          {/* Right Content - Features Showcase */}
           <div className="relative w-full">
-            {/* Main Search Card */}
+            {/* Main Features Card */}
             <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl border border-white/30">
-              <div className="text-center mb-4 sm:mb-6">
+              <div className="text-center mb-6 sm:mb-8">
                 <h3 className="text-2xl sm:text-3xl font-bold text-brand-blue-800 mb-2">
-                  Test Your Website Performance
+                  Powerful Performance Tools
                 </h3>
                 <p className="text-brand-gray-500 text-base sm:text-lg">
-                  Get instant PageSpeed insights using Google's API
+                  Everything you need to optimize your website
                 </p>
               </div>
 
-              <form onSubmit={handleSearch} className="space-y-3 sm:space-y-4">
-                {/* Website URL */}
-                <div className="space-y-2">
-                  <label className="text-brand-blue-800 font-bold text-sm sm:text-base flex items-center space-x-2">
-                    <FaGlobe className="text-brand-theme" />
-                    <span>Website URL</span>
-                  </label>
-                  <input
-                    type="url"
-                    value={searchQuery.websiteUrl}
-                    onChange={(e) =>
-                      setSearchQuery({
-                        ...searchQuery,
-                        websiteUrl: e.target.value,
-                      })
-                    }
-                    placeholder="https://example.com"
-                    className="w-full px-4 py-3 sm:py-4 bg-white border-2 border-brand-gray-200 rounded-xl focus:border-brand-theme focus:ring-2 focus:ring-brand-theme/10 transition-all duration-300 text-brand-blue-800 text-sm sm:text-base"
-                    required
-                  />
-                </div>
-                {/* Test Type */}
-                <div className="space-y-2">
-                  <label className="text-brand-blue-800 font-bold text-sm sm:text-base flex items-center space-x-2">
-                    <FaTachometerAlt className="text-brand-theme" />
-                    <span>Test Type</span>
-                  </label>
-                  <select
-                    value={searchQuery.testType}
-                    onChange={(e) =>
-                      setSearchQuery({
-                        ...searchQuery,
-                        testType: e.target.value,
-                      })
-                    }
-                    className="w-full px-4 py-3 sm:py-4 bg-white border-2 border-brand-gray-200 rounded-xl focus:border-brand-theme focus:ring-2 focus:ring-brand-theme/10 transition-all duration-300 text-brand-blue-800 appearance-none cursor-pointer text-sm sm:text-base"
+              {/* Features Grid */}
+              <div className="space-y-4 sm:space-y-6">
+                {capabilities.map((capability, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start space-x-4 p-4 bg-gradient-to-r from-brand-theme/5 to-brand-theme-600/5 rounded-xl border border-brand-theme/10 hover:border-brand-theme/20 transition-all duration-300"
                   >
-                    {testTypes.map((type) => (
-                      <option key={type.value} value={type.value}>
-                        {type.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                    <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-brand-theme to-brand-theme-600 rounded-xl flex items-center justify-center text-white text-xl">
+                      {capability.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-brand-blue-800 text-base sm:text-lg mb-1">
+                        {capability.title}
+                      </h4>
+                      <p className="text-brand-gray-600 text-sm sm:text-base">
+                        {capability.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-                {/* Test Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-brand-theme/25 flex items-center justify-center space-x-2 text-base sm:text-lg"
-                >
-                  <FaTachometerAlt className="text-lg sm:text-xl" />
-                  <span>Test Performance</span>
-                  <IoArrowForward className="text-lg sm:text-xl" />
-                </button>
-              </form>
+              {/* Call to Action */}
+              <div className="mt-6 sm:mt-8 pt-4 border-t border-brand-gray-200">
+                <div className="text-center">
+                  <p className="text-brand-gray-600 text-sm sm:text-base mb-4">
+                    Ready to get started? Sign up now and test your first
+                    website!
+                  </p>
+                  <Link
+                    href="/signup"
+                    className="inline-flex items-center space-x-2 bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-brand-theme/25"
+                  >
+                    <FaRocket className="text-lg" />
+                    <span>Start Testing Now</span>
+                    <IoArrowForward className="text-lg" />
+                  </Link>
+                </div>
+              </div>
 
               {/* Quick Stats */}
-              <div className="mt-4 pt-3 border-t border-brand-gray-200">
+              <div className="mt-6 pt-4 border-t border-brand-gray-200">
                 <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
                   <div>
                     <div className="text-lg sm:text-xl font-bold text-brand-theme">
@@ -296,10 +238,6 @@ const HeroSection = ({ cities = [] }) => {
                 </div>
               </div>
             </div>
-
-            {/* Floating Elements */}
-            {/* <div className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-16 sm:w-24 h-16 sm:h-24 bg-gradient-to-r from-brand-theme/20 to-brand-theme-600/20 rounded-full blur-xl animate-pulse"></div>
-            <div className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-20 sm:w-32 h-20 sm:h-32 bg-gradient-to-r from-brand-blue-700/20 to-brand-theme/20 rounded-full blur-xl animate-pulse delay-1000"></div> */}
           </div>
         </div>
       </div>

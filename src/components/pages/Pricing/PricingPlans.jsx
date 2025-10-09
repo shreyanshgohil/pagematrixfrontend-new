@@ -1,5 +1,6 @@
 import React from "react";
-import { FaCheck, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
+import TickBox from "../../common/TickBox";
 
 const PricingPlans = () => {
   const plans = [
@@ -182,9 +183,11 @@ const PricingPlans = () => {
                 <ul className="space-y-4">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-                        <FaCheck className="h-3 w-3 text-green-600" />
-                      </div>
+                      <TickBox
+                        checked={true}
+                        size="default"
+                        className="mt-0.5"
+                      />
                       <span className="text-brand-gray-700 text-sm">
                         {feature}
                       </span>
@@ -210,15 +213,15 @@ const PricingPlans = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-8 text-sm text-brand-gray-500">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <TickBox checked={true} size="small" />
               <span>Cancel anytime</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <TickBox checked={true} size="small" />
               <span>No setup fees</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <TickBox checked={true} size="small" />
               <span>API access included</span>
             </div>
           </div>
