@@ -101,7 +101,7 @@ const ForgotPassword = () => {
 
         <Header />
 
-        <main className="flex-1 flex items-center justify-center py-12 relative z-10">
+        <main className="flex-1 flex items-center justify-center py-12 pt-20 sm:pt-24 lg:pt-32 relative z-10">
           <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left Side - Branding & Features */}

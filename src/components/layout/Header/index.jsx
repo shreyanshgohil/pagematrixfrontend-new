@@ -11,17 +11,25 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
 
-  // Check if current page should have fixed header (home, about, blog, blog details, contact, privacy, terms-and-conditions, and cookie-policy pages)
+  // Check if current page should have fixed header (home, about, pricing, features, careers, team, blog, blog details, contact, privacy, terms-and-conditions, cookie-policy, and auth pages)
   const isFixedHeaderPage =
     router.pathname === "/" ||
     router.pathname === "/about" ||
+    router.pathname === "/pricing" ||
+    router.pathname === "/features" ||
+    router.pathname === "/careers" ||
+    router.pathname === "/team" ||
     router.pathname === "/api" ||
     router.pathname === "/blog" ||
     router.pathname.startsWith("/blog/") ||
     router.pathname === "/contact" ||
     router.pathname === "/privacy" ||
     router.pathname === "/terms-and-conditions" ||
-    router.pathname === "/cookie-policy";
+    router.pathname === "/cookie-policy" ||
+    router.pathname === "/signin" ||
+    router.pathname === "/signup" ||
+    router.pathname === "/forgot-password" ||
+    router.pathname === "/reset-password";
 
   // Handle scroll effect
   useEffect(() => {
@@ -35,7 +43,7 @@ const Header = () => {
   const navigationItems = [
     { name: "Features", href: "/features" },
     { name: "Pricing", href: "/pricing" },
-    { name: "API", href: "/api" },
+    { name: "API", href: "/api-docs" },
     { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
