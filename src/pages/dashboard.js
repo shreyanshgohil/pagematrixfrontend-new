@@ -5,10 +5,12 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import DashboardOverview from "@/components/dashboard/DashboardOverview";
 import TaskForm from "@/components/dashboard/TaskForm";
 import RecentTasks from "@/components/dashboard/RecentTasks";
+import NewTaskModal from "@/components/dashboard/NewTaskModal";
 import { FaChartBar, FaTasks, FaPlus } from "react-icons/fa";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
 
   const tabs = [
     { id: "overview", label: "Overview", icon: FaChartBar },
@@ -19,6 +21,8 @@ const Dashboard = () => {
   const handleTabClick = (tabId) => {
     if (tabId === "recent") {
       window.location.href = "/tasks-dashboard";
+    } else if (tabId === "new") {
+      setIsNewTaskModalOpen(true);
     } else {
       setActiveTab(tabId);
     }
@@ -75,7 +79,7 @@ const Dashboard = () => {
                     <span className="font-medium">View Reports</span>
                   </button>
                   <button
-                    onClick={() => setActiveTab("new")}
+                    onClick={() => setIsNewTaskModalOpen(true)}
                     className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white rounded-lg hover:from-brand-theme-600 hover:to-brand-theme-800 transition-all duration-200 shadow-lg hover:shadow-xl"
                   >
                     <FaPlus className="h-4 w-4" />
@@ -114,6 +118,12 @@ const Dashboard = () => {
           </div>
         </div>
       </DashboardLayout>
+
+      {/* New Task Modal */}
+      <NewTaskModal
+        isOpen={isNewTaskModalOpen}
+        onClose={() => setIsNewTaskModalOpen(false)}
+      />
     </>
   );
 };

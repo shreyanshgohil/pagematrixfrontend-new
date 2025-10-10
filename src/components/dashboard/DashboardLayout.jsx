@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import {
   FaBell,
   FaCog,
@@ -16,29 +17,35 @@ import { IoMenu, IoClose } from "react-icons/io5";
 
 const DashboardLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const router = useRouter();
 
   const navigation = [
-    { name: "Dashboard", href: "/dashboard", icon: FaChartBar, current: false },
-    { name: "Tasks", href: "/tasks-dashboard", icon: FaTasks, current: false },
+    { name: "Dashboard", href: "/dashboard", icon: FaChartBar },
+    { name: "Tasks", href: "/tasks-dashboard", icon: FaTasks },
     {
       name: "Reports",
       href: "/reports",
       icon: FaChartLine,
-      current: false,
     },
     {
       name: "Plans & Billing",
       href: "/plans-billing",
       icon: FaCreditCard,
-      current: true,
     },
     {
       name: "Settings",
-      href: "/dashboard/settings",
+      href: "/settings",
       icon: FaSettings,
-      current: false,
     },
   ];
+
+  // Get the current active navigation item based on the current path
+  const getCurrentNavigation = () => {
+    return navigation.map((item) => ({
+      ...item,
+      current: router.pathname === item.href,
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row">
@@ -80,7 +87,7 @@ const DashboardLayout = ({ children }) => {
 
         <nav className="mt-8 px-4">
           <div className="space-y-1">
-            {navigation.map((item) => (
+            {getCurrentNavigation().map((item) => (
               <Link
                 key={item.name}
                 href={item.href}

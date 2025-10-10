@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import SEO from "@/components/common/SEO";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import NewTaskModal from "@/components/dashboard/NewTaskModal";
 import {
   FaRocket,
   FaCheckCircle,
@@ -11,11 +12,13 @@ import {
   FaArrowRight,
   FaCalendarAlt,
   FaBolt,
+  FaPlus,
 } from "react-icons/fa";
 
 const TasksDashboard = () => {
   const [activeTab, setActiveTab] = useState("indexer");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
 
   const tasks = [
     {
@@ -158,8 +161,11 @@ const TasksDashboard = () => {
                     <span>Checker Tasks</span>
                   </button>
                 </div>
-                <button className="flex items-center space-x-2 px-6 py-3 bg-brand-theme text-white rounded-lg hover:bg-brand-theme-600 transition-colors shadow-lg hover:shadow-xl">
-                  <span className="text-lg">+</span>
+                <button
+                  onClick={() => setIsNewTaskModalOpen(true)}
+                  className="flex items-center space-x-2 px-6 py-3 bg-brand-theme text-white rounded-lg hover:bg-brand-theme-600 transition-colors shadow-lg hover:shadow-xl"
+                >
+                  <FaPlus className="h-4 w-4" />
                   <span className="font-medium">Create task</span>
                 </button>
               </div>
@@ -320,6 +326,12 @@ const TasksDashboard = () => {
           </div>
         </div>
       </DashboardLayout>
+
+      {/* New Task Modal */}
+      <NewTaskModal
+        isOpen={isNewTaskModalOpen}
+        onClose={() => setIsNewTaskModalOpen(false)}
+      />
     </>
   );
 };
