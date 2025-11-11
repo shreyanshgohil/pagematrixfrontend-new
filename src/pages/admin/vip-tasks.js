@@ -7,7 +7,6 @@ import {
   FaClock,
   FaWaveSquare,
   FaRedo,
-  FaExternalLinkAlt,
   FaCheckCircle,
   FaExclamationTriangle,
   FaCircle,
@@ -144,10 +143,6 @@ const AdminVipTasks = () => {
                     <FaRedo className="h-4 w-4" />
                     <span className="font-medium">Refresh</span>
                   </button>
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
-                    <span>Shreyansh Gohil</span>
-                    <FaExternalLinkAlt className="h-3 w-3" />
-                  </div>
                 </div>
               </div>
             </div>

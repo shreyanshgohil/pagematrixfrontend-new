@@ -20,6 +20,7 @@ import { IoMenu, IoClose } from "react-icons/io5";
 
 const AdminDashboardLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [expandedItems, setExpandedItems] = useState({});
   const router = useRouter();
 
   const navigation = [
@@ -35,7 +36,12 @@ const AdminDashboardLayout = ({ children }) => {
       name: "Blog Management",
       href: "/admin/blog",
       icon: FaFileAlt,
-      hasArrow: true,
+      hasChildren: true,
+      children: [
+        { name: "Posts", href: "/admin/blog/posts" },
+        { name: "Categories", href: "/admin/blog/categories" },
+        { name: "Tags", href: "/admin/blog/tags" },
+      ],
     },
     { name: "FAQs", href: "/admin/faqs", icon: FaQuestionCircle },
     { name: "Payment History", href: "/admin/payments", icon: FaDollarSign },
@@ -43,20 +49,63 @@ const AdminDashboardLayout = ({ children }) => {
       name: "Reports",
       href: "/admin/reports",
       icon: FaChartBar,
-      hasArrow: true,
+      hasChildren: true,
+      children: [
+        { name: "Task Status Overview", href: "/admin/reports/task-status" },
+        { name: "API Logs", href: "/admin/reports/api-logs" },
+      ],
     },
-    { name: "Settings", href: "/admin/settings", icon: FaCog, hasArrow: true },
+    {
+      name: "Settings",
+      href: "/admin/settings",
+      icon: FaCog,
+      hasChildren: true,
+      children: [
+        { name: "Email Templates", href: "/admin/settings/email-templates" },
+        { name: "SEO", href: "/admin/settings/seo" },
+      ],
+    },
     { name: "SpeedyIndex", href: "/admin/speedyindex", icon: FaBolt },
     { name: "VIP Task Management", href: "/admin/vip-tasks", icon: FaChartBar },
   ];
 
-  // Get the current active navigation item based on the current path
-  const getCurrentNavigation = () => {
-    return navigation.map((item) => ({
-      ...item,
-      current: router.pathname === item.href,
+  // Toggle expanded state for items with children
+  const toggleExpanded = (itemName) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [itemName]: !prev[itemName],
     }));
   };
+
+  // Check if a navigation item or its children is active
+  const isItemActive = (item) => {
+    if (router.pathname === item.href) return true;
+    if (item.children) {
+      return item.children.some((child) => router.pathname === child.href);
+    }
+    return false;
+  };
+
+  // Check if a child item is active
+  const isChildActive = (childHref) => {
+    return router.pathname === childHref;
+  };
+
+  // Auto-expand parent items when a child is active
+  useEffect(() => {
+    const newExpandedItems = {};
+    navigation.forEach((item) => {
+      if (item.hasChildren) {
+        const hasActiveChild = item.children.some(
+          (child) => router.pathname === child.href
+        );
+        if (hasActiveChild) {
+          newExpandedItems[item.name] = true;
+        }
+      }
+    });
+    setExpandedItems((prev) => ({ ...prev, ...newExpandedItems }));
+  }, [router.pathname]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row">
@@ -97,35 +146,68 @@ const AdminDashboardLayout = ({ children }) => {
         {/* Navigation */}
         <nav className="mt-8 px-4">
           <div className="space-y-1">
-            {getCurrentNavigation().map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`group flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                  item.current
-                    ? "bg-brand-theme text-white shadow-sm"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm"
-                }`}
-              >
-                <div className="flex items-center">
-                  <item.icon
-                    className={`mr-3 h-5 w-5 ${
-                      item.current
-                        ? "text-white"
-                        : "text-gray-400 group-hover:text-gray-600"
+            {navigation.map((item) => {
+              const isActive = isItemActive(item);
+              const isExpanded = expandedItems[item.name];
+
+              return (
+                <div key={item.name}>
+                  {/* Parent Item */}
+                  <div
+                    className={`group flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? "bg-brand-theme text-white shadow-sm"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm"
                     }`}
-                  />
-                  <span>{item.name}</span>
+                    onClick={() => {
+                      if (item.hasChildren) {
+                        toggleExpanded(item.name);
+                      }
+                    }}
+                  >
+                    <div className="flex items-center">
+                      <item.icon
+                        className={`mr-3 h-5 w-5 ${
+                          isActive
+                            ? "text-white"
+                            : "text-gray-400 group-hover:text-gray-600"
+                        }`}
+                      />
+                      <span>{item.name}</span>
+                    </div>
+                    {item.hasChildren && (
+                      <FaChevronRight
+                        className={`h-4 w-4 transition-transform duration-200 ${
+                          isExpanded ? "rotate-90" : ""
+                        } ${isActive ? "text-white" : "text-gray-400"}`}
+                      />
+                    )}
+                  </div>
+
+                  {/* Children Items */}
+                  {item.hasChildren && isExpanded && (
+                    <div className="ml-4 mt-1 space-y-1">
+                      {item.children.map((child) => {
+                        const childIsActive = isChildActive(child.href);
+                        return (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            className={`block px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                              childIsActive
+                                ? "bg-brand-theme text-white shadow-sm"
+                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm"
+                            }`}
+                          >
+                            {child.name}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-                {item.hasArrow && (
-                  <FaChevronRight
-                    className={`h-4 w-4 ${
-                      item.current ? "text-white" : "text-gray-400"
-                    }`}
-                  />
-                )}
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </nav>
 

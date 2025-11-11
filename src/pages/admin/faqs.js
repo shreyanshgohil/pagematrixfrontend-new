@@ -10,7 +10,6 @@ import {
   FaTrash,
   FaPlus,
   FaSearch,
-  FaExternalLinkAlt,
 } from "react-icons/fa";
 
 const AdminFAQs = () => {
@@ -165,10 +164,6 @@ const AdminFAQs = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900">FAQs</h1>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <span>Shreyansh Gohil</span>
-                  <FaExternalLinkAlt className="h-3 w-3" />
                 </div>
               </div>
             </div>

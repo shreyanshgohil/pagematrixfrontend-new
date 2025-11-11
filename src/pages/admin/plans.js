@@ -10,7 +10,6 @@ import {
   FaEdit,
   FaTrash,
   FaCheck,
-  FaExternalLinkAlt,
   FaCalendarAlt,
   FaUser,
 } from "react-icons/fa";
@@ -231,10 +230,6 @@ const AdminPlans = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900">Plans</h1>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <span>Shreyansh Gohil</span>
-                  <FaExternalLinkAlt className="h-3 w-3" />
                 </div>
               </div>
             </div>

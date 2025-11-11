@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import SEO from "@/components/common/SEO";
 import AdminDashboardLayout from "@/components/dashboard/AdminDashboardLayout";
-import {
-  FaShieldAlt,
-  FaExternalLinkAlt,
-  FaSearch,
-  FaTimes,
-} from "react-icons/fa";
+import { FaShieldAlt, FaSearch, FaTimes } from "react-icons/fa";
 
 const AdminSpeedyIndex = () => {
   const [activeTab, setActiveTab] = useState("checker");
@@ -59,10 +54,6 @@ const AdminSpeedyIndex = () => {
                   <p className="mt-2 text-gray-600">
                     Checker and Indexer tools for Google
                   </p>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <span>Shreyansh Gohil</span>
-                  <FaExternalLinkAlt className="h-3 w-3" />
                 </div>
               </div>
             </div>

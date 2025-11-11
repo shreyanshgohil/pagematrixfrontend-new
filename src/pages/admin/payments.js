@@ -9,7 +9,6 @@ import {
   FaSearch,
   FaEye,
   FaRedo,
-  FaExternalLinkAlt,
 } from "react-icons/fa";
 
 const AdminPayments = () => {
@@ -271,10 +270,6 @@ const AdminPayments = () => {
                   <h1 className="text-3xl font-bold text-gray-900">
                     Payment History
                   </h1>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <span>Shreyansh Gohil</span>
-                  <FaExternalLinkAlt className="h-3 w-3" />
                 </div>
               </div>
             </div>
