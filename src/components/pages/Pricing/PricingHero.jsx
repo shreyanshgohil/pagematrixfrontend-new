@@ -58,7 +58,7 @@ const PricingHero = () => {
         <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-t from-white/10 to-transparent"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 lg:pt-8 lg:py-16">
+      <div className="container--boxed relative z-10 px-4 sm:px-6 lg:px-8 w-full py-12 lg:pt-8 lg:py-16">
         {/* Main Hero Content */}
         <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -91,8 +91,8 @@ const PricingHero = () => {
                   </span>
                 </h1>
                 <p className="text-lg sm:text-xl text-white/90 lg:max-w-lg leading-relaxed">
-                  Get comprehensive PageSpeed insights. Choose from flexible plans designed for developers,
-                  businesses, and enterprises.
+                  Get comprehensive PageSpeed insights. Choose from flexible
+                  plans designed for developers, businesses, and enterprises.
                 </p>
               </div>
 

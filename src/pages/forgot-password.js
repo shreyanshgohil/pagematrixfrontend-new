@@ -102,7 +102,7 @@ const ForgotPassword = () => {
         <Header />
 
         <main className="flex-1 flex items-center justify-center py-40 relative z-10">
-          <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container--boxed w-full px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left Side - Branding & Features */}
               <div className="text-white space-y-8">
@@ -114,7 +114,7 @@ const ForgotPassword = () => {
                     </span>
                   </div>
 
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
                     Forgot Your
                     <span className="block bg-gradient-to-r from-brand-theme to-yellow-400 bg-clip-text text-transparent">
                       Password?

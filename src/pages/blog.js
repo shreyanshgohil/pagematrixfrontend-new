@@ -187,7 +187,7 @@ export default function Blog() {
               <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-t from-white/10 to-transparent"></div>
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 lg:pt-8 lg:py-16">
+            <div className="container--boxed relative z-10 px-4 sm:px-6 lg:px-8 w-full py-12 lg:pt-8 lg:py-16">
               <div className="text-center mb-12 sm:mb-16 lg:mb-20">
                 {/* Badge */}
                 <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/20 mb-6 sm:mb-8">
