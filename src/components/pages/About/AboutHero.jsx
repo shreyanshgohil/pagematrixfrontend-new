@@ -45,7 +45,7 @@ const AboutHero = () => {
         <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-t from-white/10 to-transparent"></div>
       </div>
 
-      <div className="container--boxed relative z-10 px-4 sm:px-6 lg:px-8 w-full py-12 lg:pt-8 lg:py-16">
+      <div className="relative z-10 container--boxed px-4 sm:px-6 lg:px-8 w-full py-12 lg:pt-8 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-6 sm:space-y-8">

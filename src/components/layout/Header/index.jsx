@@ -87,20 +87,33 @@ const Header = () => {
               role="navigation"
               aria-label="Main navigation"
             >
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`font-semibold relative group transition-all duration-300 ${
-                    isScrolled || !isFixedHeaderPage
-                      ? "text-brand-blue-800 hover:text-brand-theme"
-                      : "text-white hover:text-brand-theme"
-                  }`}
-                >
-                  {item.name}
-                  <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-brand-theme transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              ))}
+              {navigationItems.map((item) => {
+                const isActive =
+                  router.pathname === item.href ||
+                  (item.href === "/api-docs" && router.pathname === "/api") ||
+                  (item.href === "/blog" &&
+                    router.pathname.startsWith("/blog"));
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`font-semibold relative group transition-all duration-300 ${
+                      isActive
+                        ? "text-brand-theme"
+                        : isScrolled || !isFixedHeaderPage
+                        ? "text-brand-blue-800 hover:text-brand-theme"
+                        : "text-white hover:text-brand-theme"
+                    }`}
+                  >
+                    {item.name}
+                    <span
+                      className={`absolute -bottom-0.5 left-0 h-0.5 bg-brand-theme transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    ></span>
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Authentication Buttons */}

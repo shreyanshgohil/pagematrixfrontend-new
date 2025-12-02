@@ -24,7 +24,7 @@ const WhyUs = () => {
     {
       title: "Comprehensive Performance Analysis",
       description:
-        "Get in-depth insights into Core Web Vitals, performance scores and practical improvement recommendations.",
+        "Get detailed insights into Core Web Vitals, performance scores, and actionable recommendations to optimize your website's speed and user experience.",
       linkTitle: "View analysis features",
       linkHref: "/pagespeed-test",
       image: "/images/home/search.svg",
