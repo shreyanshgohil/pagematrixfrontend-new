@@ -14,7 +14,7 @@ import {
 
 const FeaturesHero = () => {
   const quickFeatures = [
-    { icon: <IoSpeedometerOutline />, text: "Google PageSpeed API" },
+    { icon: <IoSpeedometerOutline />, text: "PageSpeed API" },
     { icon: <IoAnalyticsOutline />, text: "Real-time Analysis" },
     { icon: <IoGlobeOutline />, text: "Mobile & Desktop" },
   ];
@@ -96,7 +96,7 @@ const FeaturesHero = () => {
                     100%
                   </div>
                   <div className="text-xs sm:text-sm text-white/80">
-                    Google API
+                    Accurate
                   </div>
                 </div>
                 <div className="text-center">
@@ -149,7 +149,7 @@ const FeaturesHero = () => {
                 <div className="text-center p-3 sm:p-4 bg-brand-theme/10 rounded-xl">
                   <FaRocket className="text-2xl sm:text-3xl text-brand-theme mx-auto mb-2" />
                   <div className="text-xs sm:text-sm font-semibold text-brand-blue-800">
-                    Google API
+                    PageSpeed API
                   </div>
                 </div>
                 <div className="text-center p-3 sm:p-4 bg-brand-blue-700/10 rounded-xl">
@@ -188,7 +188,7 @@ const FeaturesHero = () => {
                       100%
                     </div>
                     <div className="text-xs sm:text-sm text-brand-gray-500">
-                      Google API
+                      Accurate
                     </div>
                   </div>
                   <div>

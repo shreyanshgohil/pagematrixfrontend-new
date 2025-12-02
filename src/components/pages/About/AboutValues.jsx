@@ -14,7 +14,7 @@ const AboutValues = () => {
       icon: <FaShieldAlt />,
       title: "Trust & Accuracy",
       description:
-        "We believe in complete accuracy. Every PageSpeed analysis uses Google's official API and we provide honest, reliable data to help you make informed optimization decisions.",
+        "We believe in complete accuracy. Every PageSpeed analysis provides honest, reliable data to help you make informed optimization decisions.",
       color: "from-brand-blue-700 to-brand-blue-800",
     },
     {
@@ -28,7 +28,7 @@ const AboutValues = () => {
       icon: <FaLightbulb />,
       title: "Innovation",
       description:
-        "We leverage cutting-edge technology and Google's PageSpeed API to simplify performance analysis and make website optimization more efficient and accessible.",
+        "We leverage cutting-edge technology to simplify performance analysis and make website optimization more efficient and accessible.",
       color: "from-brand-theme-600 to-brand-theme-800",
     },
     {

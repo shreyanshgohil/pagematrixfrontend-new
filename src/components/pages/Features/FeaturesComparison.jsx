@@ -11,10 +11,10 @@ import {
 const FeaturesComparison = () => {
   const features = [
     {
-      name: "Google PageSpeed API",
+      name: "PageSpeed API",
       ourTool: true,
       competitors: false,
-      description: "Official Google PageSpeed Insights API integration",
+      description: "PageSpeed Insights API integration",
     },
     {
       name: "Real-time Analysis",

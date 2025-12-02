@@ -33,12 +33,12 @@ const AdminSpeedyIndex = () => {
         <title>SpeedyIndex - Admin Dashboard</title>
         <meta
           name="description"
-          content="SpeedyIndex checker and indexer tools for Google"
+          content="SpeedyIndex checker and indexer tools"
         />
       </Head>
       <SEO
         title="SpeedyIndex - Admin Dashboard"
-        description="SpeedyIndex checker and indexer tools for Google"
+        description="SpeedyIndex checker and indexer tools"
       />
 
       <AdminDashboardLayout>
@@ -52,7 +52,7 @@ const AdminSpeedyIndex = () => {
                     SpeedyIndex
                   </h1>
                   <p className="mt-2 text-gray-600">
-                    Checker and Indexer tools for Google
+                    Checker and Indexer tools
                   </p>
                 </div>
               </div>

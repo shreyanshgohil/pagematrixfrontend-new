@@ -13,7 +13,7 @@ import { FaTachometerAlt, FaRocket, FaChartLine } from "react-icons/fa";
 
 const HeroSection = ({ cities = [] }) => {
   const features = [
-    { icon: <IoShieldCheckmark />, text: "Google PageSpeed API" },
+    { icon: <IoShieldCheckmark />, text: "PageSpeed API" },
     { icon: <IoCheckmarkCircle />, text: "Real-time Analysis" },
     { icon: <IoStar />, text: "Performance Insights" },
   ];
@@ -97,8 +97,7 @@ const HeroSection = ({ cities = [] }) => {
                   </span>
                 </h1>
                 <p className="text-lg sm:text-xl text-white/90 lg:max-w-lg leading-relaxed">
-                  Get comprehensive PageSpeed insights using Google's PageSpeed
-                  API. Optimize your website performance with real-time analysis
+                  Get comprehensive PageSpeed insights. Optimize your website performance with real-time analysis
                   and actionable recommendations.
                 </p>
               </div>

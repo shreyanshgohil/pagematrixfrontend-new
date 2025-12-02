@@ -7,15 +7,15 @@ const API = () => {
     <>
       <SEO
         title="API Documentation | PageSpeed Performance API | Developer Integration"
-        description="Integrate our PageSpeed Performance API into your applications. Get comprehensive website performance analysis using Google's PageSpeed Insights API with simple REST endpoints and authentication tokens."
-        keywords="PageSpeed API, website performance API, developer API, REST API, performance testing API, Google PageSpeed integration, API documentation, developer tools, web performance API"
+        description="Integrate our PageSpeed Performance API into your applications. Get comprehensive website performance analysis with simple REST endpoints and authentication tokens."
+        keywords="PageSpeed API, website performance API, developer API, REST API, performance testing API, API documentation, developer tools, web performance API"
         url="/api"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "WebAPI",
           name: "PageSpeed Performance API",
           description:
-            "REST API for website performance analysis using Google PageSpeed Insights",
+            "REST API for website performance analysis",
           url: `${
             process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com"
           }/api`,

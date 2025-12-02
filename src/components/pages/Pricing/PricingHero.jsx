@@ -18,7 +18,7 @@ const PricingHero = () => {
   }, []);
 
   const features = [
-    { icon: <IoSpeedometerOutline />, text: "Google PageSpeed API" },
+    { icon: <IoSpeedometerOutline />, text: "PageSpeed API" },
     { icon: <IoAnalyticsOutline />, text: "Real-time Analysis" },
     { icon: <IoStar />, text: "Performance Insights" },
   ];
@@ -91,8 +91,7 @@ const PricingHero = () => {
                   </span>
                 </h1>
                 <p className="text-lg sm:text-xl text-white/90 lg:max-w-lg leading-relaxed">
-                  Get comprehensive PageSpeed insights using Google's PageSpeed
-                  API. Choose from flexible plans designed for developers,
+                  Get comprehensive PageSpeed insights. Choose from flexible plans designed for developers,
                   businesses, and enterprises.
                 </p>
               </div>

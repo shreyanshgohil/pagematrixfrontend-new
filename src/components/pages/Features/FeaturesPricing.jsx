@@ -44,7 +44,7 @@ const FeaturesPricing = () => {
       features: [
         "Unlimited PageSpeed tests",
         "Advanced performance metrics",
-        "Google PageSpeed API access",
+        "PageSpeed API access",
         "Historical data tracking",
         "Automated monitoring",
         "Custom alerts",
@@ -98,7 +98,7 @@ const FeaturesPricing = () => {
           </h2>
           <p className="text-base sm:text-lg text-brand-gray-500 max-w-3xl mx-auto leading-relaxed">
             Select the perfect plan for your PageSpeed analysis needs. All plans
-            include access to our Google PageSpeed API integration and core
+            include access to our PageSpeed API integration and core
             features.
           </p>
         </div>
@@ -207,7 +207,7 @@ const FeaturesPricing = () => {
               All Plans Include
             </h4>
             <p className="text-sm sm:text-base text-brand-gray-500 mb-4">
-              Google PageSpeed API integration, Core Web Vitals analysis, mobile
+              PageSpeed API integration, Core Web Vitals analysis, mobile
               & desktop testing, and real-time performance metrics.
             </p>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center text-xs sm:text-sm text-brand-gray-500">

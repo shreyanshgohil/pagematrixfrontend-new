@@ -5,7 +5,7 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       quote:
-        "This PageSpeed tool is incredible! It helped us identify critical performance issues and improve our website speed by 40%. The Google API integration is seamless and the insights are spot-on.",
+        "This PageSpeed tool is incredible! It helped us identify critical performance issues and improve our website speed by 40%. The API integration is seamless and the insights are spot-on.",
       author: "Sarah Chen",
       role: "Frontend Developer at TechCorp",
       avatar: "SC",

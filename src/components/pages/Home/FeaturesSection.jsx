@@ -13,9 +13,9 @@ import {
 const FeaturesSection = () => {
   const features = [
     {
-      title: "Google PageSpeed API",
+      title: "PageSpeed API",
       description:
-        "Powered by Google's official PageSpeed Insights API for accurate and reliable performance metrics.",
+        "Accurate and reliable performance metrics for comprehensive website analysis.",
       icon: <FaRocket className="text-3xl" />,
       color: "from-brand-blue-700 to-brand-blue-800",
     },

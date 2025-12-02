@@ -14,7 +14,7 @@ const AboutTimeline = () => {
       year: "2022",
       title: "The Beginning",
       description:
-        "Founded with a vision to revolutionize website performance optimization through Google's PageSpeed API and cutting-edge technology.",
+        "Founded with a vision to revolutionize website performance optimization through cutting-edge technology.",
       icon: <FaRocket />,
       color: "from-brand-blue-700 to-brand-blue-800",
     },
@@ -22,7 +22,7 @@ const AboutTimeline = () => {
       year: "2022",
       title: "Platform Launch",
       description:
-        "Launched our innovative PageSpeed analysis platform with Google API integration and comprehensive performance testing capabilities.",
+        "Launched our innovative PageSpeed analysis platform with comprehensive performance testing capabilities.",
       icon: <FaTrophy />,
       color: "from-brand-theme to-brand-theme-600",
     },

@@ -132,7 +132,7 @@ const PricingPlans = () => {
           <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-brand-theme to-brand-theme-600 mx-auto mb-6"></div>
           <p className="text-lg text-brand-gray-600 max-w-3xl mx-auto">
             Choose the perfect plan for your website performance testing needs.
-            All plans include access to our Google PageSpeed API integration.
+            All plans include access to our PageSpeed API integration.
           </p>
         </div>
 

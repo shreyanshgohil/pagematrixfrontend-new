@@ -261,8 +261,7 @@ $response = json_decode($result, true);
                     </h2>
                     <p className="text-lg text-gray-600 mb-6">
                       Our PageSpeed Performance API provides comprehensive
-                      website performance analysis using Google's PageSpeed
-                      Insights API. Get detailed metrics, recommendations, and
+                      website performance analysis. Get detailed metrics, recommendations, and
                       Core Web Vitals data for any website.
                     </p>
                   </div>

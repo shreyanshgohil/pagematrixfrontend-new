@@ -14,7 +14,7 @@ const PricingPage = () => {
     <Layout>
       <SEO
         title="Pricing - PageSpeed Performance Tool | Affordable Website Speed Testing Plans"
-        description="Choose the perfect PageSpeed performance testing plan for your needs. From free tier to enterprise solutions, get accurate website speed analysis with Google PageSpeed API integration."
+        description="Choose the perfect PageSpeed performance testing plan for your needs. From free tier to enterprise solutions, get accurate website speed analysis with PageSpeed API integration."
         keywords="PageSpeed pricing, website performance pricing, PageSpeed API pricing, website speed test pricing, performance testing plans, PageSpeed tool pricing, website optimization pricing, Core Web Vitals pricing"
         url="/pricing"
         structuredData={{
@@ -22,7 +22,7 @@ const PricingPage = () => {
           "@type": "WebApplication",
           name: "PageSpeed Performance Tool - Pricing",
           description:
-            "Affordable website performance testing plans with Google PageSpeed API integration. Choose from free to enterprise solutions.",
+            "Affordable website performance testing plans with PageSpeed API integration. Choose from free to enterprise solutions.",
           url: `${
             process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com"
           }/pricing`,

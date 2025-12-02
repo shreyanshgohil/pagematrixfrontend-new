@@ -69,8 +69,7 @@ const AboutHero = () => {
               </h1>
               <p className="text-lg sm:text-xl text-white/90 leading-relaxed">
                 We're more than just a PageSpeed tool. We're your trusted
-                partner in optimizing website performance, backed by Google's
-                PageSpeed API and years of development experience.
+                partner in optimizing website performance, backed by years of development experience.
               </p>
             </div>
 
@@ -102,8 +101,7 @@ const AboutHero = () => {
                 <p className="text-brand-gray-500 text-base sm:text-lg leading-relaxed mb-6">
                   Since our founding in 2022, we've been committed to
                   revolutionizing website performance optimization through
-                  Google's PageSpeed API, cutting-edge technology and
-                  exceptional developer experience.
+                  cutting-edge technology and exceptional developer experience.
                 </p>
                 <div className="grid grid-cols-2 gap-4 text-center">
                   <div className="bg-brand-theme/10 rounded-xl p-4">

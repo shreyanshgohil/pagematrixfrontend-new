@@ -32,7 +32,7 @@ const Team = () => {
       name: "Shreyansh Gohil",
       position: "Chief Technology Officer",
       initials: "SG",
-      bio: "Tech innovator passionate about using Google's PageSpeed API to solve real-world performance problems.",
+      bio: "Tech innovator passionate about using PageSpeed API to solve real-world performance problems.",
       experience: "5+ Years",
       education: "Computer Science",
     },
@@ -104,7 +104,7 @@ const Team = () => {
     {
       title: "Innovation",
       description:
-        "We constantly innovate to provide the best PageSpeed analysis solutions using Google's API and cutting-edge technology.",
+        "We constantly innovate to provide the best PageSpeed analysis solutions using cutting-edge technology.",
       icon: <FaBuilding />,
       color: "from-brand-theme to-brand-theme-600",
     },
@@ -137,7 +137,7 @@ const Team = () => {
         <title>Our Team - PageSpeed Performance Tool | Meet the Experts</title>
         <meta
           name="description"
-          content="Meet the talented team behind our PageSpeed performance tool. Our experts are dedicated to helping developers optimize website performance with years of experience and Google PageSpeed API expertise."
+          content="Meet the talented team behind our PageSpeed performance tool. Our experts are dedicated to helping developers optimize website performance with years of experience and PageSpeed API expertise."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

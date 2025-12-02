@@ -12,9 +12,9 @@ import {
 const WhyUs = () => {
   const whyUsData = [
     {
-      title: "Google PageSpeed API Integration",
+      title: "PageSpeed API Integration",
       description:
-        "Powered by Google's official PageSpeed Insights API for accurate and reliable performance metrics. Get the same data that Google uses for search rankings.",
+        "Accurate and reliable performance metrics for comprehensive website analysis. Get the data you need for search rankings.",
       linkTitle: "Test your website",
       linkHref: "/pagespeed-test",
       image: "/images/home/promoting-brand.svg",

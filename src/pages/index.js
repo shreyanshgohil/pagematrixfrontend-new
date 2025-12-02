@@ -30,16 +30,16 @@ const index = ({ facets, cities }) => {
   return (
     <>
       <SEO
-        title="PageSpeed Performance Tool | Google PageSpeed API Integration | Website Speed Testing"
-        description="Analyze your website performance with our comprehensive PageSpeed testing tool powered by Google's PageSpeed Insights API. Get real-time performance metrics, Core Web Vitals analysis, and actionable optimization recommendations to boost your website speed and SEO rankings."
-        keywords="PageSpeed API, website performance, Core Web Vitals, Google PageSpeed Insights, website speed test, performance optimization, web performance, page speed analysis, mobile performance, desktop performance, website optimization, SEO performance, web vitals, performance monitoring"
+        title="PageSpeed Performance Tool | PageSpeed API Integration | Website Speed Testing"
+        description="Analyze your website performance with our comprehensive PageSpeed testing tool. Get real-time performance metrics, Core Web Vitals analysis, and actionable optimization recommendations to boost your website speed and SEO rankings."
+        keywords="PageSpeed API, website performance, Core Web Vitals, website speed test, performance optimization, web performance, page speed analysis, mobile performance, desktop performance, website optimization, SEO performance, web vitals, performance monitoring"
         url="/"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "WebApplication",
           name: "PageSpeed Performance Tool",
           description:
-            "Comprehensive website performance analysis tool powered by Google's PageSpeed Insights API. Get real-time performance metrics, Core Web Vitals analysis, and optimization recommendations.",
+            "Comprehensive website performance analysis tool. Get real-time performance metrics, Core Web Vitals analysis, and optimization recommendations.",
           url: process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com",
           logo: `${
             process.env.NEXT_PUBLIC_SITE_URL || "https://pagespeed-tool.com"
@@ -50,7 +50,7 @@ const index = ({ facets, cities }) => {
           applicationCategory: "DeveloperApplication",
           operatingSystem: "Web Browser",
           featureList: [
-            "Google PageSpeed API Integration",
+            "PageSpeed API Integration",
             "Core Web Vitals Analysis",
             "Mobile & Desktop Testing",
             "Real-time Performance Metrics",
@@ -60,7 +60,7 @@ const index = ({ facets, cities }) => {
           offers: {
             "@type": "Offer",
             description:
-              "Website performance testing and optimization services using Google PageSpeed API",
+              "Website performance testing and optimization services using PageSpeed API",
             category: "Web Performance Tools",
           },
           potentialAction: {

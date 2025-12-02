@@ -16,12 +16,12 @@ import {
 const FeaturesDetailed = () => {
   const detailedFeatures = [
     {
-      title: "Google PageSpeed API Integration",
+      title: "PageSpeed API Integration",
       description:
-        "Our tool is powered by Google's official PageSpeed Insights API, ensuring you get the same accurate performance data that Google uses for search rankings.",
+        "Accurate performance data for comprehensive website analysis and optimization.",
       features: [
-        "Official Google PageSpeed Insights API",
-        "Same data Google uses for rankings",
+        "PageSpeed Insights API",
+        "Accurate performance metrics",
         "Real-time performance scoring",
         "Comprehensive audit results",
         "Mobile and desktop analysis",

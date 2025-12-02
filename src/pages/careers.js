@@ -56,7 +56,7 @@ const Careers = () => {
         "3+ years of experience with React.js and Next.js",
         "Strong knowledge of TypeScript and modern CSS",
         "Experience with performance optimization and Core Web Vitals",
-        "Familiarity with Google PageSpeed API integration",
+        "Familiarity with PageSpeed API integration",
         "Experience with testing frameworks (Jest, React Testing Library)",
       ],
       benefits: [
@@ -126,11 +126,11 @@ const Careers = () => {
       type: "Full-time",
       experience: "2-4 years",
       description:
-        "Build scalable backend services and APIs that power our PageSpeed analysis platform and Google API integration.",
+        "Build scalable backend services and APIs that power our PageSpeed analysis platform.",
       requirements: [
         "2+ years of backend development experience",
         "Proficiency in Node.js, Python, or Java",
-        "Experience with Google PageSpeed API integration",
+        "Experience with PageSpeed API integration",
         "Knowledge of cloud platforms (AWS, GCP, Azure)",
         "Understanding of performance monitoring and caching",
       ],
@@ -155,7 +155,7 @@ const Careers = () => {
       requirements: [
         "3+ years of web performance optimization experience",
         "Deep knowledge of Core Web Vitals and PageSpeed metrics",
-        "Experience with Google PageSpeed Insights API",
+        "Experience with PageSpeed Insights API",
         "Proficiency in performance testing tools (Lighthouse, WebPageTest)",
         "Understanding of CDN, caching, and optimization strategies",
       ],
@@ -277,7 +277,7 @@ const Careers = () => {
       icon: <FaLightbulb />,
       title: "Innovation",
       description:
-        "Work on cutting-edge Google PageSpeed API and performance technology",
+        "Work on cutting-edge PageSpeed API and performance technology",
       color: "from-brand-blue-800 to-brand-theme",
     },
     {
@@ -327,7 +327,7 @@ const Careers = () => {
     <>
       <SEO
         title="Careers - PageSpeed Performance Tool | Join Our Team & Build Your Career"
-        description="Join our PageSpeed performance tool team and be part of a mission to revolutionize website performance optimization. Explore open positions, career opportunities and benefits. Work with Google PageSpeed API and cutting-edge performance technology."
+        description="Join our PageSpeed performance tool team and be part of a mission to revolutionize website performance optimization. Explore open positions, career opportunities and benefits. Work with cutting-edge performance technology."
         keywords="careers, jobs, employment, PageSpeed jobs, performance jobs, tech jobs, join PageSpeed team, career opportunities, job openings, performance careers, tech careers, developer jobs, API jobs"
         url="/careers"
         structuredData={{

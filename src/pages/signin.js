@@ -352,11 +352,10 @@ const SignIn = () => {
                   <FaTachometerAlt className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-brand-blue-800 mb-3">
-                  Google PageSpeed API
+                  PageSpeed API
                 </h3>
                 <p className="text-brand-gray-600">
-                  Powered by Google's official PageSpeed Insights API for
-                  accurate, real-time performance analysis
+                  Accurate, real-time performance analysis for comprehensive website optimization
                 </p>
               </div>
 

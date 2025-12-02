@@ -11,22 +11,22 @@ const Features = () => {
   return (
     <>
       <SEO
-        title="PageSpeed Tool Features | Google PageSpeed API Integration | Performance Analysis"
-        description="Explore comprehensive PageSpeed tool features including Google PageSpeed API integration, Core Web Vitals analysis, mobile & desktop testing, real-time performance metrics, and developer-friendly API access."
-        keywords="PageSpeed features, Google PageSpeed API, Core Web Vitals, performance analysis, mobile testing, desktop testing, real-time metrics, developer API, website optimization, performance monitoring"
+        title="PageSpeed Tool Features | PageSpeed API Integration | Performance Analysis"
+        description="Explore comprehensive PageSpeed tool features including PageSpeed API integration, Core Web Vitals analysis, mobile & desktop testing, real-time performance metrics, and developer-friendly API access."
+        keywords="PageSpeed features, PageSpeed API, Core Web Vitals, performance analysis, mobile testing, desktop testing, real-time metrics, developer API, website optimization, performance monitoring"
         url="/features"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "WebPage",
           name: "PageSpeed Tool Features",
           description:
-            "Comprehensive features of our PageSpeed performance analysis tool powered by Google's PageSpeed Insights API",
+            "Comprehensive features of our PageSpeed performance analysis tool",
           url: process.env.NEXT_PUBLIC_SITE_URL + "/features",
           mainEntity: {
             "@type": "WebApplication",
             name: "PageSpeed Performance Tool",
             featureList: [
-              "Google PageSpeed API Integration",
+              "PageSpeed API Integration",
               "Core Web Vitals Analysis",
               "Mobile & Desktop Testing",
               "Real-time Performance Metrics",

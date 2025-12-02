@@ -66,7 +66,7 @@ const CTASection = () => {
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-6 text-brand-gray-500 text-xs sm:text-sm">
             <div className="flex items-center gap-2">
               <FaShieldAlt className="text-brand-theme" />
-              <span>Google PageSpeed API</span>
+              <span>PageSpeed API</span>
             </div>
             <div className="hidden sm:block w-1 h-1 bg-brand-gray-400 rounded-full"></div>
             <div className="flex items-center gap-2">
