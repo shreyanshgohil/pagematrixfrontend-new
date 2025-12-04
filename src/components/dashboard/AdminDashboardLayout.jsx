@@ -153,36 +153,53 @@ const AdminDashboardLayout = ({ children }) => {
               return (
                 <div key={item.name}>
                   {/* Parent Item */}
-                  <div
-                    className={`group flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
-                      isActive
-                        ? "bg-brand-theme text-white shadow-sm"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm"
-                    }`}
-                    onClick={() => {
-                      if (item.hasChildren) {
-                        toggleExpanded(item.name);
-                      }
-                    }}
-                  >
-                    <div className="flex items-center">
-                      <item.icon
-                        className={`mr-3 h-5 w-5 ${
-                          isActive
-                            ? "text-white"
-                            : "text-gray-400 group-hover:text-gray-600"
-                        }`}
-                      />
-                      <span>{item.name}</span>
-                    </div>
-                    {item.hasChildren && (
+                  {item.hasChildren ? (
+                    <div
+                      className={`group flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
+                        isActive
+                          ? "bg-brand-theme text-white shadow-sm"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm"
+                      }`}
+                      onClick={() => toggleExpanded(item.name)}
+                    >
+                      <div className="flex items-center">
+                        <item.icon
+                          className={`mr-3 h-5 w-5 ${
+                            isActive
+                              ? "text-white"
+                              : "text-gray-400 group-hover:text-gray-600"
+                          }`}
+                        />
+                        <span>{item.name}</span>
+                      </div>
                       <FaChevronRight
                         className={`h-4 w-4 transition-transform duration-200 ${
                           isExpanded ? "rotate-90" : ""
                         } ${isActive ? "text-white" : "text-gray-400"}`}
                       />
-                    )}
-                  </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={`group flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
+                        isActive
+                          ? "bg-brand-theme text-white shadow-sm"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm"
+                      }`}
+                      onClick={() => setIsSidebarOpen(false)}
+                    >
+                      <div className="flex items-center">
+                        <item.icon
+                          className={`mr-3 h-5 w-5 ${
+                            isActive
+                              ? "text-white"
+                              : "text-gray-400 group-hover:text-gray-600"
+                          }`}
+                        />
+                        <span>{item.name}</span>
+                      </div>
+                    </Link>
+                  )}
 
                   {/* Children Items */}
                   {item.hasChildren && isExpanded && (

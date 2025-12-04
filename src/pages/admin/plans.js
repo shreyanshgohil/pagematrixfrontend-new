@@ -41,7 +41,7 @@ const AdminPlans = () => {
       activeUsers: 0,
       features: [
         "Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -56,7 +56,7 @@ const AdminPlans = () => {
       activeUsers: 1,
       features: [
         "Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -71,7 +71,7 @@ const AdminPlans = () => {
       activeUsers: 0,
       features: [
         "Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -81,12 +81,12 @@ const AdminPlans = () => {
       name: "Enterprise",
       status: "Active",
       price: "$499.00",
-      description: "For large enterprises with extensive indexing requirements",
+      description: "For large enterprises with extensive page analysis requirements",
       credits: 12000,
       activeUsers: 0,
       features: [
         "Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -101,7 +101,7 @@ const AdminPlans = () => {
       activeUsers: 0,
       features: [
         "Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -116,7 +116,7 @@ const AdminPlans = () => {
       activeUsers: 10,
       features: [
         "Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -131,7 +131,7 @@ const AdminPlans = () => {
       activeUsers: 4,
       features: [
         "Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "No payment required",
       ],
     },
@@ -145,7 +145,7 @@ const AdminPlans = () => {
       activeUsers: 0,
       features: [
         "Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "Legacy plan features",
       ],
       isLegacy: true,
@@ -200,7 +200,7 @@ const AdminPlans = () => {
       price: "Free",
       features: [
         "50,000 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Admin-only features",
         "Custom expiration dates",

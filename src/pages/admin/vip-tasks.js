@@ -17,7 +17,7 @@ const AdminVipTasks = () => {
 
   const tabs = [
     { id: "overview", label: "Overview" },
-    { id: "failed", label: "Failed Tasks" },
+    { id: "failed", label: "Failed Pages" },
     { id: "delayed", label: "Delayed Jobs" },
     { id: "queue", label: "Queue Status" },
     { id: "health", label: "Health Monitor" },
@@ -25,7 +25,7 @@ const AdminVipTasks = () => {
 
   const summaryStats = [
     {
-      title: "All VIP tasks created",
+      title: "All VIP pages created",
       value: "6",
       color: "text-gray-900",
     },
@@ -35,7 +35,7 @@ const AdminVipTasks = () => {
       color: "text-green-600",
     },
     {
-      title: "Tasks with errors",
+      title: "Pages with errors",
       value: "0",
       color: "text-red-600",
     },
@@ -120,8 +120,8 @@ const AdminVipTasks = () => {
         />
       </Head>
       <SEO
-        title="VIP Task Management - Admin Dashboard"
-        description="Monitor and manage VIP task processing and retry failed jobs"
+        title="VIP Page Analysis Management - Admin Dashboard"
+        description="Monitor and manage VIP page analysis processing and retry failed jobs"
       />
 
       <AdminDashboardLayout>
@@ -132,10 +132,10 @@ const AdminVipTasks = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900">
-                    VIP Task Management
+                    VIP Page Analysis Management
                   </h1>
                   <p className="mt-2 text-gray-600">
-                    Monitor and manage VIP task processing and retry failed jobs
+                    Monitor and manage VIP page analysis processing and retry failed jobs
                   </p>
                 </div>
                 <div className="flex items-center space-x-4">

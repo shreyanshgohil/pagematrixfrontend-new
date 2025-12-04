@@ -59,7 +59,7 @@ const AdminFAQs = () => {
     },
     {
       id: 2,
-      question: "How fast does indexing really work?",
+      question: "How fast does page analysis work?",
       category: "Technical",
       status: "Published",
     },
@@ -77,7 +77,7 @@ const AdminFAQs = () => {
     },
     {
       id: 5,
-      question: "How do I upload URLs for indexing?",
+      question: "How do I add URLs for analysis?",
       category: "Getting Started",
       status: "Published",
     },
@@ -89,7 +89,7 @@ const AdminFAQs = () => {
     },
     {
       id: 7,
-      question: "How do I check if my URLs are already indexed?",
+      question: "How do I check if my pages have been analyzed?",
       category: "Technical",
       status: "Published",
     },

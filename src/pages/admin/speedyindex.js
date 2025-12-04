@@ -5,7 +5,7 @@ import AdminDashboardLayout from "@/components/dashboard/AdminDashboardLayout";
 import { FaShieldAlt, FaSearch, FaTimes } from "react-icons/fa";
 
 const AdminSpeedyIndex = () => {
-  const [activeTab, setActiveTab] = useState("checker");
+  const [activeTab, setActiveTab] = useState("analysis");
   const [taskIds, setTaskIds] = useState("");
   const [taskId, setTaskId] = useState("");
 
@@ -37,8 +37,8 @@ const AdminSpeedyIndex = () => {
         />
       </Head>
       <SEO
-        title="SpeedyIndex - Admin Dashboard"
-        description="SpeedyIndex checker and indexer tools"
+        title="Page Analysis Tools - Admin Dashboard"
+        description="Manage and monitor page analysis tasks"
       />
 
       <AdminDashboardLayout>
@@ -49,10 +49,10 @@ const AdminSpeedyIndex = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900">
-                    SpeedyIndex
+                    Page Analysis Tools
                   </h1>
                   <p className="mt-2 text-gray-600">
-                    Checker and Indexer tools
+                    Manage and monitor page analysis tasks
                   </p>
                 </div>
               </div>
@@ -65,39 +65,29 @@ const AdminSpeedyIndex = () => {
             <div className="mb-8">
               <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg w-fit">
                 <button
-                  onClick={() => setActiveTab("checker")}
+                  onClick={() => setActiveTab("analysis")}
                   className={`px-6 py-3 text-sm font-medium rounded-md transition-colors ${
-                    activeTab === "checker"
+                    activeTab === "analysis"
                       ? "bg-white text-gray-900 shadow-sm border border-gray-200"
                       : "text-gray-600 hover:text-gray-900"
                   }`}
                 >
-                  Checker
-                </button>
-                <button
-                  onClick={() => setActiveTab("indexer")}
-                  className={`px-6 py-3 text-sm font-medium rounded-md transition-colors ${
-                    activeTab === "indexer"
-                      ? "bg-white text-gray-900 shadow-sm border border-gray-200"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  Indexer
+                  Page Analysis
                 </button>
               </div>
             </div>
 
-            {/* Check Task Status Section */}
+            {/* Check Page Analysis Status Section */}
             <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-6">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                Check Task Status
+                Check Page Analysis Status
               </h2>
               <div className="space-y-4">
                 <div>
                   <textarea
                     value={taskIds}
                     onChange={(e) => setTaskIds(e.target.value)}
-                    placeholder="Enter Task IDs (one per line or comma separated)"
+                    placeholder="Enter Analysis IDs (one per line or comma separated)"
                     rows={6}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-theme focus:border-brand-theme resize-y"
                   />
@@ -130,7 +120,7 @@ const AdminSpeedyIndex = () => {
                     type="text"
                     value={taskId}
                     onChange={(e) => setTaskId(e.target.value)}
-                    placeholder="Enter Task ID"
+                    placeholder="Enter Analysis ID"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-theme focus:border-brand-theme"
                   />
                 </div>

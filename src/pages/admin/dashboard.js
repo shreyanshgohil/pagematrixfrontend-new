@@ -43,9 +43,9 @@ const AdminDashboard = () => {
     },
   ];
 
-  const speedyIndexBalance = {
-    indexer: 45998,
-    checker: 48541,
+  const pageAnalysisStats = {
+    totalAnalyzed: 45998,
+    thisMonth: 48541,
   };
 
   const getStatCardColor = (color) => {
@@ -136,26 +136,26 @@ const AdminDashboard = () => {
               ))}
             </div>
 
-            {/* SpeedyIndex Balance */}
+            {/* Page Analysis Stats */}
             <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-8">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900">
-                  $ SpeedyIndex Balance
+                  Page Analysis Statistics
                 </h3>
                 <FaBolt className="h-5 w-5 text-brand-theme" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-gray-900 mb-1">
-                    {speedyIndexBalance.indexer.toLocaleString()}
+                    {pageAnalysisStats.totalAnalyzed.toLocaleString()}
                   </p>
-                  <p className="text-sm text-gray-600">Indexer</p>
+                  <p className="text-sm text-gray-600">Total Pages Analyzed</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-gray-900 mb-1">
-                    {speedyIndexBalance.checker.toLocaleString()}
+                    {pageAnalysisStats.thisMonth.toLocaleString()}
                   </p>
-                  <p className="text-sm text-gray-600">Checker</p>
+                  <p className="text-sm text-gray-600">Pages This Month</p>
                 </div>
               </div>
             </div>
