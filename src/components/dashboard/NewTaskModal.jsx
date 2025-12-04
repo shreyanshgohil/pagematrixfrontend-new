@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import {
   FaTimes,
-  FaWrench,
-  FaRocket,
-  FaSearch,
   FaFileAlt,
   FaLightbulb,
   FaLink,
   FaChartBar,
   FaExclamationTriangle,
+  FaTachometerAlt,
 } from "react-icons/fa";
 
 const NewTaskModal = ({ isOpen, onClose }) => {
-  const [taskType, setTaskType] = useState("indexer");
-  const [taskTitle, setTaskTitle] = useState("Indexer Task #5b8lhf8rh");
+  const [taskTitle, setTaskTitle] = useState("Task #5b8lhf8rh");
   const [urls, setUrls] = useState("");
   const [errors, setErrors] = useState({});
 
@@ -33,7 +30,7 @@ const NewTaskModal = ({ isOpen, onClose }) => {
 
     if (Object.keys(newErrors).length === 0) {
       // Handle form submission
-      console.log("Form submitted:", { taskType, urls, taskTitle });
+      console.log("Form submitted:", { urls, taskTitle });
       onClose();
     }
   };
@@ -78,7 +75,7 @@ const NewTaskModal = ({ isOpen, onClose }) => {
           <div className="bg-white px-6 py-3 border-b border-gray-200">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-900">
-                Create a new task
+                Add URL Pages
               </h3>
               <button
                 onClick={handleClose}
@@ -91,41 +88,19 @@ const NewTaskModal = ({ isOpen, onClose }) => {
 
           {/* Content */}
           <form onSubmit={handleSubmit} className="px-6 py-4">
-            {/* Task Type */}
-            <div className="mb-4">
-              <label className="flex items-center space-x-2 text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">
-                <FaWrench className="h-4 w-4" />
-                <span>Task Type</span>
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setTaskType("indexer")}
-                  className={`flex items-center space-x-3 p-3 rounded-lg border-2 transition-all ${
-                    taskType === "indexer"
-                      ? "border-brand-theme bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white shadow-md"
-                      : "border-gray-200 hover:border-gray-300 text-gray-700"
-                  }`}
-                >
-                  <FaRocket className="h-5 w-5" />
-                  <span className="font-medium">Indexer</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setTaskType("checker")}
-                  className={`flex items-center space-x-3 p-3 rounded-lg border-2 transition-all ${
-                    taskType === "checker"
-                      ? "border-brand-theme bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white shadow-md"
-                      : "border-gray-200 hover:border-gray-300 text-gray-700"
-                  }`}
-                >
-                  <FaSearch className="h-5 w-5" />
-                  <span className="font-medium">Checker</span>
-                </button>
+            {/* Info Banner */}
+            <div className="mb-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-start space-x-3">
+                <FaTachometerAlt className="h-5 w-5 text-blue-600 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-gray-900">
+                    Add URL pages to analyze their speed and performance
+                  </p>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Each URL will be analyzed for page speed metrics
+                  </p>
+                </div>
               </div>
-              <p className="text-sm text-gray-600 mt-2">
-                Submit URLs for Google indexing • Uses unified credits
-              </p>
             </div>
 
             {/* Task Title */}
@@ -195,6 +170,12 @@ const NewTaskModal = ({ isOpen, onClose }) => {
                   <span>Max 10,000 URLs per task • Each URL = 1 credit</span>
                 </div>
                 <div className="flex items-center space-x-2">
+                  <FaTachometerAlt className="h-4 w-4" />
+                  <span>
+                    Pages will be analyzed for speed and performance metrics
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2">
                   <FaExclamationTriangle className="h-4 w-4" />
                   <span>
                     URLs must start with http:// or https:// • Use "Fix URLs"
@@ -209,8 +190,8 @@ const NewTaskModal = ({ isOpen, onClose }) => {
               type="submit"
               className="w-full bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:from-brand-theme-600 hover:to-brand-theme-800 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
             >
-              <FaRocket className="h-5 w-5" />
-              <span>Submit Task</span>
+              <FaTachometerAlt className="h-5 w-5" />
+              <span>Analyze Pages</span>
             </button>
           </form>
         </div>

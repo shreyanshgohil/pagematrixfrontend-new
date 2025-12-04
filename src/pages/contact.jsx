@@ -492,7 +492,7 @@ const Contact = () => {
                       </p>
                       <Link
                         href="/pagespeed-test"
-                        className="inline-flex items-center gap-2 bg-white text-brand-theme font-semibold py-3 px-6 rounded-xl hover:bg-brand-theme/10 transition-all duration-300"
+                        className="inline-flex items-center gap-2 bg-white text-brand-theme font-semibold py-3 px-6 rounded-xl hover:bg-white/90 transition-all duration-300"
                       >
                         Test Your Website
                         <FaArrowRight className="text-sm" />

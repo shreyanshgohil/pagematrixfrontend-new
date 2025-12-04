@@ -171,15 +171,10 @@ const FeaturesComparison = () => {
                     >
                       {plan.features[featureIndex] ? (
                         <div className="flex items-center space-x-2">
-                          <FaCheck className="text-green-500 text-lg" />
-                          {plan.highlight && (
-                            <span className="text-xs text-green-600 font-semibold">
-                              ✓
-                            </span>
-                          )}
+                          <FaCheck className="text-brand-neutral text-lg" />
                         </div>
                       ) : (
-                        <FaTimes className="text-brand-gray-300 text-lg" />
+                        <FaTimes className="text-brand-gray-500/50 text-lg" />
                       )}
                     </div>
                   ))}

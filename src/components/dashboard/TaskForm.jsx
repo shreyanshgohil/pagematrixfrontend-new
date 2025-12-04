@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import {
-  FaRocket,
-  FaSearch,
   FaClock,
   FaExclamationTriangle,
   FaChartBar,
   FaLightbulb,
   FaLink,
+  FaTachometerAlt,
 } from "react-icons/fa";
 
 const TaskForm = () => {
-  const [taskType, setTaskType] = useState("indexer");
   const [urls, setUrls] = useState("");
-  const [taskTitle, setTaskTitle] = useState("PageSpeed Task #cd24grota");
+  const [taskTitle, setTaskTitle] = useState("Task #cd24grota");
   const [errors, setErrors] = useState({});
 
   const availableCredits = 8;
@@ -29,7 +27,7 @@ const TaskForm = () => {
 
     if (Object.keys(newErrors).length === 0) {
       // Handle form submission
-      console.log("Form submitted:", { taskType, urls, taskTitle });
+      console.log("Form submitted:", { urls, taskTitle });
     }
   };
 
@@ -46,10 +44,10 @@ const TaskForm = () => {
           </div>
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Submit New Task
+              Add URL Pages
             </h2>
             <p className="text-gray-600 text-lg">
-              Create and submit performance analysis tasks for your URLs
+              Add URL pages to analyze their speed and performance metrics
             </p>
           </div>
         </div>
@@ -73,95 +71,20 @@ const TaskForm = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Task Type */}
-          <div>
-            <label className="block text-lg font-bold text-gray-900 mb-6">
-              Task Type
-            </label>
-            <div className="grid grid-cols-2 gap-6">
-              <button
-                type="button"
-                onClick={() => setTaskType("indexer")}
-                className={`p-6 rounded-xl border-2 transition-all duration-200 hover:shadow-md ${
-                  taskType === "indexer"
-                    ? "border-brand-theme bg-brand-theme/5 shadow-md"
-                    : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
-                }`}
-              >
-                <div className="flex items-center space-x-4">
-                  <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                      taskType === "indexer"
-                        ? "bg-brand-theme/10"
-                        : "bg-gray-100"
-                    }`}
-                  >
-                    <FaRocket
-                      className={`h-6 w-6 ${
-                        taskType === "indexer"
-                          ? "text-brand-theme"
-                          : "text-gray-400"
-                      }`}
-                    />
-                  </div>
-                  <div className="text-left">
-                    <div
-                      className={`font-bold text-lg ${
-                        taskType === "indexer"
-                          ? "text-brand-theme"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      PageSpeed Analysis
-                    </div>
-                    <div className="text-sm text-gray-500 mt-1">
-                      Analyze website performance • Uses unified credits
-                    </div>
-                  </div>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setTaskType("checker")}
-                className={`p-6 rounded-xl border-2 transition-all duration-200 hover:shadow-md ${
-                  taskType === "checker"
-                    ? "border-brand-theme bg-brand-theme/5 shadow-md"
-                    : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
-                }`}
-              >
-                <div className="flex items-center space-x-4">
-                  <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                      taskType === "checker"
-                        ? "bg-brand-theme/10"
-                        : "bg-gray-100"
-                    }`}
-                  >
-                    <FaSearch
-                      className={`h-6 w-6 ${
-                        taskType === "checker"
-                          ? "text-brand-theme"
-                          : "text-gray-400"
-                      }`}
-                    />
-                  </div>
-                  <div className="text-left">
-                    <div
-                      className={`font-bold text-lg ${
-                        taskType === "checker"
-                          ? "text-brand-theme"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      Performance Check
-                    </div>
-                    <div className="text-sm text-gray-500 mt-1">
-                      Quick performance check • Uses unified credits
-                    </div>
-                  </div>
-                </div>
-              </button>
+          {/* Info Section */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shadow-sm">
+                <FaTachometerAlt className="h-6 w-6 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="font-bold text-gray-900 text-lg mb-2">
+                  Speed & Performance Analysis
+                </h3>
+                <p className="text-gray-600">
+                  Add URL pages to analyze their speed and performance metrics. Each page will be tested for loading speed, performance scores, and optimization opportunities.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -233,6 +156,12 @@ const TaskForm = () => {
                 </span>
               </div>
               <div className="flex items-center space-x-3 bg-white p-3 rounded-lg">
+                <FaTachometerAlt className="h-5 w-5 text-blue-600" />
+                <span className="font-medium">
+                  Pages will be analyzed for speed and performance metrics
+                </span>
+              </div>
+              <div className="flex items-center space-x-3 bg-white p-3 rounded-lg">
                 <FaExclamationTriangle className="h-5 w-5 text-yellow-500" />
                 <span className="font-medium">
                   URLs must start with http:// or https:// • Use "Fix URLs" for
@@ -248,8 +177,8 @@ const TaskForm = () => {
               type="submit"
               className="w-full bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white font-bold py-5 px-8 rounded-xl hover:from-brand-theme-600 hover:to-brand-theme-800 transition-all duration-300 flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl text-lg"
             >
-              <FaRocket className="h-6 w-6" />
-              <span>Submit Task</span>
+              <FaTachometerAlt className="h-6 w-6" />
+              <span>Analyze Pages</span>
             </button>
           </div>
         </form>

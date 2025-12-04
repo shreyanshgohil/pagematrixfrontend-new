@@ -5,61 +5,76 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import NewTaskModal from "@/components/dashboard/NewTaskModal";
 import {
   FaRocket,
-  FaCheckCircle,
   FaSearch,
   FaFilter,
   FaDownload,
   FaArrowRight,
   FaCalendarAlt,
-  FaBolt,
   FaPlus,
+  FaTachometerAlt,
+  FaClock,
+  FaChartLine,
 } from "react-icons/fa";
 
 const TasksDashboard = () => {
-  const [activeTab, setActiveTab] = useState("indexer");
   const [searchQuery, setSearchQuery] = useState("");
   const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
 
   const tasks = [
     {
       id: "ff69dg8os",
-      name: "Indexer Task #ff69dg8os",
+      url: "https://example.com/home",
       status: "completed",
-      urls: { completed: 0, total: 1, processed: 1 },
-      progress: 0,
-      credits: { used: 0, total: 1 },
+      performanceScore: 92,
+      loadTime: "1.2s",
+      lcp: "1.8s",
+      fid: "45ms",
+      cls: "0.05",
       created: "25 days ago",
-      type: "indexer",
     },
     {
       id: "y6f4bxo3n",
-      name: "Indexer Task #y6f4bxo3n",
+      url: "https://example.com/about",
       status: "completed",
-      urls: { completed: 1, total: 1, processed: 1 },
-      progress: 100,
-      credits: { used: 1, total: 1 },
+      performanceScore: 78,
+      loadTime: "2.1s",
+      lcp: "2.5s",
+      fid: "120ms",
+      cls: "0.12",
       created: "25 days ago",
-      type: "indexer",
     },
     {
       id: "a1b2c3d4e",
-      name: "Indexer Task #a1b2c3d4e",
+      url: "https://example.com/products",
       status: "processing",
-      urls: { completed: 2, total: 5, processed: 3 },
-      progress: 60,
-      credits: { used: 2, total: 5 },
+      performanceScore: null,
+      loadTime: null,
+      lcp: null,
+      fid: null,
+      cls: null,
       created: "2 days ago",
-      type: "indexer",
     },
     {
       id: "f5g6h7i8j",
-      name: "Indexer Task #f5g6h7i8j",
+      url: "https://example.com/contact",
       status: "failed",
-      urls: { completed: 0, total: 3, processed: 0 },
-      progress: 0,
-      credits: { used: 0, total: 3 },
+      performanceScore: null,
+      loadTime: null,
+      lcp: null,
+      fid: null,
+      cls: null,
       created: "1 week ago",
-      type: "indexer",
+    },
+    {
+      id: "x9y8z7w6v",
+      url: "https://example.com/blog",
+      status: "completed",
+      performanceScore: 65,
+      loadTime: "3.5s",
+      lcp: "4.2s",
+      fid: "200ms",
+      cls: "0.25",
+      created: "3 days ago",
     },
   ];
 
@@ -89,15 +104,45 @@ const TasksDashboard = () => {
     }
   };
 
-  const filteredTasks = tasks.filter((task) => {
-    if (activeTab === "indexer") {
-      return task.type === "indexer";
-    }
-    return task.type === "checker";
-  });
+  const getPerformanceScoreColor = (score) => {
+    if (!score) return "text-gray-400";
+    if (score >= 90) return "text-green-600";
+    if (score >= 50) return "text-yellow-600";
+    return "text-red-600";
+  };
 
-  const searchedTasks = filteredTasks.filter((task) =>
-    task.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const getVitalColor = (value, type) => {
+    if (!value) return "text-gray-400";
+    
+    // Extract numeric value (handles "1.8s", "45ms", "0.05" formats)
+    const numericValue = parseFloat(value.toString().replace(/[^0-9.]/g, ""));
+    
+    if (type === "lcp") {
+      // LCP: Good < 2.5s, Needs Improvement 2.5-4s, Poor > 4s
+      if (numericValue < 2.5) return "text-green-600";
+      if (numericValue < 4.0) return "text-yellow-600";
+      return "text-red-600";
+    }
+    
+    if (type === "fid") {
+      // FID: Good < 100ms, Needs Improvement 100-300ms, Poor > 300ms
+      if (numericValue < 100) return "text-green-600";
+      if (numericValue < 300) return "text-yellow-600";
+      return "text-red-600";
+    }
+    
+    if (type === "cls") {
+      // CLS: Good < 0.1, Needs Improvement 0.1-0.25, Poor > 0.25
+      if (numericValue < 0.1) return "text-green-600";
+      if (numericValue < 0.25) return "text-yellow-600";
+      return "text-red-600";
+    }
+    
+    return "text-gray-600";
+  };
+
+  const searchedTasks = tasks.filter((task) =>
+    task.url.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -110,8 +155,8 @@ const TasksDashboard = () => {
 
       <SEO
         title="Tasks Dashboard - PageSpeed Performance Tool | Task Management"
-        description="Track and manage your indexing and checking tasks with real-time updates. Monitor progress, credits, and task status."
-        keywords="tasks dashboard, task management, indexing tasks, checking tasks, PageSpeed tasks"
+        description="Track and manage your tasks with real-time updates. Monitor progress, credits, and task status."
+        keywords="tasks dashboard, task management, PageSpeed tasks"
         url="/tasks-dashboard"
       />
 
@@ -125,8 +170,7 @@ const TasksDashboard = () => {
                   Tasks Dashboard
                 </h1>
                 <p className="text-gray-600 text-lg">
-                  Track and manage your indexing and checking tasks with
-                  real-time updates
+                  Track and manage your tasks with real-time updates
                 </p>
               </div>
             </div>
@@ -134,52 +178,23 @@ const TasksDashboard = () => {
 
           {/* Main Content */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            {/* Task Type Navigation and Create Button */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <button
-                    onClick={() => setActiveTab("indexer")}
-                    className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-200 ${
-                      activeTab === "indexer"
-                        ? "bg-brand-theme/10 text-brand-theme border-2 border-brand-theme shadow-sm"
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                    }`}
-                  >
-                    <FaBolt className="h-4 w-4" />
-                    <span>Indexer Tasks</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("checker")}
-                    className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-200 ${
-                      activeTab === "checker"
-                        ? "bg-brand-theme/10 text-brand-theme border-2 border-brand-theme shadow-sm"
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                    }`}
-                  >
-                    <FaCheckCircle className="h-4 w-4" />
-                    <span>Checker Tasks</span>
-                  </button>
-                </div>
-                <button
-                  onClick={() => setIsNewTaskModalOpen(true)}
-                  className="flex items-center space-x-2 px-6 py-3 bg-brand-theme text-white rounded-lg hover:bg-brand-theme-600 transition-colors shadow-lg hover:shadow-xl"
-                >
-                  <FaPlus className="h-4 w-4" />
-                  <span className="font-medium">Create task</span>
-                </button>
+            {/* Section Header with Create Button */}
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  Tasks
+                </h2>
+                <p className="text-gray-600">
+                  View performance metrics for your analyzed pages
+                </p>
               </div>
-            </div>
-
-            {/* Section Header */}
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                {activeTab === "indexer" ? "Indexer Tasks" : "Checker Tasks"}
-              </h2>
-              <p className="text-gray-600">
-                Track your {activeTab === "indexer" ? "indexing" : "checking"}{" "}
-                tasks and their progress
-              </p>
+              <button
+                onClick={() => setIsNewTaskModalOpen(true)}
+                className="flex items-center space-x-2 px-6 py-3 bg-brand-theme text-white rounded-lg hover:bg-brand-theme-600 transition-colors shadow-lg hover:shadow-xl"
+              >
+                <FaPlus className="h-4 w-4" />
+                <span className="font-medium">Create task</span>
+              </button>
             </div>
 
             {/* Search and Filter Bar */}
@@ -189,7 +204,7 @@ const TasksDashboard = () => {
                   <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <input
                     type="text"
-                    placeholder="Search by task title"
+                    placeholder="Search by URL"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-theme focus:border-brand-theme"
@@ -209,22 +224,22 @@ const TasksDashboard = () => {
                   <thead className="bg-gray-50">
                     <tr>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Task Name
+                        Page URL
                       </th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Status
                       </th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        URLs
+                        Performance Score
                       </th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Progress
+                        Load Time
                       </th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Credits
+                        Core Web Vitals
                       </th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Created
+                        Analyzed
                       </th>
                       <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Actions
@@ -237,11 +252,11 @@ const TasksDashboard = () => {
                         key={task.id}
                         className="hover:bg-gray-50 transition-colors"
                       >
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4">
                           <div className="flex items-center space-x-3">
-                            <FaRocket className="h-4 w-4 text-gray-400" />
-                            <span className="text-sm font-medium text-gray-900">
-                              {task.name}
+                            <FaRocket className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                            <span className="text-sm font-medium text-gray-900 break-all">
+                              {task.url}
                             </span>
                           </div>
                         </td>
@@ -255,33 +270,84 @@ const TasksDashboard = () => {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div>
-                            <div className="text-sm font-medium text-gray-900">
-                              {task.urls.completed}/{task.urls.total}
+                          {task.performanceScore !== null ? (
+                            <div className="flex items-center space-x-2">
+                              <FaTachometerAlt
+                                className={`h-4 w-4 ${getPerformanceScoreColor(
+                                  task.performanceScore
+                                )}`}
+                              />
+                              <span
+                                className={`text-sm font-bold ${getPerformanceScoreColor(
+                                  task.performanceScore
+                                )}`}
+                              >
+                                {task.performanceScore}
+                              </span>
+                              <span className="text-xs text-gray-500">/100</span>
                             </div>
-                            <div className="text-xs text-gray-500">
-                              {task.urls.processed} processed
-                            </div>
-                          </div>
+                          ) : (
+                            <span className="text-sm text-gray-400">-</span>
+                          )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-20 bg-gray-200 rounded-full h-2">
-                              <div
-                                className="bg-brand-theme h-2 rounded-full transition-all duration-300"
-                                style={{ width: `${task.progress}%` }}
-                              ></div>
+                          {task.loadTime ? (
+                            <div className="flex items-center space-x-2">
+                              <FaClock className="h-4 w-4 text-gray-400" />
+                              <span className="text-sm font-medium text-gray-900">
+                                {task.loadTime}
+                              </span>
                             </div>
-                            <span className="text-sm font-medium text-gray-900">
-                              {task.progress}%
-                            </span>
-                          </div>
+                          ) : (
+                            <span className="text-sm text-gray-400">-</span>
+                          )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="text-sm font-medium text-yellow-600">
-                            {task.credits.used} (
-                            {task.credits.used === 0 ? "total" : "used"})
-                          </span>
+                        <td className="px-6 py-4">
+                          {task.status === "completed" ? (
+                            <div className="space-y-1">
+                              <div className="flex items-center space-x-2">
+                                <span className="text-xs font-semibold text-gray-600 w-8">
+                                  LCP:
+                                </span>
+                                <span
+                                  className={`text-xs font-medium ${getVitalColor(
+                                    task.lcp,
+                                    "lcp"
+                                  )}`}
+                                >
+                                  {task.lcp}
+                                </span>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <span className="text-xs font-semibold text-gray-600 w-8">
+                                  FID:
+                                </span>
+                                <span
+                                  className={`text-xs font-medium ${getVitalColor(
+                                    task.fid,
+                                    "fid"
+                                  )}`}
+                                >
+                                  {task.fid}
+                                </span>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <span className="text-xs font-semibold text-gray-600 w-8">
+                                  CLS:
+                                </span>
+                                <span
+                                  className={`text-xs font-medium ${getVitalColor(
+                                    task.cls,
+                                    "cls"
+                                  )}`}
+                                >
+                                  {task.cls}
+                                </span>
+                              </div>
+                            </div>
+                          ) : (
+                            <span className="text-sm text-gray-400">-</span>
+                          )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center space-x-2">
@@ -310,15 +376,15 @@ const TasksDashboard = () => {
               {searchedTasks.length === 0 && (
                 <div className="text-center py-16">
                   <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <FaRocket className="h-10 w-10 text-gray-400" />
+                    <FaTachometerAlt className="h-10 w-10 text-gray-400" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    No tasks found
+                    No pages found
                   </h3>
                   <p className="text-gray-500 text-lg">
                     {searchQuery
-                      ? "No tasks match your search criteria."
-                      : `You haven't created any ${activeTab} tasks yet.`}
+                      ? "No pages match your search criteria."
+                      : "You haven't analyzed any pages yet."}
                   </p>
                 </div>
               )}
