@@ -14,7 +14,6 @@ import {
   FaQuestionCircle,
   FaDollarSign,
   FaChevronRight,
-  FaBolt,
 } from "react-icons/fa";
 import { IoMenu, IoClose } from "react-icons/io5";
 
@@ -65,7 +64,6 @@ const AdminDashboardLayout = ({ children }) => {
         { name: "SEO", href: "/admin/settings/seo" },
       ],
     },
-    { name: "SpeedyIndex", href: "/admin/speedyindex", icon: FaBolt },
     { name: "VIP Task Management", href: "/admin/vip-tasks", icon: FaChartBar },
   ];
 
