@@ -8,6 +8,8 @@ import {
   FaDownload,
   FaFilter,
   FaPlus,
+  FaTachometerAlt,
+  FaRocket,
 } from "react-icons/fa";
 
 const RecentTasks = () => {
@@ -16,68 +18,74 @@ const RecentTasks = () => {
   const tasks = [
     {
       id: 1,
-      title: "E-commerce Site Analysis",
       url: "https://example-store.com",
       status: "completed",
-      score: 85,
+      performanceScore: 85,
+      loadTime: "1.8s",
+      lcp: "2.1s",
+      fid: "95ms",
+      cls: "0.08",
       date: "2024-01-15T10:30:00Z",
-      type: "PageSpeed Analysis",
-      urls: 1,
     },
     {
       id: 2,
-      title: "Blog Performance Check",
       url: "https://myblog.com",
       status: "processing",
-      score: null,
+      performanceScore: null,
+      loadTime: null,
+      lcp: null,
+      fid: null,
+      cls: null,
       date: "2024-01-15T08:15:00Z",
-      type: "Performance Check",
-      urls: 3,
     },
     {
       id: 3,
-      title: "Portfolio Site Analysis",
       url: "https://portfolio.dev",
       status: "completed",
-      score: 92,
+      performanceScore: 92,
+      loadTime: "1.2s",
+      lcp: "1.5s",
+      fid: "45ms",
+      cls: "0.03",
       date: "2024-01-15T06:45:00Z",
-      type: "PageSpeed Analysis",
-      urls: 1,
     },
     {
       id: 4,
-      title: "News Website Check",
       url: "https://news-site.com",
       status: "failed",
-      score: null,
+      performanceScore: null,
+      loadTime: null,
+      lcp: null,
+      fid: null,
+      cls: null,
       date: "2024-01-15T04:20:00Z",
-      type: "Performance Check",
-      urls: 5,
     },
     {
       id: 5,
-      title: "Corporate Website Analysis",
       url: "https://corporate.com",
       status: "completed",
-      score: 78,
+      performanceScore: 78,
+      loadTime: "2.5s",
+      lcp: "3.2s",
+      fid: "150ms",
+      cls: "0.15",
       date: "2024-01-14T16:30:00Z",
-      type: "PageSpeed Analysis",
-      urls: 2,
     },
     {
       id: 6,
-      title: "Landing Page Check",
       url: "https://landing.example.com",
       status: "completed",
-      score: 95,
+      performanceScore: 95,
+      loadTime: "0.9s",
+      lcp: "1.1s",
+      fid: "30ms",
+      cls: "0.02",
       date: "2024-01-14T14:15:00Z",
-      type: "Performance Check",
-      urls: 1,
     },
   ];
 
   const filters = [
-    { id: "all", label: "All Tasks", count: tasks.length },
+    { id: "all", label: "All Pages", count: tasks.length },
     {
       id: "completed",
       label: "Completed",
@@ -94,6 +102,43 @@ const RecentTasks = () => {
       count: tasks.filter((t) => t.status === "failed").length,
     },
   ];
+
+  const getPerformanceScoreColor = (score) => {
+    if (!score) return "text-gray-400";
+    if (score >= 90) return "text-green-600";
+    if (score >= 50) return "text-yellow-600";
+    return "text-red-600";
+  };
+
+  const getVitalColor = (value, type) => {
+    if (!value) return "text-gray-400";
+    
+    // Extract numeric value (handles "1.8s", "45ms", "0.05" formats)
+    const numericValue = parseFloat(value.toString().replace(/[^0-9.]/g, ""));
+    
+    if (type === "lcp") {
+      // LCP: Good < 2.5s, Needs Improvement 2.5-4s, Poor > 4s
+      if (numericValue < 2.5) return "text-green-600";
+      if (numericValue < 4.0) return "text-yellow-600";
+      return "text-red-600";
+    }
+    
+    if (type === "fid") {
+      // FID: Good < 100ms, Needs Improvement 100-300ms, Poor > 300ms
+      if (numericValue < 100) return "text-green-600";
+      if (numericValue < 300) return "text-yellow-600";
+      return "text-red-600";
+    }
+    
+    if (type === "cls") {
+      // CLS: Good < 0.1, Needs Improvement 0.1-0.25, Poor > 0.25
+      if (numericValue < 0.1) return "text-green-600";
+      if (numericValue < 0.25) return "text-yellow-600";
+      return "text-red-600";
+    }
+    
+    return "text-gray-600";
+  };
 
   const filteredTasks =
     filter === "all" ? tasks : tasks.filter((task) => task.status === filter);
@@ -153,9 +198,9 @@ const RecentTasks = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Recent Tasks</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Recent Pages</h2>
           <p className="text-gray-600 mt-2 text-lg">
-            Manage and monitor your performance analysis tasks
+            View and manage your analyzed pages with performance metrics
           </p>
         </div>
         <div className="flex items-center space-x-4">
@@ -163,9 +208,12 @@ const RecentTasks = () => {
             <FaDownload className="h-4 w-4" />
             <span className="font-medium">Export</span>
           </button>
-          <button className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white rounded-lg hover:from-brand-theme-600 hover:to-brand-theme-800 transition-all duration-200 shadow-lg hover:shadow-xl">
+          <button 
+            onClick={() => window.location.href = "/tasks-dashboard"}
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white rounded-lg hover:from-brand-theme-600 hover:to-brand-theme-800 transition-all duration-200 shadow-lg hover:shadow-xl"
+          >
             <FaPlus className="h-4 w-4" />
-            <span className="font-medium">New Task</span>
+            <span className="font-medium">Add Pages</span>
           </button>
         </div>
       </div>
@@ -200,16 +248,19 @@ const RecentTasks = () => {
             <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Task
+                  Page URL
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Status
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Score
+                  Performance Score
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  URLs
+                  Load Time
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Core Web Vitals
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Date
@@ -225,17 +276,12 @@ const RecentTasks = () => {
                   key={task.id}
                   className="hover:bg-gray-50 transition-colors duration-150"
                 >
-                  <td className="px-6 py-5 whitespace-nowrap">
-                    <div>
-                      <div className="text-sm font-semibold text-gray-900 mb-1">
-                        {task.title}
-                      </div>
-                      <div className="text-sm text-gray-500 mb-1">
+                  <td className="px-6 py-5">
+                    <div className="flex items-center space-x-3">
+                      <FaRocket className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                      <span className="text-sm font-medium text-gray-900 break-all">
                         {task.url}
-                      </div>
-                      <div className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full inline-block">
-                        {task.type}
-                      </div>
+                      </span>
                     </div>
                   </td>
                   <td className="px-6 py-5 whitespace-nowrap">
@@ -251,29 +297,84 @@ const RecentTasks = () => {
                     </div>
                   </td>
                   <td className="px-6 py-5 whitespace-nowrap">
-                    {task.score ? (
+                    {task.performanceScore !== null ? (
                       <div className="flex items-center space-x-2">
-                        <div
-                          className={`w-3 h-3 rounded-full ${
-                            task.score >= 90
-                              ? "bg-green-500"
-                              : task.score >= 70
-                              ? "bg-yellow-500"
-                              : "bg-red-500"
-                          }`}
-                        ></div>
-                        <span className="text-sm font-semibold text-gray-900">
-                          {task.score}
+                        <FaTachometerAlt
+                          className={`h-4 w-4 ${getPerformanceScoreColor(
+                            task.performanceScore
+                          )}`}
+                        />
+                        <span
+                          className={`text-sm font-bold ${getPerformanceScoreColor(
+                            task.performanceScore
+                          )}`}
+                        >
+                          {task.performanceScore}
                         </span>
+                        <span className="text-xs text-gray-500">/100</span>
                       </div>
                     ) : (
                       <span className="text-sm text-gray-400">-</span>
                     )}
                   </td>
                   <td className="px-6 py-5 whitespace-nowrap">
-                    <span className="text-sm font-medium text-gray-900 bg-gray-100 px-2 py-1 rounded-full">
-                      {task.urls}
-                    </span>
+                    {task.loadTime ? (
+                      <div className="flex items-center space-x-2">
+                        <FaClock className="h-4 w-4 text-gray-400" />
+                        <span className="text-sm font-medium text-gray-900">
+                          {task.loadTime}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-sm text-gray-400">-</span>
+                    )}
+                  </td>
+                  <td className="px-6 py-5">
+                    {task.status === "completed" ? (
+                      <div className="space-y-1">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs font-semibold text-gray-600 w-8">
+                            LCP:
+                          </span>
+                          <span
+                            className={`text-xs font-medium ${getVitalColor(
+                              task.lcp,
+                              "lcp"
+                            )}`}
+                          >
+                            {task.lcp}
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs font-semibold text-gray-600 w-8">
+                            FID:
+                          </span>
+                          <span
+                            className={`text-xs font-medium ${getVitalColor(
+                              task.fid,
+                              "fid"
+                            )}`}
+                          >
+                            {task.fid}
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs font-semibold text-gray-600 w-8">
+                            CLS:
+                          </span>
+                          <span
+                            className={`text-xs font-medium ${getVitalColor(
+                              task.cls,
+                              "cls"
+                            )}`}
+                          >
+                            {task.cls}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <span className="text-sm text-gray-400">-</span>
+                    )}
                   </td>
                   <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-500">
                     {formatDate(task.date)}
@@ -302,15 +403,15 @@ const RecentTasks = () => {
         {filteredTasks.length === 0 && (
           <div className="text-center py-16">
             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaClock className="h-10 w-10 text-gray-400" />
+              <FaTachometerAlt className="h-10 w-10 text-gray-400" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
-              No tasks found
+              No pages found
             </h3>
             <p className="text-gray-500 text-lg">
               {filter === "all"
-                ? "You haven't created any tasks yet."
-                : `No ${filter} tasks found.`}
+                ? "You haven't analyzed any pages yet."
+                : `No ${filter} pages found.`}
             </p>
           </div>
         )}

@@ -58,13 +58,13 @@ const Settings = () => {
       date: "Sep 15, 2025, 10:23 PM",
       credits: -1,
       plan: "Free",
-      task: "Indexer Task #y6f4bxo3n",
+      page: "https://example.com/home",
     },
     {
       date: "Sep 15, 2025, 10:25 PM",
       credits: -1,
       plan: "Free",
-      task: "Checker Task #80vccw010",
+      page: "https://example.com/about",
     },
   ];
 
@@ -487,7 +487,7 @@ const Settings = () => {
                       Plan
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Task
+                      Page URL
                     </th>
                   </tr>
                 </thead>
@@ -508,7 +508,7 @@ const Settings = () => {
                           href="#"
                           className="text-brand-theme hover:text-brand-theme-600"
                         >
-                          {item.task}
+                          {item.page}
                         </a>
                       </td>
                     </tr>
@@ -673,7 +673,7 @@ const Settings = () => {
                       Plan
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Task
+                      Page URL
                     </th>
                   </tr>
                 </thead>
@@ -694,7 +694,7 @@ const Settings = () => {
                           href="#"
                           className="text-brand-theme hover:text-brand-theme-600"
                         >
-                          {item.task}
+                          {item.page}
                         </a>
                       </td>
                     </tr>

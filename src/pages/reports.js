@@ -17,7 +17,7 @@ const Reports = () => {
 
   const tabs = [
     { id: "credit-usage", label: "Credit Usage", icon: FaChartBar },
-    { id: "task-reports", label: "Task Reports", icon: FaFileAlt },
+    { id: "page-reports", label: "Page Reports", icon: FaFileAlt },
     { id: "credit-holds", label: "Credit Holds", icon: FaClock },
   ];
 
@@ -120,8 +120,8 @@ const Reports = () => {
 
       <SEO
         title="Reports - PageSpeed Performance Tool | Usage Analytics & Reports"
-        description="Track and manage your reports with detailed reports and usage analytics. Monitor credit usage, task reports, and performance metrics."
-        keywords="reports, usage analytics, credit usage, task reports, performance metrics, PageSpeed reports"
+        description="Track and manage your reports with detailed reports and usage analytics. Monitor credit usage, page reports, and performance metrics."
+        keywords="reports, usage analytics, credit usage, page reports, performance metrics, PageSpeed reports"
         url="/reports"
       />
 
@@ -299,17 +299,17 @@ const Reports = () => {
               </>
             )}
 
-            {/* Task Reports Tab */}
-            {activeTab === "task-reports" && (
+            {/* Page Reports Tab */}
+            {activeTab === "page-reports" && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
                 <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <FaFileAlt className="h-10 w-10 text-gray-400" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  Task Reports
+                  Page Reports
                 </h3>
                 <p className="text-gray-500 text-lg">
-                  Detailed task reports and analytics coming soon
+                  Detailed page performance reports and analytics coming soon
                 </p>
               </div>
             )}

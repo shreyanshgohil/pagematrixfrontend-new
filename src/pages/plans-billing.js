@@ -39,7 +39,7 @@ const PlansBilling = () => {
       isAvailable: true,
       features: [
         "10 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "No payment required",
       ],
       buttonText: "Current Plan",
@@ -55,7 +55,7 @@ const PlansBilling = () => {
       isAvailable: false,
       features: [
         "50,000 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Admin-only features",
         "Custom expiration dates",
@@ -73,7 +73,7 @@ const PlansBilling = () => {
       isAvailable: true,
       features: [
         "800 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -90,7 +90,7 @@ const PlansBilling = () => {
       isAvailable: true,
       features: [
         "2,000 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -107,7 +107,7 @@ const PlansBilling = () => {
       isAvailable: true,
       features: [
         "4,800 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -124,7 +124,7 @@ const PlansBilling = () => {
       isAvailable: true,
       features: [
         "12,000 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -141,7 +141,7 @@ const PlansBilling = () => {
       isAvailable: true,
       features: [
         "20,000 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -158,7 +158,7 @@ const PlansBilling = () => {
       isAvailable: true,
       features: [
         "40,000 Credits per month",
-        "Use for indexing or checking",
+        "PageSpeed analysis for your URLs",
         "VIP queue access",
         "Monthly recurring payment",
       ],
@@ -172,7 +172,7 @@ const PlansBilling = () => {
       icon: FaBolt,
       title: "Unified Credits",
       description:
-        "Use credits for both indexing and checking tasks without separate limits.",
+        "Use credits for PageSpeed analysis of your URLs. Each URL analyzed uses one credit.",
       color: "text-brand-theme",
       bgColor: "bg-brand-theme/10",
     },

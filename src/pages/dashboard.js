@@ -14,8 +14,8 @@ const Dashboard = () => {
 
   const tabs = [
     { id: "overview", label: "Overview", icon: FaChartBar },
-    { id: "recent", label: "Recent Tasks", icon: FaTasks },
-    { id: "new", label: "New Task", icon: FaPlus },
+    { id: "recent", label: "Recent Pages", icon: FaTasks },
+    { id: "new", label: "Add Pages", icon: FaPlus },
   ];
 
   const handleTabClick = (tabId) => {
@@ -83,7 +83,7 @@ const Dashboard = () => {
                     className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-brand-theme to-brand-theme-600 text-white rounded-lg hover:from-brand-theme-600 hover:to-brand-theme-800 transition-all duration-200 shadow-lg hover:shadow-xl"
                   >
                     <FaPlus className="h-4 w-4" />
-                    <span className="font-medium">New Task</span>
+                    <span className="font-medium">Add Pages</span>
                   </button>
                 </div>
               </div>

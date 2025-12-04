@@ -11,7 +11,7 @@ import {
 const DashboardOverview = () => {
   const stats = [
     {
-      name: "Total Analysis",
+      name: "Total Pages Analyzed",
       value: "1,247",
       change: "+12% from last month",
       changeType: "positive",
@@ -21,7 +21,7 @@ const DashboardOverview = () => {
       iconBg: "bg-brand-theme/10",
     },
     {
-      name: "Completed Tasks",
+      name: "Completed Analysis",
       value: "1,189",
       change: "+8% from last month",
       changeType: "positive",
@@ -31,7 +31,7 @@ const DashboardOverview = () => {
       iconBg: "bg-green-100",
     },
     {
-      name: "Pending Tasks",
+      name: "Processing",
       value: "58",
       change: "-3% from last month",
       changeType: "negative",
@@ -41,7 +41,7 @@ const DashboardOverview = () => {
       iconBg: "bg-yellow-100",
     },
     {
-      name: "Failed Tasks",
+      name: "Failed Analysis",
       value: "12",
       change: "+2% from last month",
       changeType: "negative",
@@ -55,34 +55,34 @@ const DashboardOverview = () => {
   const recentTasks = [
     {
       id: 1,
-      title: "E-commerce Site Analysis",
       url: "https://example-store.com",
       status: "completed",
-      score: 85,
+      performanceScore: 85,
+      loadTime: "1.8s",
       date: "2 hours ago",
     },
     {
       id: 2,
-      title: "Blog Performance Check",
       url: "https://myblog.com",
       status: "processing",
-      score: null,
+      performanceScore: null,
+      loadTime: null,
       date: "4 hours ago",
     },
     {
       id: 3,
-      title: "Portfolio Site Analysis",
       url: "https://portfolio.dev",
       status: "completed",
-      score: 92,
+      performanceScore: 92,
+      loadTime: "1.2s",
       date: "6 hours ago",
     },
     {
       id: 4,
-      title: "News Website Check",
       url: "https://news-site.com",
       status: "failed",
-      score: null,
+      performanceScore: null,
+      loadTime: null,
       date: "8 hours ago",
     },
   ];
@@ -189,13 +189,16 @@ const DashboardOverview = () => {
           </div>
         </div>
 
-        {/* Recent Tasks */}
+        {/* Recent Pages */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-semibold text-gray-900">
-              Recent Tasks
+              Recent Pages
             </h3>
-            <button className="text-brand-theme hover:text-brand-theme-600 text-sm font-medium px-3 py-1 rounded-lg hover:bg-brand-theme/5 transition-colors">
+            <button 
+              onClick={() => window.location.href = "/tasks-dashboard"}
+              className="text-brand-theme hover:text-brand-theme-600 text-sm font-medium px-3 py-1 rounded-lg hover:bg-brand-theme/5 transition-colors"
+            >
               View all
             </button>
           </div>
@@ -205,9 +208,8 @@ const DashboardOverview = () => {
                 key={task.id}
                 className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
               >
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center space-x-3 mb-2">
-                    <h4 className="font-medium text-gray-900">{task.title}</h4>
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
                         task.status
@@ -216,31 +218,45 @@ const DashboardOverview = () => {
                       {getStatusText(task.status)}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-500 mb-2">{task.url}</p>
-                  <div className="flex items-center space-x-4">
+                  <p className="text-sm text-gray-900 font-medium mb-2 truncate">{task.url}</p>
+                  <div className="flex items-center space-x-4 flex-wrap">
                     <span className="text-xs text-gray-400">{task.date}</span>
-                    {task.score && (
+                    {task.performanceScore && (
                       <div className="flex items-center space-x-1">
-                        <FaGlobe className="h-3 w-3 text-gray-400" />
+                        <FaTachometerAlt className={`h-3 w-3 ${
+                          task.performanceScore >= 90 ? "text-green-600" :
+                          task.performanceScore >= 50 ? "text-yellow-600" : "text-red-600"
+                        }`} />
+                        <span className={`text-xs font-semibold ${
+                          task.performanceScore >= 90 ? "text-green-600" :
+                          task.performanceScore >= 50 ? "text-yellow-600" : "text-red-600"
+                        }`}>
+                          Score: {task.performanceScore}
+                        </span>
+                      </div>
+                    )}
+                    {task.loadTime && (
+                      <div className="flex items-center space-x-1">
+                        <FaClock className="h-3 w-3 text-gray-400" />
                         <span className="text-xs text-gray-500">
-                          Score: {task.score}
+                          {task.loadTime}
                         </span>
                       </div>
                     )}
                   </div>
                 </div>
                 {task.status === "completed" && (
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shadow-sm">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
                     <FaCheckCircle className="h-5 w-5 text-green-600" />
                   </div>
                 )}
                 {task.status === "processing" && (
-                  <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center shadow-sm">
+                  <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
                     <FaClock className="h-5 w-5 text-yellow-600" />
                   </div>
                 )}
                 {task.status === "failed" && (
-                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center shadow-sm">
+                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
                     <FaExclamationTriangle className="h-5 w-5 text-red-600" />
                   </div>
                 )}
@@ -262,10 +278,10 @@ const DashboardOverview = () => {
             </div>
             <div className="text-left">
               <p className="font-semibold text-gray-900 group-hover:text-brand-theme transition-colors">
-                New Analysis
+                Add Pages
               </p>
               <p className="text-sm text-gray-500">
-                Start a new performance analysis
+                Analyze new pages for speed and performance
               </p>
             </div>
           </button>
