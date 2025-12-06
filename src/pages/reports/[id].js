@@ -57,11 +57,16 @@ const ReportDetail = () => {
     );
   }
 
-  // Extract basic information
-  const url = reportData.id || reportData.lighthouseResult?.finalUrl || "";
-  const fetchTime = reportData.lighthouseResult?.fetchTime || "";
+  // Extract data from different sections
+  const normalData = reportData.normal || reportData;
+  const seoData = reportData.seo;
+  const accessibilityData = reportData.accessibility;
+
+  // Extract basic information from normal data
+  const url = normalData.id || normalData.lighthouseResult?.finalUrl || "";
+  const fetchTime = normalData.lighthouseResult?.fetchTime || "";
   const performanceScore =
-    reportData.lighthouseResult?.categories?.performance?.score * 100 || 0;
+    normalData.lighthouseResult?.categories?.performance?.score * 100 || 0;
 
   return (
     <>
@@ -206,7 +211,7 @@ const ReportDetail = () => {
                 Performance Score Overview
               </h2>
 
-              {reportData.lighthouseResult?.categories?.performance && (
+              {normalData.lighthouseResult?.categories?.performance && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Main Performance Score */}
                   <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
@@ -306,25 +311,25 @@ const ReportDetail = () => {
                         <div>
                           <span className="text-gray-600">Lighthouse Version:</span>
                           <span className="ml-2 font-medium text-gray-900">
-                            {reportData.lighthouseResult?.lighthouseVersion || "N/A"}
+                            {normalData.lighthouseResult?.lighthouseVersion || "N/A"}
                           </span>
                         </div>
                         <div>
                           <span className="text-gray-600">Form Factor:</span>
                           <span className="ml-2 font-medium text-gray-900 capitalize">
-                            {reportData.lighthouseResult?.configSettings?.formFactor || "N/A"}
+                            {normalData.lighthouseResult?.configSettings?.formFactor || "N/A"}
                           </span>
                         </div>
                         <div>
                           <span className="text-gray-600">Benchmark Index:</span>
                           <span className="ml-2 font-medium text-gray-900">
-                            {reportData.lighthouseResult?.environment?.benchmarkIndex || "N/A"}
+                            {normalData.lighthouseResult?.environment?.benchmarkIndex || "N/A"}
                           </span>
                         </div>
                         <div>
                           <span className="text-gray-600">Channel:</span>
                           <span className="ml-2 font-medium text-gray-900 uppercase">
-                            {reportData.lighthouseResult?.configSettings?.channel || "N/A"}
+                            {normalData.lighthouseResult?.configSettings?.channel || "N/A"}
                           </span>
                         </div>
                       </div>
@@ -342,7 +347,7 @@ const ReportDetail = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* LCP - Largest Contentful Paint */}
-                {reportData.lighthouseResult?.audits?.["largest-contentful-paint"] && (
+                {normalData.lighthouseResult?.audits?.["largest-contentful-paint"] && (
                   <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border border-blue-200">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-semibold text-gray-900">LCP</h3>
@@ -351,7 +356,7 @@ const ReportDetail = () => {
                       </span>
                     </div>
                     {(() => {
-                      const lcp = reportData.lighthouseResult.audits["largest-contentful-paint"];
+                      const lcp = normalData.lighthouseResult.audits["largest-contentful-paint"];
                       const value = lcp.numericValue / 1000; // Convert to seconds
                       const displayValue = lcp.displayValue || `${value.toFixed(2)}s`;
                       const score = lcp.score;
@@ -391,7 +396,7 @@ const ReportDetail = () => {
                 )}
 
                 {/* TBT - Total Blocking Time (replaces FID) */}
-                {reportData.lighthouseResult?.audits?.["total-blocking-time"] && (
+                {normalData.lighthouseResult?.audits?.["total-blocking-time"] && (
                   <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl border border-purple-200">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-semibold text-gray-900">TBT</h3>
@@ -400,7 +405,7 @@ const ReportDetail = () => {
                       </span>
                     </div>
                     {(() => {
-                      const tbt = reportData.lighthouseResult.audits["total-blocking-time"];
+                      const tbt = normalData.lighthouseResult.audits["total-blocking-time"];
                       const value = tbt.numericValue; // Already in milliseconds
                       const displayValue = tbt.displayValue || `${Math.round(value)}ms`;
                       const score = tbt.score;
@@ -440,7 +445,7 @@ const ReportDetail = () => {
                 )}
 
                 {/* CLS - Cumulative Layout Shift */}
-                {reportData.lighthouseResult?.audits?.["cumulative-layout-shift"] && (
+                {normalData.lighthouseResult?.audits?.["cumulative-layout-shift"] && (
                   <div className="p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl border border-orange-200">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-semibold text-gray-900">CLS</h3>
@@ -449,7 +454,7 @@ const ReportDetail = () => {
                       </span>
                     </div>
                     {(() => {
-                      const cls = reportData.lighthouseResult.audits["cumulative-layout-shift"];
+                      const cls = normalData.lighthouseResult.audits["cumulative-layout-shift"];
                       const value = cls.numericValue;
                       const displayValue = cls.displayValue || value.toFixed(3);
                       const score = cls.score;
@@ -498,14 +503,14 @@ const ReportDetail = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* First Contentful Paint */}
-                {reportData.lighthouseResult?.audits?.["first-contentful-paint"] && (
+                {normalData.lighthouseResult?.audits?.["first-contentful-paint"] && (
                   <div className="p-5 bg-gray-50 rounded-lg border border-gray-200">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-sm font-semibold text-gray-900">FCP</h3>
                       <span className="text-xs text-gray-500">First Contentful Paint</span>
                     </div>
                     {(() => {
-                      const fcp = reportData.lighthouseResult.audits["first-contentful-paint"];
+                      const fcp = normalData.lighthouseResult.audits["first-contentful-paint"];
                       const value = fcp.numericValue / 1000;
                       const displayValue = fcp.displayValue || `${value.toFixed(2)}s`;
                       const score = fcp.score;
@@ -529,14 +534,14 @@ const ReportDetail = () => {
                 )}
 
                 {/* Speed Index */}
-                {reportData.lighthouseResult?.audits?.["speed-index"] && (
+                {normalData.lighthouseResult?.audits?.["speed-index"] && (
                   <div className="p-5 bg-gray-50 rounded-lg border border-gray-200">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-sm font-semibold text-gray-900">Speed Index</h3>
                       <span className="text-xs text-gray-500">Visual Load</span>
                     </div>
                     {(() => {
-                      const si = reportData.lighthouseResult.audits["speed-index"];
+                      const si = normalData.lighthouseResult.audits["speed-index"];
                       const value = si.numericValue / 1000;
                       const displayValue = si.displayValue || `${value.toFixed(2)}s`;
                       const score = si.score;
@@ -560,14 +565,14 @@ const ReportDetail = () => {
                 )}
 
                 {/* Total Blocking Time (already shown in Core Web Vitals, but showing here too for completeness) */}
-                {reportData.lighthouseResult?.audits?.["total-blocking-time"] && (
+                {normalData.lighthouseResult?.audits?.["total-blocking-time"] && (
                   <div className="p-5 bg-gray-50 rounded-lg border border-gray-200">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-sm font-semibold text-gray-900">TBT</h3>
                       <span className="text-xs text-gray-500">Total Blocking Time</span>
                     </div>
                     {(() => {
-                      const tbt = reportData.lighthouseResult.audits["total-blocking-time"];
+                      const tbt = normalData.lighthouseResult.audits["total-blocking-time"];
                       const displayValue = tbt.displayValue || `${Math.round(tbt.numericValue)}ms`;
                       const score = tbt.score;
                       const value = tbt.numericValue;
@@ -600,17 +605,17 @@ const ReportDetail = () => {
 
               <div className="space-y-6">
                 {/* Final Screenshot */}
-                {reportData.lighthouseResult?.audits?.["final-screenshot"]?.details?.data && (
+                {normalData.lighthouseResult?.audits?.["final-screenshot"]?.details?.data && (
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">
                       Final Screenshot
                     </h3>
                     <p className="text-sm text-gray-600 mb-4">
-                      {reportData.lighthouseResult.audits["final-screenshot"].description}
+                      {normalData.lighthouseResult.audits["final-screenshot"].description}
                     </p>
                     <div className="border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
                       <img
-                        src={reportData.lighthouseResult.audits["final-screenshot"].details.data}
+                        src={normalData.lighthouseResult.audits["final-screenshot"].details.data}
                         alt="Final Screenshot"
                         className="w-full h-auto"
                       />
@@ -619,17 +624,17 @@ const ReportDetail = () => {
                 )}
 
                 {/* Screenshot Thumbnails (Filmstrip) */}
-                {reportData.lighthouseResult?.audits?.["screenshot-thumbnails"]?.details?.items && (
+                {normalData.lighthouseResult?.audits?.["screenshot-thumbnails"]?.details?.items && (
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">
                       Page Load Filmstrip
                     </h3>
                     <p className="text-sm text-gray-600 mb-4">
-                      {reportData.lighthouseResult.audits["screenshot-thumbnails"].description}
+                      {normalData.lighthouseResult.audits["screenshot-thumbnails"].description}
                     </p>
                     <div className="border border-gray-200 rounded-lg overflow-hidden bg-gray-50 p-4">
                       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {reportData.lighthouseResult.audits["screenshot-thumbnails"].details.items.map(
+                        {normalData.lighthouseResult.audits["screenshot-thumbnails"].details.items.map(
                           (item, index) => (
                             <div
                               key={index}
@@ -661,7 +666,7 @@ const ReportDetail = () => {
                 )}
 
                 {/* Full Page Screenshot */}
-                {reportData.lighthouseResult?.fullPageScreenshot?.screenshot?.data && (
+                {normalData.lighthouseResult?.fullPageScreenshot?.screenshot?.data && (
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">
                       Full Page Screenshot
@@ -671,7 +676,7 @@ const ReportDetail = () => {
                     </p>
                     <div className="border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
                       <img
-                        src={reportData.lighthouseResult.fullPageScreenshot.screenshot.data}
+                        src={normalData.lighthouseResult.fullPageScreenshot.screenshot.data}
                         alt="Full Page Screenshot"
                         className="w-full h-auto"
                       />
@@ -680,9 +685,9 @@ const ReportDetail = () => {
                 )}
 
                 {/* No Screenshots Available */}
-                {!reportData.lighthouseResult?.audits?.["final-screenshot"]?.details?.data &&
-                  !reportData.lighthouseResult?.audits?.["screenshot-thumbnails"]?.details?.items &&
-                  !reportData.lighthouseResult?.fullPageScreenshot?.screenshot?.data && (
+                {!normalData.lighthouseResult?.audits?.["final-screenshot"]?.details?.data &&
+                  !normalData.lighthouseResult?.audits?.["screenshot-thumbnails"]?.details?.items &&
+                  !normalData.lighthouseResult?.fullPageScreenshot?.screenshot?.data && (
                     <div className="text-center py-12">
                       <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <FaGlobe className="h-8 w-8 text-gray-400" />
@@ -699,7 +704,7 @@ const ReportDetail = () => {
                 Accessibility
               </h2>
 
-              {reportData.lighthouseResult?.categories?.accessibility ? (
+              {accessibilityData?.lighthouseResult?.categories?.accessibility ? (
                 <div>
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-4">
@@ -726,17 +731,17 @@ const ReportDetail = () => {
                               r="54"
                               fill="none"
                               stroke={
-                                reportData.lighthouseResult.categories.accessibility
+                                accessibilityData.lighthouseResult.categories.accessibility
                                   .score * 100 >= 90
                                   ? "#10b981"
-                                  : reportData.lighthouseResult.categories
+                                  : accessibilityData.lighthouseResult.categories
                                       .accessibility.score * 100 >= 70
                                   ? "#f59e0b"
                                   : "#ef4444"
                               }
                               strokeWidth="8"
                               strokeDasharray={`${
-                                (reportData.lighthouseResult.categories
+                                (accessibilityData.lighthouseResult.categories
                                   .accessibility.score * 100 / 100) *
                                 339.29
                               } 339.29`}
@@ -746,17 +751,17 @@ const ReportDetail = () => {
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span
                               className={`text-2xl font-bold ${
-                                reportData.lighthouseResult.categories
+                                accessibilityData.lighthouseResult.categories
                                   .accessibility.score * 100 >= 90
                                   ? "text-green-600"
-                                  : reportData.lighthouseResult.categories
+                                  : accessibilityData.lighthouseResult.categories
                                       .accessibility.score * 100 >= 70
                                   ? "text-yellow-600"
                                   : "text-red-600"
                               }`}
                             >
                               {Math.round(
-                                reportData.lighthouseResult.categories
+                                accessibilityData.lighthouseResult.categories
                                   .accessibility.score * 100
                               )}
                             </span>
@@ -766,25 +771,25 @@ const ReportDetail = () => {
                     </div>
                     <p className="text-sm text-gray-600">
                       {
-                        reportData.lighthouseResult.categories.accessibility
+                        accessibilityData.lighthouseResult.categories.accessibility
                           .title
                       }
                     </p>
                   </div>
 
                   {/* Accessibility Audits */}
-                  {reportData.lighthouseResult.categories.accessibility
+                  {accessibilityData.lighthouseResult.categories.accessibility
                     .auditRefs && (
                     <div>
                       <h4 className="text-md font-semibold text-gray-900 mb-4">
                         Accessibility Audits
                       </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {reportData.lighthouseResult.categories.accessibility.auditRefs
+                        {accessibilityData.lighthouseResult.categories.accessibility.auditRefs
                           .slice(0, 10)
                           .map((auditRef, index) => {
                             const audit =
-                              reportData.lighthouseResult?.audits?.[
+                              accessibilityData.lighthouseResult?.audits?.[
                                 auditRef.id
                               ];
                             if (!audit) return null;
@@ -843,7 +848,7 @@ const ReportDetail = () => {
                 SEO (Search Engine Optimization)
               </h2>
 
-              {reportData.lighthouseResult?.categories?.seo ? (
+              {seoData?.lighthouseResult?.categories?.seo ? (
                 <div>
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-4">
@@ -870,17 +875,17 @@ const ReportDetail = () => {
                               r="54"
                               fill="none"
                               stroke={
-                                reportData.lighthouseResult.categories.seo
+                                seoData.lighthouseResult.categories.seo
                                   .score * 100 >= 90
                                   ? "#10b981"
-                                  : reportData.lighthouseResult.categories.seo
+                                  : seoData.lighthouseResult.categories.seo
                                       .score * 100 >= 70
                                   ? "#f59e0b"
                                   : "#ef4444"
                               }
                               strokeWidth="8"
                               strokeDasharray={`${
-                                (reportData.lighthouseResult.categories.seo
+                                (seoData.lighthouseResult.categories.seo
                                   .score * 100 / 100) *
                                 339.29
                               } 339.29`}
@@ -890,17 +895,17 @@ const ReportDetail = () => {
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span
                               className={`text-2xl font-bold ${
-                                reportData.lighthouseResult.categories.seo
+                                seoData.lighthouseResult.categories.seo
                                   .score * 100 >= 90
                                   ? "text-green-600"
-                                  : reportData.lighthouseResult.categories.seo
+                                  : seoData.lighthouseResult.categories.seo
                                       .score * 100 >= 70
                                   ? "text-yellow-600"
                                   : "text-red-600"
                               }`}
                             >
                               {Math.round(
-                                reportData.lighthouseResult.categories.seo
+                                seoData.lighthouseResult.categories.seo
                                   .score * 100
                               )}
                             </span>
@@ -909,22 +914,22 @@ const ReportDetail = () => {
                       </div>
                     </div>
                     <p className="text-sm text-gray-600">
-                      {reportData.lighthouseResult.categories.seo.title}
+                      {seoData.lighthouseResult.categories.seo.title}
                     </p>
                   </div>
 
                   {/* SEO Audits */}
-                  {reportData.lighthouseResult.categories.seo.auditRefs && (
+                  {seoData.lighthouseResult.categories.seo.auditRefs && (
                     <div>
                       <h4 className="text-md font-semibold text-gray-900 mb-4">
                         SEO Audits
                       </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {reportData.lighthouseResult.categories.seo.auditRefs
+                        {seoData.lighthouseResult.categories.seo.auditRefs
                           .slice(0, 10)
                           .map((auditRef, index) => {
                             const audit =
-                              reportData.lighthouseResult?.audits?.[
+                              seoData.lighthouseResult?.audits?.[
                                 auditRef.id
                               ];
                             if (!audit) return null;
@@ -983,28 +988,28 @@ const ReportDetail = () => {
                 Loading Experience (Field Data)
               </h2>
 
-              {reportData.loadingExperience?.metrics ? (
+              {normalData.loadingExperience?.metrics ? (
                 <div>
                   <div className="mb-4">
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        reportData.loadingExperience.overall_category ===
+                        normalData.loadingExperience.overall_category ===
                         "FAST"
                           ? "bg-green-100 text-green-800"
-                          : reportData.loadingExperience.overall_category ===
+                          : normalData.loadingExperience.overall_category ===
                             "AVERAGE"
                           ? "bg-yellow-100 text-yellow-800"
                           : "bg-red-100 text-red-800"
                       }`}
                     >
                       Overall:{" "}
-                      {reportData.loadingExperience.overall_category}
+                      {normalData.loadingExperience.overall_category}
                     </span>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {Object.entries(
-                      reportData.loadingExperience.metrics
+                      normalData.loadingExperience.metrics
                     ).map(([key, metric]) => (
                       <div
                         key={key}
@@ -1069,20 +1074,20 @@ const ReportDetail = () => {
             </div>
 
             {/* Section 9: Diagnostics */}
-            {reportData.lighthouseResult?.audits?.diagnostics && (
+            {normalData.lighthouseResult?.audits?.diagnostics && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
                   Diagnostics
                 </h2>
                 <p className="text-sm text-gray-600 mb-4">
-                  {reportData.lighthouseResult.audits.diagnostics.description}
+                  {normalData.lighthouseResult.audits.diagnostics.description}
                 </p>
 
-                {reportData.lighthouseResult.audits.diagnostics.details
+                {normalData.lighthouseResult.audits.diagnostics.details
                   ?.items?.[0] && (
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {Object.entries(
-                      reportData.lighthouseResult.audits.diagnostics.details
+                      normalData.lighthouseResult.audits.diagnostics.details
                         .items[0]
                     ).map(([key, value]) => (
                       <div
@@ -1107,7 +1112,7 @@ const ReportDetail = () => {
             )}
 
             {/* Section 10: Network Requests */}
-            {reportData.lighthouseResult?.audits?.["network-requests"]
+            {normalData.lighthouseResult?.audits?.["network-requests"]
               ?.details?.items && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -1115,7 +1120,7 @@ const ReportDetail = () => {
                 </h2>
                 <p className="text-sm text-gray-600 mb-4">
                   {
-                    reportData.lighthouseResult.audits["network-requests"]
+                    normalData.lighthouseResult.audits["network-requests"]
                       .description
                   }
                 </p>
@@ -1142,7 +1147,7 @@ const ReportDetail = () => {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {reportData.lighthouseResult.audits[
+                      {normalData.lighthouseResult.audits[
                         "network-requests"
                       ].details.items
                         .slice(0, 50)
@@ -1193,12 +1198,12 @@ const ReportDetail = () => {
                     </tbody>
                   </table>
                 </div>
-                {reportData.lighthouseResult.audits["network-requests"]
+                {normalData.lighthouseResult.audits["network-requests"]
                   .details.items.length > 50 && (
                   <div className="mt-4 text-sm text-gray-600 text-center">
                     Showing first 50 of{" "}
                     {
-                      reportData.lighthouseResult.audits["network-requests"]
+                      normalData.lighthouseResult.audits["network-requests"]
                         .details.items.length
                     }{" "}
                     requests
@@ -1208,7 +1213,7 @@ const ReportDetail = () => {
             )}
 
             {/* Section 11: All Performance Audits */}
-            {reportData.lighthouseResult?.categories?.performance
+            {normalData.lighthouseResult?.categories?.performance
               ?.auditRefs && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -1216,10 +1221,10 @@ const ReportDetail = () => {
                 </h2>
 
                 <div className="space-y-4">
-                  {reportData.lighthouseResult.categories.performance.auditRefs.map(
+                  {normalData.lighthouseResult.categories.performance.auditRefs.map(
                     (auditRef, index) => {
                       const audit =
-                        reportData.lighthouseResult?.audits?.[auditRef.id];
+                        normalData.lighthouseResult?.audits?.[auditRef.id];
                       if (!audit) return null;
 
                       return (
@@ -1286,7 +1291,7 @@ const ReportDetail = () => {
             )}
 
             {/* Section 12: Origin Loading Experience */}
-            {reportData.originLoadingExperience?.metrics && (
+            {normalData.originLoadingExperience?.metrics && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
                   Origin Loading Experience
@@ -1295,23 +1300,23 @@ const ReportDetail = () => {
                 <div className="mb-4">
                   <span
                     className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      reportData.originLoadingExperience.overall_category ===
+                      normalData.originLoadingExperience.overall_category ===
                       "FAST"
                         ? "bg-green-100 text-green-800"
-                        : reportData.originLoadingExperience
+                        : normalData.originLoadingExperience
                             .overall_category === "AVERAGE"
                         ? "bg-yellow-100 text-yellow-800"
                         : "bg-red-100 text-red-800"
                     }`}
                   >
                     Overall:{" "}
-                    {reportData.originLoadingExperience.overall_category}
+                    {normalData.originLoadingExperience.overall_category}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {Object.entries(
-                    reportData.originLoadingExperience.metrics
+                    normalData.originLoadingExperience.metrics
                   ).map(([key, metric]) => (
                     <div
                       key={key}
