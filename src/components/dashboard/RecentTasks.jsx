@@ -369,7 +369,7 @@ const RecentTasks = () => {
                             )}`}
                           >
                             {task.cls}
-                          </span>
+                    </span>
                         </div>
                       </div>
                     ) : (

@@ -1,0 +1,537 @@
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import SEO from "@/components/common/SEO";
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import {
+  FaArrowLeft,
+  FaTachometerAlt,
+  FaClock,
+  FaDownload,
+  FaGlobe,
+  FaCalendarAlt,
+} from "react-icons/fa";
+import pageSpeedData from "../../../data.json";
+
+const ReportDetail = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [reportData, setReportData] = useState(null);
+
+  useEffect(() => {
+    // For now, use the data.json file as dummy data
+    // Later, we'll fetch from API using the id
+    if (pageSpeedData) {
+      setReportData(pageSpeedData);
+    }
+  }, [id]);
+
+  if (!reportData) {
+    return (
+      <DashboardLayout>
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-theme mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading report data...</p>
+          </div>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+  // Extract basic information
+  const url = reportData.id || reportData.lighthouseResult?.finalUrl || "";
+  const fetchTime = reportData.lighthouseResult?.fetchTime || "";
+  const performanceScore =
+    reportData.lighthouseResult?.categories?.performance?.score * 100 || 0;
+
+  return (
+    <>
+      <Head>
+        <title>Page Report - {url}</title>
+        <meta
+          name="description"
+          content={`Detailed PageSpeed performance report for ${url}`}
+        />
+      </Head>
+
+      <SEO
+        title={`Page Report - ${url}`}
+        description={`Detailed PageSpeed performance report for ${url}`}
+      />
+
+      <DashboardLayout>
+        <div className="min-h-screen bg-gray-50">
+          {/* Header Section */}
+          <div className="bg-white border-b border-gray-200 shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div className="flex items-center justify-between mb-4">
+                <Link
+                  href="/reports"
+                  className="flex items-center space-x-2 text-gray-600 hover:text-brand-theme transition-colors"
+                >
+                  <FaArrowLeft className="h-4 w-4" />
+                  <span className="font-medium">Back to Reports</span>
+                </Link>
+                <button className="flex items-center space-x-2 px-4 py-2 bg-brand-theme text-white rounded-lg hover:bg-brand-theme-600 transition-colors shadow-sm">
+                  <FaDownload className="h-4 w-4" />
+                  <span className="font-medium">Export Report</span>
+                </button>
+              </div>
+
+              <div className="mt-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-12 h-12 bg-brand-theme/10 rounded-lg flex items-center justify-center">
+                    <FaGlobe className="h-6 w-6 text-brand-theme" />
+                  </div>
+                  <div>
+                    <h1 className="text-2xl font-bold text-gray-900">
+                      Page Performance Report
+                    </h1>
+                    <p className="text-sm text-gray-600 mt-1 break-all">
+                      {url}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-6 mt-4">
+                  <div className="flex items-center space-x-2 text-gray-600">
+                    <FaCalendarAlt className="h-4 w-4" />
+                    <span className="text-sm">
+                      {fetchTime
+                        ? new Date(fetchTime).toLocaleString()
+                        : "N/A"}
+                    </span>
+                  </div>
+                  {performanceScore > 0 && (
+                    <div className="flex items-center space-x-2">
+                      <FaTachometerAlt
+                        className={`h-5 w-5 ${
+                          performanceScore >= 90
+                            ? "text-green-600"
+                            : performanceScore >= 70
+                            ? "text-yellow-600"
+                            : "text-red-600"
+                        }`}
+                      />
+                      <span
+                        className={`text-lg font-bold ${
+                          performanceScore >= 90
+                            ? "text-green-600"
+                            : performanceScore >= 70
+                            ? "text-yellow-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        Performance Score: {Math.round(performanceScore)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Section 2: Performance Score Overview */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                Performance Score Overview
+              </h2>
+
+              {reportData.lighthouseResult?.categories?.performance && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Main Performance Score */}
+                  <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+                    <div className="relative w-32 h-32 mb-4">
+                      <svg
+                        className="transform -rotate-90 w-32 h-32"
+                        viewBox="0 0 120 120"
+                      >
+                        {/* Background circle */}
+                        <circle
+                          cx="60"
+                          cy="60"
+                          r="54"
+                          fill="none"
+                          stroke="#e5e7eb"
+                          strokeWidth="8"
+                        />
+                        {/* Score circle */}
+                        <circle
+                          cx="60"
+                          cy="60"
+                          r="54"
+                          fill="none"
+                          stroke={
+                            performanceScore >= 90
+                              ? "#10b981"
+                              : performanceScore >= 70
+                              ? "#f59e0b"
+                              : "#ef4444"
+                          }
+                          strokeWidth="8"
+                          strokeDasharray={`${(performanceScore / 100) * 339.29} 339.29`}
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span
+                          className={`text-3xl font-bold ${
+                            performanceScore >= 90
+                              ? "text-green-600"
+                              : performanceScore >= 70
+                              ? "text-yellow-600"
+                              : "text-red-600"
+                          }`}
+                        >
+                          {Math.round(performanceScore)}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      Performance
+                    </h3>
+                    <p className="text-sm text-gray-600 text-center">
+                      {performanceScore >= 90
+                        ? "Excellent performance"
+                        : performanceScore >= 70
+                        ? "Good performance"
+                        : "Needs improvement"}
+                    </p>
+                  </div>
+
+                  {/* Score Breakdown */}
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-gray-700">
+                          Performance Score
+                        </span>
+                        <span
+                          className={`text-sm font-bold ${
+                            performanceScore >= 90
+                              ? "text-green-600"
+                              : performanceScore >= 70
+                              ? "text-yellow-600"
+                              : "text-red-600"
+                          }`}
+                        >
+                          {Math.round(performanceScore)} / 100
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-3">
+                        <div
+                          className={`h-3 rounded-full ${
+                            performanceScore >= 90
+                              ? "bg-green-600"
+                              : performanceScore >= 70
+                              ? "bg-yellow-600"
+                              : "bg-red-600"
+                          }`}
+                          style={{ width: `${performanceScore}%` }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-gray-200">
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <span className="text-gray-600">Lighthouse Version:</span>
+                          <span className="ml-2 font-medium text-gray-900">
+                            {reportData.lighthouseResult?.lighthouseVersion || "N/A"}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-gray-600">Form Factor:</span>
+                          <span className="ml-2 font-medium text-gray-900 capitalize">
+                            {reportData.lighthouseResult?.configSettings?.formFactor || "N/A"}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-gray-600">Benchmark Index:</span>
+                          <span className="ml-2 font-medium text-gray-900">
+                            {reportData.lighthouseResult?.environment?.benchmarkIndex || "N/A"}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-gray-600">Channel:</span>
+                          <span className="ml-2 font-medium text-gray-900 uppercase">
+                            {reportData.lighthouseResult?.configSettings?.channel || "N/A"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Section 3: Core Web Vitals */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                Core Web Vitals
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* LCP - Largest Contentful Paint */}
+                {reportData.lighthouseResult?.audits?.["largest-contentful-paint"] && (
+                  <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border border-blue-200">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-gray-900">LCP</h3>
+                      <span className="px-2 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded">
+                        Largest Contentful Paint
+                      </span>
+                    </div>
+                    {(() => {
+                      const lcp = reportData.lighthouseResult.audits["largest-contentful-paint"];
+                      const value = lcp.numericValue / 1000; // Convert to seconds
+                      const displayValue = lcp.displayValue || `${value.toFixed(2)}s`;
+                      const score = lcp.score;
+                      const isGood = value <= 2.5;
+                      const isNeedsImprovement = value > 2.5 && value <= 4.0;
+                      
+                      return (
+                        <>
+                          <div className="mb-4">
+                            <div className={`text-4xl font-bold mb-2 ${
+                              isGood ? "text-green-600" : isNeedsImprovement ? "text-yellow-600" : "text-red-600"
+                            }`}>
+                              {displayValue}
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              Score: {Math.round(score * 100)} / 100
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Good</span>
+                              <span className="text-gray-600">≤ 2.5s</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Needs Improvement</span>
+                              <span className="text-gray-600">2.5s - 4.0s</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Poor</span>
+                              <span className="text-gray-600">&gt; 4.0s</span>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* TBT - Total Blocking Time (replaces FID) */}
+                {reportData.lighthouseResult?.audits?.["total-blocking-time"] && (
+                  <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl border border-purple-200">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-gray-900">TBT</h3>
+                      <span className="px-2 py-1 text-xs font-medium bg-purple-200 text-purple-800 rounded">
+                        Total Blocking Time
+                      </span>
+                    </div>
+                    {(() => {
+                      const tbt = reportData.lighthouseResult.audits["total-blocking-time"];
+                      const value = tbt.numericValue; // Already in milliseconds
+                      const displayValue = tbt.displayValue || `${Math.round(value)}ms`;
+                      const score = tbt.score;
+                      const isGood = value <= 200;
+                      const isNeedsImprovement = value > 200 && value <= 600;
+                      
+                      return (
+                        <>
+                          <div className="mb-4">
+                            <div className={`text-4xl font-bold mb-2 ${
+                              isGood ? "text-green-600" : isNeedsImprovement ? "text-yellow-600" : "text-red-600"
+                            }`}>
+                              {displayValue}
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              Score: {Math.round(score * 100)} / 100
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Good</span>
+                              <span className="text-gray-600">≤ 200ms</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Needs Improvement</span>
+                              <span className="text-gray-600">200ms - 600ms</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Poor</span>
+                              <span className="text-gray-600">&gt; 600ms</span>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* CLS - Cumulative Layout Shift */}
+                {reportData.lighthouseResult?.audits?.["cumulative-layout-shift"] && (
+                  <div className="p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl border border-orange-200">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-gray-900">CLS</h3>
+                      <span className="px-2 py-1 text-xs font-medium bg-orange-200 text-orange-800 rounded">
+                        Cumulative Layout Shift
+                      </span>
+                    </div>
+                    {(() => {
+                      const cls = reportData.lighthouseResult.audits["cumulative-layout-shift"];
+                      const value = cls.numericValue;
+                      const displayValue = cls.displayValue || value.toFixed(3);
+                      const score = cls.score;
+                      const isGood = value <= 0.1;
+                      const isNeedsImprovement = value > 0.1 && value <= 0.25;
+                      
+                      return (
+                        <>
+                          <div className="mb-4">
+                            <div className={`text-4xl font-bold mb-2 ${
+                              isGood ? "text-green-600" : isNeedsImprovement ? "text-yellow-600" : "text-red-600"
+                            }`}>
+                              {displayValue}
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              Score: {Math.round(score * 100)} / 100
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Good</span>
+                              <span className="text-gray-600">≤ 0.1</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Needs Improvement</span>
+                              <span className="text-gray-600">0.1 - 0.25</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Poor</span>
+                              <span className="text-gray-600">&gt; 0.25</span>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Section 4: Additional Performance Metrics */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                Additional Performance Metrics
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* First Contentful Paint */}
+                {reportData.lighthouseResult?.audits?.["first-contentful-paint"] && (
+                  <div className="p-5 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-semibold text-gray-900">FCP</h3>
+                      <span className="text-xs text-gray-500">First Contentful Paint</span>
+                    </div>
+                    {(() => {
+                      const fcp = reportData.lighthouseResult.audits["first-contentful-paint"];
+                      const value = fcp.numericValue / 1000;
+                      const displayValue = fcp.displayValue || `${value.toFixed(2)}s`;
+                      const score = fcp.score;
+                      const isGood = value <= 1.8;
+                      const isNeedsImprovement = value > 1.8 && value <= 3.0;
+                      
+                      return (
+                        <>
+                          <div className={`text-2xl font-bold mb-2 ${
+                            isGood ? "text-green-600" : isNeedsImprovement ? "text-yellow-600" : "text-red-600"
+                          }`}>
+                            {displayValue}
+                          </div>
+                          <div className="text-xs text-gray-600">
+                            Score: {Math.round(score * 100)} / 100
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* Speed Index */}
+                {reportData.lighthouseResult?.audits?.["speed-index"] && (
+                  <div className="p-5 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-semibold text-gray-900">Speed Index</h3>
+                      <span className="text-xs text-gray-500">Visual Load</span>
+                    </div>
+                    {(() => {
+                      const si = reportData.lighthouseResult.audits["speed-index"];
+                      const value = si.numericValue / 1000;
+                      const displayValue = si.displayValue || `${value.toFixed(2)}s`;
+                      const score = si.score;
+                      const isGood = value <= 3.4;
+                      const isNeedsImprovement = value > 3.4 && value <= 5.8;
+                      
+                      return (
+                        <>
+                          <div className={`text-2xl font-bold mb-2 ${
+                            isGood ? "text-green-600" : isNeedsImprovement ? "text-yellow-600" : "text-red-600"
+                          }`}>
+                            {displayValue}
+                          </div>
+                          <div className="text-xs text-gray-600">
+                            Score: {Math.round(score * 100)} / 100
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* Total Blocking Time (already shown in Core Web Vitals, but showing here too for completeness) */}
+                {reportData.lighthouseResult?.audits?.["total-blocking-time"] && (
+                  <div className="p-5 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-semibold text-gray-900">TBT</h3>
+                      <span className="text-xs text-gray-500">Total Blocking Time</span>
+                    </div>
+                    {(() => {
+                      const tbt = reportData.lighthouseResult.audits["total-blocking-time"];
+                      const displayValue = tbt.displayValue || `${Math.round(tbt.numericValue)}ms`;
+                      const score = tbt.score;
+                      const value = tbt.numericValue;
+                      const isGood = value <= 200;
+                      const isNeedsImprovement = value > 200 && value <= 600;
+                      
+                      return (
+                        <>
+                          <div className={`text-2xl font-bold mb-2 ${
+                            isGood ? "text-green-600" : isNeedsImprovement ? "text-yellow-600" : "text-red-600"
+                          }`}>
+                            {displayValue}
+                          </div>
+                          <div className="text-xs text-gray-600">
+                            Score: {Math.round(score * 100)} / 100
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </DashboardLayout>
+    </>
+  );
+};
+
+export default ReportDetail;
+

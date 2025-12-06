@@ -77,14 +77,14 @@ const TaskForm = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shadow-sm">
                 <FaTachometerAlt className="h-6 w-6 text-blue-600" />
               </div>
-              <div>
+          <div>
                 <h3 className="font-bold text-gray-900 text-lg mb-2">
                   Speed & Performance Analysis
                 </h3>
                 <p className="text-gray-600">
                   Add URL pages to analyze their speed and performance metrics. Each page will be tested for loading speed, performance scores, and optimization opportunities.
                 </p>
-              </div>
+                </div>
             </div>
           </div>
 

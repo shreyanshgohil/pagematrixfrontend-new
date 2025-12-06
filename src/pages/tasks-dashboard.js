@@ -187,14 +187,14 @@ const TasksDashboard = () => {
                 <p className="text-gray-600">
                   View performance metrics for your analyzed pages
                 </p>
-              </div>
-              <button
-                onClick={() => setIsNewTaskModalOpen(true)}
-                className="flex items-center space-x-2 px-6 py-3 bg-brand-theme text-white rounded-lg hover:bg-brand-theme-600 transition-colors shadow-lg hover:shadow-xl"
-              >
-                <FaPlus className="h-4 w-4" />
-                <span className="font-medium">Create task</span>
-              </button>
+                </div>
+                <button
+                  onClick={() => setIsNewTaskModalOpen(true)}
+                  className="flex items-center space-x-2 px-6 py-3 bg-brand-theme text-white rounded-lg hover:bg-brand-theme-600 transition-colors shadow-lg hover:shadow-xl"
+                >
+                  <FaPlus className="h-4 w-4" />
+                  <span className="font-medium">Create task</span>
+                </button>
             </div>
 
             {/* Search and Filter Bar */}
@@ -342,7 +342,7 @@ const TasksDashboard = () => {
                                   )}`}
                                 >
                                   {task.cls}
-                                </span>
+                          </span>
                               </div>
                             </div>
                           ) : (

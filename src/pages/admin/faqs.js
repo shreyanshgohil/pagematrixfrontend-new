@@ -18,7 +18,8 @@ const AdminFAQs = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [isAddFAQModalOpen, setIsAddFAQModalOpen] = useState(false);
   const [isEditFAQModalOpen, setIsEditFAQModalOpen] = useState(false);
-  const [isDeleteConfirmModalOpen, setIsDeleteConfirmModalOpen] = useState(false);
+  const [isDeleteConfirmModalOpen, setIsDeleteConfirmModalOpen] =
+    useState(false);
   const [faqToEdit, setFaqToEdit] = useState(null);
   const [faqToDelete, setFaqToDelete] = useState(null);
 
@@ -60,70 +61,80 @@ const AdminFAQs = () => {
     {
       id: 1,
       question: "What can I use credits for?",
-      answer: "Credits can be used for PageSpeed analysis of your URLs. Each URL analyzed uses one credit.",
+      answer:
+        "Credits can be used for PageSpeed analysis of your URLs. Each URL analyzed uses one credit.",
       category: "Billing & Credits",
       status: "Published",
     },
     {
       id: 2,
       question: "How fast does page analysis work?",
-      answer: "Page analysis typically completes within 2 minutes. VIP queue users get priority processing with 5-minute crawler visits.",
+      answer:
+        "Page analysis typically completes within 2 minutes. VIP queue users get priority processing with 5-minute crawler visits.",
       category: "Technical",
       status: "Published",
     },
     {
       id: 3,
       question: "Can I cancel my subscription anytime?",
-      answer: "Yes, you can cancel your subscription anytime through the customer portal. Your credits will remain available until the end of your billing period.",
+      answer:
+        "Yes, you can cancel your subscription anytime through the customer portal. Your credits will remain available until the end of your billing period.",
       category: "Billing & Credits",
       status: "Published",
     },
     {
       id: 4,
       question: "What happens if I exceed my monthly credits?",
-      answer: "If you exceed your monthly credits, you'll need to wait until the next billing cycle or upgrade your plan to get more credits.",
+      answer:
+        "If you exceed your monthly credits, you'll need to wait until the next billing cycle or upgrade your plan to get more credits.",
       category: "Billing & Credits",
       status: "Published",
     },
     {
       id: 5,
       question: "How do I add URLs for analysis?",
-      answer: "You can add URLs by clicking the 'Add Pages' button and entering URLs one per line. Each URL will be analyzed for speed and performance metrics.",
+      answer:
+        "You can add URLs by clicking the 'Add Pages' button and entering URLs one per line. Each URL will be analyzed for speed and performance metrics.",
       category: "Getting Started",
       status: "Published",
     },
     {
       id: 6,
       question: "What file formats are supported for URL uploads?",
-      answer: "You can enter URLs directly in the text area. URLs must start with http:// or https:// and be entered one per line.",
+      answer:
+        "You can enter URLs directly in the text area. URLs must start with http:// or https:// and be entered one per line.",
       category: "Getting Started",
       status: "Published",
     },
     {
       id: 7,
       question: "How do I check if my pages have been analyzed?",
-      answer: "You can check the status of your page analysis in the Tasks Dashboard. Completed analyses will show performance scores and Core Web Vitals metrics.",
+      answer:
+        "You can check the status of your page analysis in the Tasks Dashboard. Completed analyses will show performance scores and Core Web Vitals metrics.",
       category: "Technical",
       status: "Published",
     },
     {
       id: 8,
       question: "What is the VIP queue and how does it work?",
-      answer: "The VIP queue provides priority processing with faster analysis times. All paid plans include VIP queue access.",
+      answer:
+        "The VIP queue provides priority processing with faster analysis times. All paid plans include VIP queue access.",
       category: "Technical",
       status: "Published",
     },
     {
       id: 9,
       question: "Can I get a refund if I'm not satisfied?",
-      answer: "Refund policies vary by plan. Please contact our support team for assistance with refund requests.",
+      answer:
+        "Refund policies vary by plan. Please contact our support team for assistance with refund requests.",
       category: "Billing & Credits",
       status: "Published",
     },
     {
       id: 10,
       question: "How does the monthly credit system work?",
-      answer: "Credits refresh every month on your billing date. Unused credits do not roll over to the next month.",
+      answer:
+        "Credits refresh every month on your billing date. Unused credits do not roll over to the next month.",
       category: "Billing & Credits",
       status: "Published",
     },
@@ -145,7 +156,9 @@ const AdminFAQs = () => {
 
   const confirmDeleteFAQ = () => {
     if (faqToDelete) {
-      setFaqs((prevFaqs) => prevFaqs.filter((faq) => faq.id !== faqToDelete.id));
+      setFaqs((prevFaqs) =>
+        prevFaqs.filter((faq) => faq.id !== faqToDelete.id)
+      );
       console.log("FAQ deleted:", faqToDelete.id);
     }
     setIsDeleteConfirmModalOpen(false);
@@ -365,9 +378,7 @@ const AdminFAQs = () => {
         categories={categories.filter((c) => c !== "All")}
         onSave={(updatedFAQ) => {
           setFaqs((prevFaqs) =>
-            prevFaqs.map((faq) =>
-              faq.id === updatedFAQ.id ? updatedFAQ : faq
-            )
+            prevFaqs.map((faq) => (faq.id === updatedFAQ.id ? updatedFAQ : faq))
           );
           handleCloseEditModal();
         }}
@@ -686,9 +697,7 @@ const EditFAQModal = ({ isOpen, onClose, faq, categories, onSave }) => {
           {/* Header */}
           <div className="bg-white px-6 py-4 border-b border-gray-200">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">
-                Edit FAQ
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900">Edit FAQ</h3>
               <button
                 onClick={handleClose}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
