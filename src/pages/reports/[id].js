@@ -22,6 +22,15 @@ import DiagnosticsSection from "@/components/reports/DiagnosticsSection";
 import NetworkRequests from "@/components/reports/NetworkRequests";
 import PerformanceAudits from "@/components/reports/PerformanceAudits";
 import OriginLoadingExperience from "@/components/reports/OriginLoadingExperience";
+import ThirdPartyEntities from "@/components/reports/ThirdPartyEntities";
+import StackPacksSection from "@/components/reports/StackPacksSection";
+import RunWarningsSection from "@/components/reports/RunWarningsSection";
+import TimingSection from "@/components/reports/TimingSection";
+import EnvironmentInfo from "@/components/reports/EnvironmentInfo";
+import PerformanceInsights from "@/components/reports/PerformanceInsights";
+import PerformanceOpportunities from "@/components/reports/PerformanceOpportunities";
+import ResourceSummary from "@/components/reports/ResourceSummary";
+import AllMetrics from "@/components/reports/AllMetrics";
 
 const ReportDetail = () => {
   const router = useRouter();
@@ -159,6 +168,33 @@ const ReportDetail = () => {
 
             {/* Section 13: All Performance Audits - Complete audit details */}
             <PerformanceAudits normalData={normalData} />
+
+            {/* Section 14: Third-Party Services - Entities detected on the page */}
+            <ThirdPartyEntities normalData={normalData} />
+
+            {/* Section 15: Framework Recommendations - Stack packs */}
+            <StackPacksSection normalData={normalData} />
+
+            {/* Section 16: Run Warnings - Lighthouse run warnings */}
+            <RunWarningsSection normalData={normalData} />
+
+            {/* Section 17: Timing - Lighthouse analysis timing */}
+            <TimingSection normalData={normalData} />
+
+            {/* Section 18: Environment & Configuration - Technical environment details */}
+            <EnvironmentInfo normalData={normalData} />
+
+            {/* Section 19: Performance Opportunities - Optimization opportunities with savings */}
+            <PerformanceOpportunities normalData={normalData} />
+
+            {/* Section 20: Performance Insights - Detailed performance insights */}
+            <PerformanceInsights normalData={normalData} />
+
+            {/* Section 21: Resource Summary - Aggregated resource statistics */}
+            <ResourceSummary normalData={normalData} />
+
+            {/* Section 22: All Metrics - Complete metrics collection */}
+            <AllMetrics normalData={normalData} />
           </div>
         </div>
       </DashboardLayout>
