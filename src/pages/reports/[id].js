@@ -15,6 +15,8 @@ import AdditionalMetrics from "@/components/reports/AdditionalMetrics";
 import ScreenshotsSection from "@/components/reports/ScreenshotsSection";
 import AccessibilitySection from "@/components/reports/AccessibilitySection";
 import SEOSection from "@/components/reports/SEOSection";
+import BestPracticesSection from "@/components/reports/BestPracticesSection";
+import CruxSection from "@/components/reports/CruxSection";
 import LoadingExperience from "@/components/reports/LoadingExperience";
 import DiagnosticsSection from "@/components/reports/DiagnosticsSection";
 import NetworkRequests from "@/components/reports/NetworkRequests";
@@ -61,6 +63,8 @@ const ReportDetail = () => {
   const normalData = reportData.normal || reportData;
   const seoData = reportData.seo;
   const accessibilityData = reportData.accessibility;
+  const bestPracticesData = reportData.best_practices;
+  const cruxData = reportData.crux;
 
   // Extract basic information from normal data
   const url = normalData.id || normalData.lighthouseResult?.finalUrl || "";
@@ -135,19 +139,25 @@ const ReportDetail = () => {
             {/* Section 7: SEO */}
             <SEOSection seoData={seoData} />
 
-            {/* Section 8: Loading Experience */}
+            {/* Section 8: Best Practices */}
+            <BestPracticesSection bestPracticesData={bestPracticesData} />
+
+            {/* Section 9: Chrome User Experience Report (CrUX) */}
+            <CruxSection cruxData={cruxData} />
+
+            {/* Section 10: Loading Experience */}
             <LoadingExperience normalData={normalData} />
 
-            {/* Section 9: Diagnostics */}
+            {/* Section 11: Diagnostics */}
             <DiagnosticsSection normalData={normalData} />
 
-            {/* Section 10: Network Requests */}
+            {/* Section 12: Network Requests */}
             <NetworkRequests normalData={normalData} />
 
-            {/* Section 11: All Performance Audits */}
+            {/* Section 13: All Performance Audits */}
             <PerformanceAudits normalData={normalData} />
 
-            {/* Section 12: Origin Loading Experience */}
+            {/* Section 14: Origin Loading Experience */}
             <OriginLoadingExperience normalData={normalData} />
           </div>
         </div>
