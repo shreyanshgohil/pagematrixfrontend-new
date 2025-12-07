@@ -31,6 +31,8 @@ import PerformanceInsights from "@/components/reports/PerformanceInsights";
 import PerformanceOpportunities from "@/components/reports/PerformanceOpportunities";
 import ResourceSummary from "@/components/reports/ResourceSummary";
 import AllMetrics from "@/components/reports/AllMetrics";
+import CategoryGroups from "@/components/reports/CategoryGroups";
+import FullPageScreenshot from "@/components/reports/FullPageScreenshot";
 
 const ReportDetail = () => {
   const router = useRouter();
@@ -78,6 +80,7 @@ const ReportDetail = () => {
   // Extract basic information from normal data
   const url = normalData.id || normalData.lighthouseResult?.finalUrl || "";
   const fetchTime = normalData.lighthouseResult?.fetchTime || "";
+  const analysisUTCTimestamp = normalData.analysisUTCTimestamp || "";
   const performanceScore =
     normalData.lighthouseResult?.categories?.performance?.score * 100 || 0;
 
@@ -105,6 +108,7 @@ const ReportDetail = () => {
             performanceScore={performanceScore}
             activeTab={activeTab}
             onTabChange={setActiveTab}
+            analysisUTCTimestamp={analysisUTCTimestamp}
           />
 
           {/* Main Content */}
@@ -195,6 +199,12 @@ const ReportDetail = () => {
 
             {/* Section 22: All Metrics - Complete metrics collection */}
             <AllMetrics normalData={normalData} />
+
+            {/* Section 23: Category Groups - Audit category organization */}
+            <CategoryGroups normalData={normalData} />
+
+            {/* Section 24: Full Page Screenshot - Complete page screenshot with nodes */}
+            <FullPageScreenshot normalData={normalData} />
           </div>
         </div>
       </DashboardLayout>

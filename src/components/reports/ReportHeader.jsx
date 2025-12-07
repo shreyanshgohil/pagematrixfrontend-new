@@ -16,6 +16,7 @@ const ReportHeader = ({
   performanceScore,
   activeTab,
   onTabChange,
+  analysisUTCTimestamp,
 }) => {
   return (
     <div className="bg-gradient-to-r from-brand-blue-800 via-brand-blue-700 to-brand-theme-800 text-white shadow-xl">
@@ -59,6 +60,14 @@ const ReportHeader = ({
                     : "N/A"}
                 </span>
               </div>
+              {analysisUTCTimestamp && (
+                <div className="flex items-center space-x-2 text-white/90 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/20">
+                  <FaCalendarAlt className="h-4 w-4" />
+                  <span className="text-sm font-medium">
+                    Analyzed: {new Date(analysisUTCTimestamp).toLocaleString()}
+                  </span>
+                </div>
+              )}
               {performanceScore > 0 && (
                 <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/20">
                   <FaTachometerAlt className="h-5 w-5 text-white" />
