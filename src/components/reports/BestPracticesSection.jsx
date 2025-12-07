@@ -24,8 +24,7 @@ const BestPracticesSection = ({ bestPracticesData }) => {
   }
 
   const bestPracticesScore =
-    bestPracticesData.lighthouseResult.categories["best-practices"].score *
-    100;
+    bestPracticesData.lighthouseResult.categories["best-practices"].score * 100;
 
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-brand-gray-400/50 p-8 mb-8 backdrop-blur-sm">
@@ -71,7 +70,9 @@ const BestPracticesSection = ({ bestPracticesData }) => {
                         : "#004d4d"
                     }
                     strokeWidth="8"
-                    strokeDasharray={`${(bestPracticesScore / 100) * 339.29} 339.29`}
+                    strokeDasharray={`${
+                      (bestPracticesScore / 100) * 339.29
+                    } 339.29`}
                     strokeLinecap="round"
                   />
                 </svg>
@@ -91,12 +92,6 @@ const BestPracticesSection = ({ bestPracticesData }) => {
               </div>
             </div>
           </div>
-          <p className="text-sm text-brand-gray-500 font-medium">
-            {
-              bestPracticesData.lighthouseResult.categories["best-practices"]
-                .title
-            }
-          </p>
         </div>
 
         {/* Best Practices Audits */}
@@ -159,4 +154,3 @@ const BestPracticesSection = ({ bestPracticesData }) => {
 };
 
 export default BestPracticesSection;
-

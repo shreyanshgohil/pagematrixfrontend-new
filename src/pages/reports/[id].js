@@ -121,44 +121,44 @@ const ReportDetail = () => {
               </div>
             </div>
 
-            {/* Section 2: Performance Score Overview */}
+            {/* Section 1: Performance Score Overview - Main score, most important */}
             <PerformanceScoreOverview normalData={normalData} />
 
-            {/* Section 3: Core Web Vitals */}
+            {/* Section 2: Core Web Vitals - Critical user experience metrics */}
             <CoreWebVitals normalData={normalData} />
 
-            {/* Section 4: Additional Performance Metrics */}
+            {/* Section 3: Additional Performance Metrics - Supporting performance data */}
             <AdditionalMetrics normalData={normalData} />
 
-            {/* Section 5: Screenshots */}
-            <ScreenshotsSection normalData={normalData} />
-
-            {/* Section 6: Accessibility */}
-            <AccessibilitySection accessibilityData={accessibilityData} />
-
-            {/* Section 7: SEO */}
-            <SEOSection seoData={seoData} />
-
-            {/* Section 8: Best Practices */}
-            <BestPracticesSection bestPracticesData={bestPracticesData} />
-
-            {/* Section 9: Chrome User Experience Report (CrUX) */}
+            {/* Section 4: Chrome User Experience Report (CrUX) - Real user data, very valuable */}
             <CruxSection cruxData={cruxData} />
 
-            {/* Section 10: Loading Experience */}
+            {/* Section 5: Loading Experience (Field Data) - Real user metrics */}
             <LoadingExperience normalData={normalData} />
 
-            {/* Section 11: Diagnostics */}
+            {/* Section 6: Screenshots - Visual representation of page load */}
+            <ScreenshotsSection normalData={normalData} />
+
+            {/* Section 7: Accessibility - Important for compliance and usability */}
+            <AccessibilitySection accessibilityData={accessibilityData} />
+
+            {/* Section 8: SEO - Important for search visibility */}
+            <SEOSection seoData={seoData} />
+
+            {/* Section 9: Best Practices - Security and best practices */}
+            <BestPracticesSection bestPracticesData={bestPracticesData} />
+
+            {/* Section 10: Origin Loading Experience - Origin-level field data */}
+            <OriginLoadingExperience normalData={normalData} />
+
+            {/* Section 11: Diagnostics - Technical diagnostic information */}
             <DiagnosticsSection normalData={normalData} />
 
-            {/* Section 12: Network Requests */}
+            {/* Section 12: Network Requests - Detailed network request data */}
             <NetworkRequests normalData={normalData} />
 
-            {/* Section 13: All Performance Audits */}
+            {/* Section 13: All Performance Audits - Complete audit details */}
             <PerformanceAudits normalData={normalData} />
-
-            {/* Section 14: Origin Loading Experience */}
-            <OriginLoadingExperience normalData={normalData} />
           </div>
         </div>
       </DashboardLayout>

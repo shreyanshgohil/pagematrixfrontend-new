@@ -218,7 +218,7 @@ const CruxSection = ({ cruxData }) => {
                     </div>
                     <div className="space-y-1.5">
                       {metric.histogram.map((bin, idx) => {
-                        const percentage = (bin.density * 100).toFixed(1);
+                        const percentage = (bin.density * 100).toFixed(2);
                         const range =
                           bin.end !== undefined
                             ? `${bin.start} - ${bin.end}`

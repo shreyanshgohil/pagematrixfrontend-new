@@ -87,9 +87,6 @@ const SEOSection = ({ seoData }) => {
               </div>
             </div>
           </div>
-          <p className="text-sm text-brand-gray-500 font-medium">
-            {seoData.lighthouseResult.categories.seo.title}
-          </p>
         </div>
 
         {/* SEO Audits */}
@@ -102,8 +99,7 @@ const SEOSection = ({ seoData }) => {
               {seoData.lighthouseResult.categories.seo.auditRefs
                 .slice(0, 10)
                 .map((auditRef, index) => {
-                  const audit =
-                    seoData.lighthouseResult?.audits?.[auditRef.id];
+                  const audit = seoData.lighthouseResult?.audits?.[auditRef.id];
                   if (!audit) return null;
 
                   return (
@@ -149,4 +145,3 @@ const SEOSection = ({ seoData }) => {
 };
 
 export default SEOSection;
-

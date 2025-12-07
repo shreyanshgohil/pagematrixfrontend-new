@@ -15,8 +15,8 @@ const AccessibilitySection = ({ accessibilityData }) => {
         </div>
         <div className="text-center py-8">
           <p className="text-brand-gray-500 font-medium">
-            Accessibility data not available in this report. Enable accessibility
-            category in Lighthouse to see this data.
+            Accessibility data not available in this report. Enable
+            accessibility category in Lighthouse to see this data.
           </p>
         </div>
       </div>
@@ -70,7 +70,9 @@ const AccessibilitySection = ({ accessibilityData }) => {
                         : "#004d4d"
                     }
                     strokeWidth="8"
-                    strokeDasharray={`${(accessibilityScore / 100) * 339.29} 339.29`}
+                    strokeDasharray={`${
+                      (accessibilityScore / 100) * 339.29
+                    } 339.29`}
                     strokeLinecap="round"
                   />
                 </svg>
@@ -90,9 +92,6 @@ const AccessibilitySection = ({ accessibilityData }) => {
               </div>
             </div>
           </div>
-          <p className="text-sm text-brand-gray-500 font-medium">
-            {accessibilityData.lighthouseResult.categories.accessibility.title}
-          </p>
         </div>
 
         {/* Accessibility Audits */}
@@ -153,4 +152,3 @@ const AccessibilitySection = ({ accessibilityData }) => {
 };
 
 export default AccessibilitySection;
-

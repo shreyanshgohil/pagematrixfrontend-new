@@ -78,7 +78,7 @@ const OriginLoadingExperience = ({ normalData }) => {
                             : "All"}
                         </span>
                         <span className="text-brand-blue-900 font-bold">
-                          {(dist.proportion * 100).toFixed(1)}%
+                          {(dist.proportion * 100).toFixed(2)}%
                         </span>
                       </div>
                     ))}

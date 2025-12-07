@@ -83,7 +83,7 @@ const LoadingExperience = ({ normalData }) => {
                       Fast: {metric.good}
                     </span>
                     <span className="text-brand-blue-900 font-bold">
-                      {metric.distributions?.[0]?.proportion * 100}%
+                      {((metric.distributions?.[0]?.proportion || 0) * 100).toFixed(2)}%
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -91,7 +91,7 @@ const LoadingExperience = ({ normalData }) => {
                       Average: {metric.average}
                     </span>
                     <span className="text-brand-blue-900 font-bold">
-                      {metric.distributions?.[1]?.proportion * 100}%
+                      {((metric.distributions?.[1]?.proportion || 0) * 100).toFixed(2)}%
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -99,7 +99,7 @@ const LoadingExperience = ({ normalData }) => {
                       Slow: {metric.poor}
                     </span>
                     <span className="text-brand-blue-900 font-bold">
-                      {metric.distributions?.[2]?.proportion * 100}%
+                      {((metric.distributions?.[2]?.proportion || 0) * 100).toFixed(2)}%
                     </span>
                   </div>
                 </div>
