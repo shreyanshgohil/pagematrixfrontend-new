@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import SEO from "@/components/common/SEO";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import NewTaskModal from "@/components/dashboard/NewTaskModal";
@@ -17,6 +18,7 @@ import {
 } from "react-icons/fa";
 
 const TasksDashboard = () => {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
 
@@ -362,7 +364,11 @@ const TasksDashboard = () => {
                             <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
                               <FaDownload className="h-4 w-4" />
                             </button>
-                            <button className="p-2 text-gray-400 hover:text-brand-theme hover:bg-brand-theme/10 rounded-full border border-brand-theme transition-colors">
+                            <button
+                              onClick={() => router.push(`/reports/${task.id}`)}
+                              className="p-2 text-gray-400 hover:text-brand-theme hover:bg-brand-theme/10 rounded-full border border-brand-theme transition-colors"
+                              title="View Report"
+                            >
                               <FaArrowRight className="h-4 w-4" />
                             </button>
                           </div>
