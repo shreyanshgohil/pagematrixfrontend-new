@@ -1,5 +1,6 @@
 import React from "react";
 import { FaInfoCircle } from "react-icons/fa";
+import { getPerformanceColor, getScoreBadgeClasses } from "@/utils/performanceColors";
 
 const AccessibilitySection = ({ accessibilityData }) => {
   if (!accessibilityData?.lighthouseResult?.categories?.accessibility) {
@@ -25,6 +26,7 @@ const AccessibilitySection = ({ accessibilityData }) => {
 
   const accessibilityScore =
     accessibilityData.lighthouseResult.categories.accessibility.score * 100;
+  const colors = getPerformanceColor(accessibilityScore);
 
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-brand-gray-400/50 p-8 mb-8 backdrop-blur-sm">
@@ -64,10 +66,10 @@ const AccessibilitySection = ({ accessibilityData }) => {
                     fill="none"
                     stroke={
                       accessibilityScore >= 90
-                        ? "#008080"
-                        : accessibilityScore >= 70
-                        ? "#007373"
-                        : "#004d4d"
+                        ? "#0cce6b"
+                        : accessibilityScore >= 50
+                        ? "#ffa400"
+                        : "#ff4e42"
                     }
                     strokeWidth="8"
                     strokeDasharray={`${
@@ -77,15 +79,7 @@ const AccessibilitySection = ({ accessibilityData }) => {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    className={`text-2xl font-bold ${
-                      accessibilityScore >= 90
-                        ? "text-brand-theme"
-                        : accessibilityScore >= 70
-                        ? "text-brand-theme-600"
-                        : "text-brand-theme-800"
-                    }`}
-                  >
+                  <span className={`text-2xl font-bold ${colors.text}`}>
                     {Math.round(accessibilityScore)}
                   </span>
                 </div>
@@ -120,13 +114,9 @@ const AccessibilitySection = ({ accessibilityData }) => {
                         </h5>
                         {audit.score !== null && (
                           <span
-                            className={`text-xs font-bold px-3 py-1.5 rounded-lg border ${
-                              audit.score >= 0.9
-                                ? "bg-brand-theme/20 text-brand-theme border-brand-theme/30"
-                                : audit.score >= 0.5
-                                ? "bg-brand-theme-600/20 text-brand-theme-600 border-brand-theme-600/30"
-                                : "bg-brand-theme-800/20 text-brand-theme-800 border-brand-theme-800/30"
-                            }`}
+                            className={`text-xs font-bold px-3 py-1.5 rounded-lg border ${getScoreBadgeClasses(
+                              audit.score
+                            )}`}
                           >
                             {Math.round(audit.score * 100)}
                           </span>

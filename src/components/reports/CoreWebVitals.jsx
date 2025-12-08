@@ -1,5 +1,6 @@
 import React from "react";
 import { FaChartLine } from "react-icons/fa";
+import { getMetricColor } from "@/utils/performanceColors";
 
 const CoreWebVitals = ({ normalData }) => {
   return (
@@ -34,21 +35,12 @@ const CoreWebVitals = ({ normalData }) => {
               const displayValue =
                 lcp.displayValue || `${value.toFixed(2)}s`;
               const score = lcp.score;
-              const isGood = value <= 2.5;
-              const isNeedsImprovement = value > 2.5 && value <= 4.0;
+              const colors = getMetricColor(value, { good: 2.5, average: 4.0 });
 
               return (
                 <>
                   <div className="mb-4">
-                    <div
-                      className={`text-5xl font-bold mb-2 ${
-                        isGood
-                          ? "text-brand-theme"
-                          : isNeedsImprovement
-                          ? "text-brand-theme-600"
-                          : "text-brand-theme-800"
-                      }`}
-                    >
+                    <div className={`text-5xl font-bold mb-2 ${colors.text}`}>
                       {displayValue}
                     </div>
                     <div className="text-sm font-semibold text-brand-gray-500">
@@ -103,21 +95,12 @@ const CoreWebVitals = ({ normalData }) => {
               const displayValue =
                 tbt.displayValue || `${Math.round(value)}ms`;
               const score = tbt.score;
-              const isGood = value <= 200;
-              const isNeedsImprovement = value > 200 && value <= 600;
+              const colors = getMetricColor(value, { good: 200, average: 600 });
 
               return (
                 <>
                   <div className="mb-4">
-                    <div
-                      className={`text-5xl font-bold mb-2 ${
-                        isGood
-                          ? "text-brand-theme"
-                          : isNeedsImprovement
-                          ? "text-brand-theme-600"
-                          : "text-brand-theme-800"
-                      }`}
-                    >
+                    <div className={`text-5xl font-bold mb-2 ${colors.text}`}>
                       {displayValue}
                     </div>
                     <div className="text-sm font-semibold text-brand-gray-500">
@@ -175,21 +158,12 @@ const CoreWebVitals = ({ normalData }) => {
               const value = cls.numericValue;
               const displayValue = cls.displayValue || value.toFixed(3);
               const score = cls.score;
-              const isGood = value <= 0.1;
-              const isNeedsImprovement = value > 0.1 && value <= 0.25;
+              const colors = getMetricColor(value, { good: 0.1, average: 0.25 });
 
               return (
                 <>
                   <div className="mb-4">
-                    <div
-                      className={`text-5xl font-bold mb-2 ${
-                        isGood
-                          ? "text-brand-theme"
-                          : isNeedsImprovement
-                          ? "text-brand-theme-600"
-                          : "text-brand-theme-800"
-                      }`}
-                    >
+                    <div className={`text-5xl font-bold mb-2 ${colors.text}`}>
                       {displayValue}
                     </div>
                     <div className="text-sm font-semibold text-brand-gray-500">

@@ -1,9 +1,11 @@
 import React from "react";
 import { FaTachometerAlt } from "react-icons/fa";
+import { getPerformanceColor } from "@/utils/performanceColors";
 
 const PerformanceScoreOverview = ({ normalData }) => {
   const performanceScore =
     normalData.lighthouseResult?.categories?.performance?.score * 100 || 0;
+  const colors = getPerformanceColor(performanceScore);
 
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-brand-gray-400/50 p-8 mb-8 backdrop-blur-sm">
@@ -42,10 +44,10 @@ const PerformanceScoreOverview = ({ normalData }) => {
                   fill="none"
                   stroke={
                     performanceScore >= 90
-                      ? "#008080"
-                      : performanceScore >= 70
-                      ? "#007373"
-                      : "#004d4d"
+                      ? "#0cce6b"
+                      : performanceScore >= 50
+                      ? "#ffa400"
+                      : "#ff4e42"
                   }
                   strokeWidth="10"
                   strokeDasharray={`${
@@ -56,15 +58,7 @@ const PerformanceScoreOverview = ({ normalData }) => {
                 />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span
-                  className={`text-5xl font-bold ${
-                    performanceScore >= 90
-                      ? "text-brand-theme"
-                      : performanceScore >= 70
-                      ? "text-brand-theme-600"
-                      : "text-brand-theme-800"
-                  }`}
-                >
+                <span className={`text-5xl font-bold ${colors.text}`}>
                   {Math.round(performanceScore)}
                 </span>
               </div>
@@ -88,27 +82,13 @@ const PerformanceScoreOverview = ({ normalData }) => {
                 <span className="text-sm font-semibold text-brand-blue-900">
                   Performance Score
                 </span>
-                <span
-                  className={`text-lg font-bold ${
-                    performanceScore >= 90
-                      ? "text-brand-theme"
-                      : performanceScore >= 70
-                      ? "text-brand-theme-600"
-                      : "text-brand-theme-800"
-                  }`}
-                >
+                <span className={`text-lg font-bold ${colors.text}`}>
                   {Math.round(performanceScore)} / 100
                 </span>
               </div>
               <div className="w-full bg-brand-gray-400/30 rounded-full h-4 overflow-hidden shadow-inner">
                 <div
-                  className={`h-4 rounded-full bg-gradient-to-r ${
-                    performanceScore >= 90
-                      ? "from-brand-theme to-brand-theme-600"
-                      : performanceScore >= 70
-                      ? "from-brand-theme-600 to-brand-theme-800"
-                      : "from-brand-theme-800 to-brand-blue-800"
-                  } shadow-lg transition-all duration-500`}
+                  className={`h-4 rounded-full bg-gradient-to-r ${colors.gradient} shadow-lg transition-all duration-500`}
                   style={{ width: `${performanceScore}%` }}
                 ></div>
               </div>

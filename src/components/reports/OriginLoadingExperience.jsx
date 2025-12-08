@@ -1,5 +1,6 @@
 import React from "react";
 import { FaClock } from "react-icons/fa";
+import { getCategoryColor } from "@/utils/performanceColors";
 
 const OriginLoadingExperience = ({ normalData }) => {
   if (!normalData.originLoadingExperience?.metrics) {
@@ -20,14 +21,13 @@ const OriginLoadingExperience = ({ normalData }) => {
       <div>
         <div className="mb-6">
           <span
-            className={`px-4 py-2 rounded-xl text-sm font-bold border-2 ${
-              normalData.originLoadingExperience.overall_category === "FAST"
-                ? "bg-brand-theme/20 text-brand-theme border-brand-theme/30"
-                : normalData.originLoadingExperience.overall_category ===
-                  "AVERAGE"
-                ? "bg-brand-theme-600/20 text-brand-theme-600 border-brand-theme-600/30"
-                : "bg-brand-theme-800/20 text-brand-theme-800 border-brand-theme-800/30"
-            }`}
+            className={`px-4 py-2 rounded-xl text-sm font-bold border-2 ${getCategoryColor(
+              normalData.originLoadingExperience.overall_category
+            ).bgLight} ${getCategoryColor(
+              normalData.originLoadingExperience.overall_category
+            ).text} ${getCategoryColor(
+              normalData.originLoadingExperience.overall_category
+            ).border}`}
           >
             Overall: {normalData.originLoadingExperience.overall_category}
           </span>
@@ -47,13 +47,9 @@ const OriginLoadingExperience = ({ normalData }) => {
                 </h4>
                 <div className="mb-3">
                   <span
-                    className={`text-xl font-bold ${
-                      metric.category === "FAST"
-                        ? "text-brand-theme"
-                        : metric.category === "AVERAGE"
-                        ? "text-brand-theme-600"
-                        : "text-brand-theme-800"
-                    }`}
+                    className={`text-xl font-bold ${getCategoryColor(
+                      metric.category
+                    ).text}`}
                   >
                     {metric.category}
                   </span>

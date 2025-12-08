@@ -1,5 +1,6 @@
 import React from "react";
 import { FaChartLine } from "react-icons/fa";
+import { getScoreBadgeClasses } from "@/utils/performanceColors";
 
 const PerformanceAudits = ({ normalData }) => {
   if (!normalData.lighthouseResult?.categories?.performance?.auditRefs) {
@@ -41,13 +42,9 @@ const PerformanceAudits = ({ normalData }) => {
                       )}
                       {audit.score !== null && (
                         <span
-                          className={`text-xs font-bold px-3 py-1.5 rounded-lg border ${
-                            audit.score >= 0.9
-                              ? "bg-brand-theme/20 text-brand-theme border-brand-theme/30"
-                              : audit.score >= 0.5
-                              ? "bg-brand-theme-600/20 text-brand-theme-600 border-brand-theme-600/30"
-                              : "bg-brand-theme-800/20 text-brand-theme-800 border-brand-theme-800/30"
-                          }`}
+                          className={`text-xs font-bold px-3 py-1.5 rounded-lg border ${getScoreBadgeClasses(
+                            audit.score
+                          )}`}
                         >
                           {Math.round(audit.score * 100)}
                         </span>

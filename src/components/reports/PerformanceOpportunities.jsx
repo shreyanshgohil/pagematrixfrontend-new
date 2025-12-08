@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRocket } from "react-icons/fa";
+import { getScoreBadgeClasses } from "@/utils/performanceColors";
 
 const PerformanceOpportunities = ({ normalData }) => {
   const audits = normalData.lighthouseResult?.audits;
@@ -69,13 +70,9 @@ const PerformanceOpportunities = ({ normalData }) => {
               </h3>
               {opportunity.score !== null && opportunity.score !== undefined && (
                 <span
-                  className={`text-xs font-bold px-3 py-1.5 rounded-lg border ml-3 ${
-                    opportunity.score >= 0.9
-                      ? "bg-brand-theme/20 text-brand-theme border-brand-theme/30"
-                      : opportunity.score >= 0.5
-                      ? "bg-brand-theme-600/20 text-brand-theme-600 border-brand-theme-600/30"
-                      : "bg-brand-theme-800/20 text-brand-theme-800 border-brand-theme-800/30"
-                  }`}
+                  className={`text-xs font-bold px-3 py-1.5 rounded-lg border ml-3 ${getScoreBadgeClasses(
+                    opportunity.score
+                  )}`}
                 >
                   {Math.round(opportunity.score * 100)}
                 </span>

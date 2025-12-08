@@ -1,5 +1,6 @@
 import React from "react";
 import { FaClock } from "react-icons/fa";
+import { getMetricColor } from "@/utils/performanceColors";
 
 const AdditionalMetrics = ({ normalData }) => {
   return (
@@ -30,20 +31,11 @@ const AdditionalMetrics = ({ normalData }) => {
               const displayValue =
                 fcp.displayValue || `${value.toFixed(2)}s`;
               const score = fcp.score;
-              const isGood = value <= 1.8;
-              const isNeedsImprovement = value > 1.8 && value <= 3.0;
+              const colors = getMetricColor(value, { good: 1.8, average: 3.0 });
 
               return (
                 <>
-                  <div
-                    className={`text-3xl font-bold mb-2 ${
-                      isGood
-                        ? "text-brand-theme"
-                        : isNeedsImprovement
-                        ? "text-brand-theme-600"
-                        : "text-brand-theme-800"
-                    }`}
-                  >
+                  <div className={`text-3xl font-bold mb-2 ${colors.text}`}>
                     {displayValue}
                   </div>
                   <div className="text-xs font-semibold text-brand-gray-500">
@@ -73,20 +65,11 @@ const AdditionalMetrics = ({ normalData }) => {
               const displayValue =
                 si.displayValue || `${value.toFixed(2)}s`;
               const score = si.score;
-              const isGood = value <= 3.4;
-              const isNeedsImprovement = value > 3.4 && value <= 5.8;
+              const colors = getMetricColor(value, { good: 3.4, average: 5.8 });
 
               return (
                 <>
-                  <div
-                    className={`text-3xl font-bold mb-2 ${
-                      isGood
-                        ? "text-brand-theme"
-                        : isNeedsImprovement
-                        ? "text-brand-theme-600"
-                        : "text-brand-theme-800"
-                    }`}
-                  >
+                  <div className={`text-3xl font-bold mb-2 ${colors.text}`}>
                     {displayValue}
                   </div>
                   <div className="text-xs font-semibold text-brand-gray-500">
@@ -114,20 +97,11 @@ const AdditionalMetrics = ({ normalData }) => {
                 tbt.displayValue || `${Math.round(tbt.numericValue)}ms`;
               const score = tbt.score;
               const value = tbt.numericValue;
-              const isGood = value <= 200;
-              const isNeedsImprovement = value > 200 && value <= 600;
+              const colors = getMetricColor(value, { good: 200, average: 600 });
 
               return (
                 <>
-                  <div
-                    className={`text-3xl font-bold mb-2 ${
-                      isGood
-                        ? "text-brand-theme"
-                        : isNeedsImprovement
-                        ? "text-brand-theme-600"
-                        : "text-brand-theme-800"
-                    }`}
-                  >
+                  <div className={`text-3xl font-bold mb-2 ${colors.text}`}>
                     {displayValue}
                   </div>
                   <div className="text-xs font-semibold text-brand-gray-500">

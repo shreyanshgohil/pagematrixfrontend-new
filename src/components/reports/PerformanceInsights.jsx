@@ -1,5 +1,6 @@
 import React from "react";
 import { FaLightbulb } from "react-icons/fa";
+import { getScoreBadgeClasses } from "@/utils/performanceColors";
 
 const PerformanceInsights = ({ normalData }) => {
   const audits = normalData.lighthouseResult?.audits;
@@ -43,13 +44,9 @@ const PerformanceInsights = ({ normalData }) => {
               </h3>
               {insight.score !== null && insight.score !== undefined && (
                 <span
-                  className={`text-xs font-bold px-3 py-1.5 rounded-lg border ${
-                    insight.score >= 0.9
-                      ? "bg-brand-theme/20 text-brand-theme border-brand-theme/30"
-                      : insight.score >= 0.5
-                      ? "bg-brand-theme-600/20 text-brand-theme-600 border-brand-theme-600/30"
-                      : "bg-brand-theme-800/20 text-brand-theme-800 border-brand-theme-800/30"
-                  }`}
+                  className={`text-xs font-bold px-3 py-1.5 rounded-lg border ${getScoreBadgeClasses(
+                    insight.score
+                  )}`}
                 >
                   {Math.round(insight.score * 100)}
                 </span>

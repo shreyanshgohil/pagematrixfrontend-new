@@ -1,5 +1,6 @@
 import React from "react";
 import { FaChartBar } from "react-icons/fa";
+import { getCategoryColor } from "@/utils/performanceColors";
 
 const CruxSection = ({ cruxData }) => {
   if (!cruxData?.record) {
@@ -182,25 +183,19 @@ const CruxSection = ({ cruxData }) => {
                 </h4>
                 <div className="mb-3">
                   <div
-                    className={`text-2xl font-bold mb-1 ${
-                      category === "FAST"
-                        ? "text-brand-theme"
-                        : category === "AVERAGE"
-                        ? "text-brand-theme-600"
-                        : "text-brand-theme-800"
-                    }`}
+                    className={`text-2xl font-bold mb-1 ${getCategoryColor(
+                      category
+                    ).text}`}
                   >
                     {displayValue}
                   </div>
                   <div className="flex items-center space-x-2">
                     <span
-                      className={`text-xs font-bold px-2 py-1 rounded-lg border ${
-                        category === "FAST"
-                          ? "bg-brand-theme/20 text-brand-theme border-brand-theme/30"
-                          : category === "AVERAGE"
-                          ? "bg-brand-theme-600/20 text-brand-theme-600 border-brand-theme-600/30"
-                          : "bg-brand-theme-800/20 text-brand-theme-800 border-brand-theme-800/30"
-                      }`}
+                      className={`text-xs font-bold px-2 py-1 rounded-lg border ${getCategoryColor(
+                        category
+                      ).bgLight} ${getCategoryColor(category).text} ${getCategoryColor(
+                        category
+                      ).border}`}
                     >
                       {category}
                     </span>
@@ -230,10 +225,10 @@ const CruxSection = ({ cruxData }) => {
                               <div
                                 className={`h-2 rounded-full ${
                                   idx === 0
-                                    ? "bg-brand-theme"
+                                    ? "bg-performance-good"
                                     : idx === 1
-                                    ? "bg-brand-theme-600"
-                                    : "bg-brand-theme-800"
+                                    ? "bg-performance-average"
+                                    : "bg-performance-poor"
                                 }`}
                                 style={{ width: `${percentage}%` }}
                               />
