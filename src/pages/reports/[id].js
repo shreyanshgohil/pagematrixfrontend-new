@@ -134,77 +134,97 @@ const ReportDetail = () => {
               </div>
             </div>
 
-            {/* Section 1: Performance Score Overview - Main score, most important */}
+            {/* ============================================ */}
+            {/* MOST USEFUL & ACTIONABLE SECTIONS (TOP) */}
+            {/* ============================================ */}
+
+            {/* Section 1: Performance Score Overview - Overall performance score */}
             <PerformanceScoreOverview normalData={normalData} />
 
-            {/* Section 2: Core Web Vitals - Critical user experience metrics */}
+            {/* Section 2: Core Web Vitals - Critical user experience metrics (LCP, TBT, CLS) */}
             <CoreWebVitals normalData={normalData} />
 
-            {/* Section 3: Additional Performance Metrics - Supporting performance data */}
+            {/* Section 3: Additional Performance Metrics - Key metrics (FCP, Speed Index, TBT) */}
             <AdditionalMetrics normalData={normalData} />
 
-            {/* Section 4: Chrome User Experience Report (CrUX) - Real user data, very valuable */}
-            <CruxSection cruxData={cruxData} />
-
-            {/* Section 5: Loading Experience (Field Data) - Real user metrics */}
-            <LoadingExperience normalData={normalData} />
-
-            {/* Section 6: Screenshots - Visual representation of page load */}
-            <ScreenshotsSection normalData={normalData} />
-
-            {/* Section 7: Accessibility - Important for compliance and usability */}
-            <AccessibilitySection accessibilityData={accessibilityData} />
-
-            {/* Section 8: SEO - Important for search visibility */}
-            <SEOSection seoData={seoData} />
-
-            {/* Section 9: Best Practices - Security and best practices */}
-            <BestPracticesSection bestPracticesData={bestPracticesData} />
-
-            {/* Section 10: Origin Loading Experience - Origin-level field data */}
-            <OriginLoadingExperience normalData={normalData} />
-
-            {/* Section 11: Diagnostics - Technical diagnostic information */}
-            <DiagnosticsSection normalData={normalData} />
-
-            {/* Section 12: Network Requests - Detailed network request data */}
-            <NetworkRequests normalData={normalData} />
-
-            {/* Section 13: All Performance Audits - Complete audit details */}
-            <PerformanceAudits normalData={normalData} />
-
-            {/* Section 14: Third-Party Services - Entities detected on the page */}
-            <ThirdPartyEntities normalData={normalData} />
-
-            {/* Section 15: Framework Recommendations - Stack packs */}
-            <StackPacksSection normalData={normalData} />
-
-            {/* Section 16: Run Warnings - Lighthouse run warnings */}
-            <RunWarningsSection normalData={normalData} />
-
-            {/* Section 17: Timing - Lighthouse analysis timing */}
-            <TimingSection normalData={normalData} />
-
-            {/* Section 18: Environment & Configuration - Technical environment details */}
-            <EnvironmentInfo normalData={normalData} />
-
-            {/* Section 19: Performance Opportunities - Optimization opportunities with savings */}
+            {/* Section 4: Performance Opportunities - Actionable optimization opportunities with savings */}
             <PerformanceOpportunities normalData={normalData} />
 
-            {/* Section 20: Performance Insights - Detailed performance insights */}
+            {/* Section 5: Performance Insights - Detailed performance insights and recommendations */}
             <PerformanceInsights normalData={normalData} />
 
-            {/* Section 21: Resource Summary - Aggregated resource statistics */}
+            {/* Section 6: Resource Summary - Quick overview of resource usage by type */}
             <ResourceSummary normalData={normalData} />
 
-            {/* Section 22: All Metrics - Complete metrics collection */}
+            {/* Section 7: Third-Party Services - Services affecting page performance */}
+            <ThirdPartyEntities normalData={normalData} />
+
+            {/* Section 8: Network Requests - Detailed network request breakdown */}
+            <NetworkRequests normalData={normalData} />
+
+            {/* ============================================ */}
+            {/* REAL USER DATA & VISUAL FEEDBACK */}
+            {/* ============================================ */}
+
+            {/* Section 9: Chrome User Experience Report (CrUX) - Real user data from Chrome */}
+            <CruxSection cruxData={cruxData} />
+
+            {/* Section 10: Loading Experience (Field Data) - Real user metrics from field data */}
+            <LoadingExperience normalData={normalData} />
+
+            {/* Section 11: Screenshots - Visual representation of page load */}
+            <ScreenshotsSection normalData={normalData} />
+
+            {/* ============================================ */}
+            {/* QUALITY METRICS (Accessibility, SEO, Best Practices) */}
+            {/* ============================================ */}
+
+            {/* Section 12: Accessibility - Accessibility score and audits */}
+            <AccessibilitySection accessibilityData={accessibilityData} />
+
+            {/* Section 13: SEO - SEO score and audits */}
+            <SEOSection seoData={seoData} />
+
+            {/* Section 14: Best Practices - Best practices score and audits */}
+            <BestPracticesSection bestPracticesData={bestPracticesData} />
+
+            {/* ============================================ */}
+            {/* TECHNICAL DETAILS & DIAGNOSTICS */}
+            {/* ============================================ */}
+
+            {/* Section 15: Diagnostics - Technical diagnostic information */}
+            <DiagnosticsSection normalData={normalData} />
+
+            {/* Section 16: Origin Loading Experience - Origin-level field data */}
+            <OriginLoadingExperience normalData={normalData} />
+
+            {/* Section 17: All Performance Audits - Complete list of all performance audits */}
+            <PerformanceAudits normalData={normalData} />
+
+            {/* Section 18: Stack Packs - Framework-specific recommendations */}
+            <StackPacksSection normalData={normalData} />
+
+            {/* Section 19: All Metrics - Complete metrics collection */}
             <AllMetrics normalData={normalData} />
 
-            {/* Section 23: Category Groups - Audit category organization */}
+            {/* ============================================ */}
+            {/* ADDITIONAL INFORMATION & METADATA */}
+            {/* ============================================ */}
+
+            {/* Section 20: Category Groups - Audit category organization */}
             <CategoryGroups normalData={normalData} />
 
-            {/* Section 24: Full Page Screenshot - Complete page screenshot with nodes */}
+            {/* Section 21: Full Page Screenshot - Complete page screenshot with nodes */}
             <FullPageScreenshot normalData={normalData} />
+
+            {/* Section 22: Run Warnings - Lighthouse run warnings */}
+            <RunWarningsSection normalData={normalData} />
+
+            {/* Section 23: Timing - Lighthouse analysis timing information */}
+            <TimingSection normalData={normalData} />
+
+            {/* Section 24: Environment & Configuration - Technical environment and configuration details */}
+            <EnvironmentInfo normalData={normalData} />
           </div>
         </div>
       </DashboardLayout>
