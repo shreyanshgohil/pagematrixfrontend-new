@@ -40,16 +40,47 @@ const ReportDetail = () => {
   const [activeTab, setActiveTab] = useState("desktop");
   const [desktopReportData, setDesktopReportData] = useState(null);
   const [mobileReportData, setMobileReportData] = useState(null);
+  const [isRefetching, setIsRefetching] = useState(false);
+
+  const loadReportData = async () => {
+    try {
+      // TODO: Replace with actual API call
+      // const response = await fetch(`/api/reports/${id}?formFactor=desktop`);
+      // const desktopData = await response.json();
+      // const mobileResponse = await fetch(`/api/reports/${id}?formFactor=mobile`);
+      // const mobileData = await mobileResponse.json();
+      
+      // For now, using dummy data
+      // Simulate API delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      
+      if (desktopData) {
+        setDesktopReportData(desktopData);
+      }
+      if (mobileData) {
+        setMobileReportData(mobileData);
+      }
+    } catch (error) {
+      console.error("Error fetching report data:", error);
+    }
+  };
 
   useEffect(() => {
-    // Load both desktop and mobile data
-    if (desktopData) {
-      setDesktopReportData(desktopData);
-    }
-    if (mobileData) {
-      setMobileReportData(mobileData);
-    }
+    loadReportData();
   }, [id]);
+
+  const handleRefetch = async () => {
+    setIsRefetching(true);
+    try {
+      await loadReportData();
+      // Show success message or toast here if needed
+    } catch (error) {
+      console.error("Error refetching data:", error);
+      // Show error message or toast here if needed
+    } finally {
+      setIsRefetching(false);
+    }
+  };
 
   // Get the active report data based on selected tab
   const reportData =
@@ -109,6 +140,8 @@ const ReportDetail = () => {
             activeTab={activeTab}
             onTabChange={setActiveTab}
             analysisUTCTimestamp={analysisUTCTimestamp}
+            onRefetch={handleRefetch}
+            isRefetching={isRefetching}
           />
 
           {/* Main Content */}

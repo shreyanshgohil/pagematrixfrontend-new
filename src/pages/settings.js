@@ -179,20 +179,14 @@ const Settings = () => {
               <span>Email Address</span>
             </div>
           </label>
-          <div className="flex items-center space-x-3">
-            <input
-              type="email"
-              value={profileData.email}
-              readOnly
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-            />
-            <button className="flex items-center space-x-2 text-brand-theme hover:text-brand-theme-600 text-sm font-medium">
-              <FaEdit className="h-3 w-3" />
-              <span>Change Email</span>
-            </button>
-          </div>
+          <input
+            type="email"
+            value={profileData.email}
+            readOnly
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
+          />
           <p className="text-xs text-gray-500 mt-1">
-            Click "Change Email" to update your email address
+            Email address cannot be changed
           </p>
         </div>
 

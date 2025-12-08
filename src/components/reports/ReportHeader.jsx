@@ -8,6 +8,7 @@ import {
   FaTachometerAlt,
   FaDesktop,
   FaMobile,
+  FaSync,
 } from "react-icons/fa";
 
 const ReportHeader = ({
@@ -17,6 +18,8 @@ const ReportHeader = ({
   activeTab,
   onTabChange,
   analysisUTCTimestamp,
+  onRefetch,
+  isRefetching,
 }) => {
   return (
     <div className="bg-gradient-to-r from-brand-blue-800 via-brand-blue-700 to-brand-theme-800 text-white shadow-xl">
@@ -29,10 +32,26 @@ const ReportHeader = ({
             <FaArrowLeft className="h-4 w-4" />
             <span className="font-medium">Back to Reports</span>
           </Link>
-          <button className="flex items-center space-x-2 px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-white/20 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/20">
-            <FaDownload className="h-4 w-4" />
-            <span className="font-medium">Export Report</span>
-          </button>
+          <div className="flex items-center space-x-3">
+            {onRefetch && (
+              <button
+                onClick={onRefetch}
+                disabled={isRefetching}
+                className="flex items-center space-x-2 px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-white/20 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <FaSync
+                  className={`h-4 w-4 ${isRefetching ? "animate-spin" : ""}`}
+                />
+                <span className="font-medium">
+                  {isRefetching ? "Refetching..." : "Refetch Data"}
+                </span>
+              </button>
+            )}
+            <button className="flex items-center space-x-2 px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-white/20 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/20">
+              <FaDownload className="h-4 w-4" />
+              <span className="font-medium">Export Report</span>
+            </button>
+          </div>
         </div>
 
         <div className="mt-6">

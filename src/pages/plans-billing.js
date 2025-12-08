@@ -297,7 +297,7 @@ const PlansBilling = () => {
                 {plans.map((plan) => (
                   <div
                     key={plan.id}
-                    className={`bg-white rounded-xl shadow-sm border-2 p-6 relative hover:shadow-md transition-shadow duration-200 ${
+                    className={`bg-white rounded-xl shadow-sm border-2 p-6 relative hover:shadow-md transition-shadow duration-200 flex flex-col ${
                       plan.isCurrent
                         ? "border-brand-theme"
                         : "border-gray-200 hover:border-gray-300"
@@ -333,7 +333,7 @@ const PlansBilling = () => {
                       ))}
                     </ul>
                     <button
-                      className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${plan.buttonStyle}`}
+                      className={`w-full py-3 px-4 rounded-lg font-medium transition-colors mt-auto ${plan.buttonStyle}`}
                       disabled={!plan.isAvailable}
                     >
                       {plan.buttonText}
