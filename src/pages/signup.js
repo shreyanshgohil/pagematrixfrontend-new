@@ -5,7 +5,8 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import SEO from "../components/common/SEO";
 import { useState } from "react";
-// Firebase imports removed - backend handles user creation
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../config/firebase";
 import { api } from "../utils/api";
 import { useRouter } from "next/router";
 import {
@@ -21,6 +22,7 @@ import {
   FaShieldAlt,
   FaRocket,
   FaCode,
+  FaGoogle,
 } from "react-icons/fa";
 
 const SignUp = () => {
@@ -36,6 +38,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -96,6 +99,58 @@ const SignUp = () => {
       );
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    setIsGoogleLoading(true);
+    setSubmitStatus(null);
+    setErrorMessage("");
+
+    try {
+      // Sign in with Google
+      const result = await signInWithPopup(auth, googleProvider);
+      const idToken = await result.user.getIdToken();
+
+      // Try to login (this will create user if doesn't exist)
+      const response = await api.login(idToken);
+
+      if (response.status === 200) {
+        setSubmitStatus("success");
+        // Redirect to dashboard after 1 second
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1000);
+      } else {
+        throw new Error(response.message || "Google sign up failed");
+      }
+    } catch (error) {
+      console.error("Google sign up error:", error);
+      setSubmitStatus("error");
+
+      // Check if user already exists
+      if (
+        error.message?.includes("email-already-in-use") ||
+        error.code === "auth/email-already-in-use" ||
+        error.message?.includes("already exists")
+      ) {
+        setErrorMessage(
+          "This Google account is already registered. Please sign in instead."
+        );
+        setTimeout(() => {
+          router.push("/signin");
+        }, 2000);
+      } else if (
+        error.message === "Firebase: Error (auth/popup-closed-by-user)"
+      ) {
+        setErrorMessage("Sign up was cancelled");
+      } else {
+        setErrorMessage(
+          error.message || "Google sign up failed. Please try again."
+        );
+      }
+    } finally {
+      setIsGoogleLoading(false);
     }
   };
 
@@ -234,7 +289,8 @@ const SignUp = () => {
                               Account Created Successfully!
                             </h4>
                             <p className="text-sm text-green-700">
-                              Please check your email to verify your account. Redirecting to sign in...
+                              Please check your email to verify your account.
+                              Redirecting to sign in...
                             </p>
                           </div>
                         </div>
@@ -250,7 +306,8 @@ const SignUp = () => {
                               Sign Up Failed
                             </h4>
                             <p className="text-sm text-red-700">
-                              {errorMessage || "Please check your information and try again."}
+                              {errorMessage ||
+                                "Please check your information and try again."}
                             </p>
                           </div>
                         </div>
@@ -420,9 +477,9 @@ const SignUp = () => {
 
                       <button
                         type="submit"
-                        disabled={isLoading}
+                        disabled={isLoading || isGoogleLoading}
                         className={`w-full font-semibold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group ${
-                          isLoading
+                          isLoading || isGoogleLoading
                             ? "bg-gray-400 text-gray-200 cursor-not-allowed"
                             : "bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white transform hover:scale-105 hover:shadow-xl hover:shadow-brand-theme/25"
                         }`}
@@ -436,6 +493,40 @@ const SignUp = () => {
                           <>
                             Create Account
                             <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform duration-300" />
+                          </>
+                        )}
+                      </button>
+
+                      <div className="relative my-6">
+                        <div className="absolute inset-0 flex items-center">
+                          <div className="w-full border-t border-brand-gray-300"></div>
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                          <span className="px-4 bg-white text-brand-gray-500">
+                            Or sign up with
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={handleGoogleSignUp}
+                        disabled={isLoading || isGoogleLoading}
+                        className={`w-full font-semibold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border-2 ${
+                          isLoading || isGoogleLoading
+                            ? "border-gray-300 text-gray-400 cursor-not-allowed"
+                            : "border-brand-gray-300 text-brand-blue-800 hover:border-brand-theme hover:bg-brand-theme/5"
+                        }`}
+                      >
+                        {isGoogleLoading ? (
+                          <>
+                            <div className="animate-spin rounded-full h-5 w-5 border-2 border-brand-gray-300 border-t-brand-theme"></div>
+                            Signing Up...
+                          </>
+                        ) : (
+                          <>
+                            <FaGoogle className="h-5 w-5" />
+                            Sign up with Google
                           </>
                         )}
                       </button>
