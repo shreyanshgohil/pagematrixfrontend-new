@@ -4,7 +4,11 @@ import Image from "next/image";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import SEO from "../components/common/SEO";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../config/firebase";
+import { api } from "../utils/api";
+import { useRouter } from "next/router";
 import {
   FaEye,
   FaEyeSlash,
@@ -17,39 +21,106 @@ import {
   FaTachometerAlt,
   FaShieldAlt,
   FaRocket,
+  FaGoogle,
 } from "react-icons/fa";
 
 const SignIn = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    // Check if redirected from signup
+    if (router.query.verified === "false") {
+      setSubmitStatus("success");
+      setErrorMessage("Please verify your email before signing in.");
+    }
+  }, [router.query]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setSubmitStatus(null);
+    setErrorMessage("");
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Sign in with Firebase
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
 
-      // For demo purposes, accept any email/password
-      if (formData.email && formData.password) {
+      // Get ID token
+      const idToken = await userCredential.user.getIdToken();
+
+      // Login to backend
+      const response = await api.login(idToken);
+
+      if (response.status === 200) {
         setSubmitStatus("success");
         // Redirect to dashboard or home page
-        window.location.href = "/";
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1000);
       } else {
-        setSubmitStatus("error");
+        throw new Error(response.message || "Login failed");
       }
     } catch (error) {
       console.error("Sign in error:", error);
       setSubmitStatus("error");
+      setErrorMessage(
+        error.message === "Firebase: Error (auth/user-not-found)" ||
+        error.message === "Firebase: Error (auth/wrong-password)"
+          ? "Invalid email or password"
+          : error.message === "Firebase: Error (auth/user-disabled)"
+          ? "This account has been disabled"
+          : error.message || "Sign in failed. Please try again."
+      );
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsGoogleLoading(true);
+    setSubmitStatus(null);
+    setErrorMessage("");
+
+    try {
+      // Sign in with Google
+      const result = await signInWithPopup(auth, googleProvider);
+      const idToken = await result.user.getIdToken();
+
+      // Login to backend
+      const response = await api.login(idToken);
+
+      if (response.status === 200) {
+        setSubmitStatus("success");
+        // Redirect to dashboard
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1000);
+      } else {
+        throw new Error(response.message || "Google sign in failed");
+      }
+    } catch (error) {
+      console.error("Google sign in error:", error);
+      setSubmitStatus("error");
+      setErrorMessage(
+        error.message === "Firebase: Error (auth/popup-closed-by-user)"
+          ? "Sign in was cancelled"
+          : error.message || "Google sign in failed. Please try again."
+      );
+    } finally {
+      setIsGoogleLoading(false);
     }
   };
 
@@ -198,7 +269,7 @@ const SignIn = () => {
                               Sign In Failed
                             </h4>
                             <p className="text-sm text-red-700">
-                              Please check your credentials and try again.
+                              {errorMessage || "Please check your credentials and try again."}
                             </p>
                           </div>
                         </div>
@@ -285,9 +356,9 @@ const SignIn = () => {
 
                       <button
                         type="submit"
-                        disabled={isLoading}
+                        disabled={isLoading || isGoogleLoading}
                         className={`w-full font-semibold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group ${
-                          isLoading
+                          isLoading || isGoogleLoading
                             ? "bg-gray-400 text-gray-200 cursor-not-allowed"
                             : "bg-gradient-to-r from-brand-theme to-brand-theme-600 hover:from-brand-theme-600 hover:to-brand-theme-800 text-white transform hover:scale-105 hover:shadow-xl hover:shadow-brand-theme/25"
                         }`}
@@ -301,6 +372,40 @@ const SignIn = () => {
                           <>
                             Sign In
                             <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform duration-300" />
+                          </>
+                        )}
+                      </button>
+
+                      <div className="relative my-6">
+                        <div className="absolute inset-0 flex items-center">
+                          <div className="w-full border-t border-brand-gray-300"></div>
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                          <span className="px-4 bg-white text-brand-gray-500">
+                            Or continue with
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={handleGoogleSignIn}
+                        disabled={isLoading || isGoogleLoading}
+                        className={`w-full font-semibold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border-2 ${
+                          isLoading || isGoogleLoading
+                            ? "border-gray-300 text-gray-400 cursor-not-allowed"
+                            : "border-brand-gray-300 text-brand-blue-800 hover:border-brand-theme hover:bg-brand-theme/5"
+                        }`}
+                      >
+                        {isGoogleLoading ? (
+                          <>
+                            <div className="animate-spin rounded-full h-5 w-5 border-2 border-brand-gray-300 border-t-brand-theme"></div>
+                            Signing In...
+                          </>
+                        ) : (
+                          <>
+                            <FaGoogle className="h-5 w-5" />
+                            Sign in with Google
                           </>
                         )}
                       </button>

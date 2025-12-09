@@ -5,6 +5,9 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import SEO from "../components/common/SEO";
 import { useState } from "react";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../config/firebase";
+import { api } from "../utils/api";
 import {
   FaEnvelope,
   FaArrowRight,
@@ -22,25 +25,33 @@ const ForgotPassword = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setSubmitStatus(null);
+    setErrorMessage("");
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Send password reset email via Firebase
+      await sendPasswordResetEmail(auth, formData.email, {
+        url: `${window.location.origin}/reset-password`,
+        handleCodeInApp: false,
+      });
 
-      // For demo purposes, accept any email
-      if (formData.email) {
-        setSubmitStatus("success");
-      } else {
-        setSubmitStatus("error");
-      }
+      // Also notify backend
+      await api.forgotPassword(formData.email);
+
+      setSubmitStatus("success");
     } catch (error) {
       console.error("Forgot password error:", error);
       setSubmitStatus("error");
+      setErrorMessage(
+        error.message === "Firebase: Error (auth/user-not-found)"
+          ? "No account found with this email address"
+          : error.message || "Failed to send reset email. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -195,7 +206,7 @@ const ForgotPassword = () => {
                               Reset Failed
                             </h4>
                             <p className="text-sm text-red-700">
-                              Please check your email address and try again.
+                              {errorMessage || "Please check your email address and try again."}
                             </p>
                           </div>
                         </div>

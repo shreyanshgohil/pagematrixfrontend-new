@@ -5,6 +5,9 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import SEO from "../components/common/SEO";
 import { useState } from "react";
+// Firebase imports removed - backend handles user creation
+import { api } from "../utils/api";
+import { useRouter } from "next/router";
 import {
   FaEye,
   FaEyeSlash,
@@ -21,6 +24,7 @@ import {
 } from "react-icons/fa";
 
 const SignUp = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -33,47 +37,63 @@ const SignUp = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setSubmitStatus(null);
+    setErrorMessage("");
 
     // Validation
     if (formData.password !== formData.confirmPassword) {
       setSubmitStatus("error");
+      setErrorMessage("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setSubmitStatus("error");
+      setErrorMessage("Password must be at least 8 characters long");
       setIsLoading(false);
       return;
     }
 
     if (!formData.agreeToTerms) {
       setSubmitStatus("error");
+      setErrorMessage("Please agree to the Terms & Conditions");
       setIsLoading(false);
       return;
     }
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Register user in backend (backend will create Firebase user)
+      const response = await api.signup({
+        email: formData.email,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        phone: "", // Add phone field if needed
+      });
 
-      // For demo purposes, accept any valid form
-      if (
-        formData.firstName &&
-        formData.lastName &&
-        formData.email &&
-        formData.password
-      ) {
+      if (response.status === 201) {
         setSubmitStatus("success");
-        // Redirect to dashboard or home page
+        // Redirect to signin page after 2 seconds
         setTimeout(() => {
-          window.location.href = "/";
+          router.push("/signin?verified=false");
         }, 2000);
       } else {
-        setSubmitStatus("error");
+        throw new Error(response.message || "Sign up failed");
       }
     } catch (error) {
       console.error("Sign up error:", error);
       setSubmitStatus("error");
+      setErrorMessage(
+        error.message === "Firebase: Error (auth/email-already-in-use)"
+          ? "Email is already registered. Please sign in instead."
+          : error.message || "Sign up failed. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -214,7 +234,7 @@ const SignUp = () => {
                               Account Created Successfully!
                             </h4>
                             <p className="text-sm text-green-700">
-                              Redirecting to your dashboard...
+                              Please check your email to verify your account. Redirecting to sign in...
                             </p>
                           </div>
                         </div>
@@ -230,7 +250,7 @@ const SignUp = () => {
                               Sign Up Failed
                             </h4>
                             <p className="text-sm text-red-700">
-                              Please check your information and try again.
+                              {errorMessage || "Please check your information and try again."}
                             </p>
                           </div>
                         </div>

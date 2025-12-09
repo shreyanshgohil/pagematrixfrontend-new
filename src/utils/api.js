@@ -1,97 +1,72 @@
-// API Configuration
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5001/backend";
 
-// API Endpoints
-export const API_ENDPOINTS = {
-  MESSAGES: {
-    CONTACT: "/messages/contact",
-    INQUIRE: "/messages/inquire",
+export const api = {
+  // Auth endpoints
+  signup: async (userData) => {
+    const response = await fetch(`${API_BASE_URL}/auth/sign-up`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    return response.json();
   },
-  NEWSLETTER: "/newsletter",
-  BLOGS: {
-    LIST: "/blogs",
-    DETAIL: "/blogs",
-    CATEGORIES: "/blogs/categories",
-    FEATURED: "/blogs/featured",
-    RECENT: "/blogs/recent",
+
+  login: async (idToken) => {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ idToken }),
+    });
+    return response.json();
   },
-};
 
-// Helper function to make API calls
-export const apiCall = async (endpoint, options = {}) => {
-  const url = `${API_BASE_URL}${endpoint}`;
+  logout: async () => {
+    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+    return response.json();
+  },
 
-  const defaultOptions = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  forgotPassword: async (email) => {
+    const response = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ email }),
+    });
+    return response.json();
+  },
 
-  const config = {
-    ...defaultOptions,
-    ...options,
-    headers: {
-      ...defaultOptions.headers,
-      ...options.headers,
-    },
-  };
+  resetPassword: async (oobCode, newPassword) => {
+    const response = await fetch(`${API_BASE_URL}/auth/reset-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ oobCode, newPassword }),
+    });
+    return response.json();
+  },
 
-  try {
-    const response = await fetch(url, config);
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(
-        errorData.message || `HTTP error! status: ${response.status}`
-      );
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("API call failed:", error);
-    throw error;
-  }
-};
-
-// Specific API functions
-
-// Message APIs
-export const sendContactMessage = async (formData) => {
-  return apiCall(API_ENDPOINTS.MESSAGES.CONTACT, {
-    method: "POST",
-    body: JSON.stringify(formData),
-  });
-};
-
-export const sendInquiryMessage = async (formData) => {
-  return apiCall(API_ENDPOINTS.MESSAGES.INQUIRE, {
-    method: "POST",
-    body: JSON.stringify(formData),
-  });
-};
-
-// Blog APIs
-export const getAllBlogs = async (params = {}) => {
-  const queryParams = new URLSearchParams(params).toString();
-  const endpoint = queryParams
-    ? `${API_ENDPOINTS.BLOGS.LIST}?${queryParams}`
-    : API_ENDPOINTS.BLOGS.LIST;
-  return apiCall(endpoint);
-};
-
-export const getBlogById = async (id) => {
-  return apiCall(`${API_ENDPOINTS.BLOGS.DETAIL}/${id}`);
-};
-
-export const getBlogCategories = async () => {
-  return apiCall(API_ENDPOINTS.BLOGS.CATEGORIES);
-};
-
-export const getFeaturedBlogs = async (limit = 6) => {
-  return apiCall(`${API_ENDPOINTS.BLOGS.FEATURED}?limit=${limit}`);
-};
-
-export const getRecentBlogs = async (limit = 5) => {
-  return apiCall(`${API_ENDPOINTS.BLOGS.RECENT}?limit=${limit}`);
+  verifyEmail: async (oobCode) => {
+    const response = await fetch(`${API_BASE_URL}/auth/verify-email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ oobCode }),
+    });
+    return response.json();
+  },
 };
