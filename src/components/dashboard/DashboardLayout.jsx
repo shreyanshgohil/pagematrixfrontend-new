@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -14,10 +14,61 @@ import {
   FaCog as FaSettings,
 } from "react-icons/fa";
 import { IoMenu, IoClose } from "react-icons/io5";
+import { api } from "@/utils/api";
 
 const DashboardLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const profileDropdownRef = useRef(null);
   const router = useRouter();
+
+  // Mock user data - replace with actual user data from session/context
+  const user = {
+    name: "Shreyansh Gohil",
+    email: "shreyanshgoil2510@gmail.com",
+  };
+
+  // Get user initials
+  const getUserInitials = (name) => {
+    if (!name) return "U";
+    const parts = name.split(" ");
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        profileDropdownRef.current &&
+        !profileDropdownRef.current.contains(event.target)
+      ) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+
+    if (isProfileDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isProfileDropdownOpen]);
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await api.logout();
+      router.push("/signin");
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Still redirect to signin even if logout fails
+      router.push("/signin");
+    }
+  };
 
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: FaChartBar },
@@ -131,20 +182,75 @@ const DashboardLayout = ({ children }) => {
               </button>
 
               {/* User menu */}
-              <div className="relative">
-                <button className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">
+              <div className="relative" ref={profileDropdownRef}>
+                <button
+                  onClick={() =>
+                    setIsProfileDropdownOpen(!isProfileDropdownOpen)
+                  }
+                  className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group"
+                >
                   <div className="w-10 h-10 bg-gradient-to-r from-brand-theme to-brand-theme-600 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                    <span className="text-white font-semibold text-sm">SG</span>
+                    <span className="text-white font-semibold text-sm">
+                      {getUserInitials(user.name)}
+                    </span>
                   </div>
                   <div className="hidden sm:block text-left">
                     <p className="text-sm font-medium text-gray-900 leading-tight">
-                      Shreyansh Gohil
+                      {user.name}
                     </p>
                     <p className="text-xs text-gray-500 leading-tight">
-                      shreyansh@example.com
+                      {user.email}
                     </p>
                   </div>
                 </button>
+
+                {/* Profile Dropdown */}
+                {isProfileDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                    {/* User Info Section */}
+                    <div className="px-4 py-3 border-b border-gray-200">
+                      <p className="text-sm font-semibold text-gray-900 uppercase">
+                        {user.name}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">{user.email}</p>
+                    </div>
+
+                    {/* Menu Items */}
+                    <div className="py-1">
+                      <Link
+                        href="/profile"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        <FaUser className="h-4 w-4 mr-3 text-gray-400" />
+                        Profile
+                      </Link>
+                      <Link
+                        href="/plans-billing"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        <FaCreditCard className="h-4 w-4 mr-3 text-gray-400" />
+                        Plans & Billing
+                      </Link>
+                      <Link
+                        href="/settings"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        <FaCog className="h-4 w-4 mr-3 text-gray-400" />
+                        Settings
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        <FaSignOutAlt className="h-4 w-4 mr-3 text-gray-400" />
+                        Log out
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -26,9 +26,8 @@ export const api = {
   },
 
   logout: async () => {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    const response = await fetch(`${API_BASE_URL}/backend/auth/logout`, {
       method: "POST",
-      credentials: "include",
     });
     return response.json();
   },
@@ -39,7 +38,6 @@ export const api = {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify({ email }),
     });
     return response.json();
@@ -51,7 +49,6 @@ export const api = {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify({ oobCode, newPassword }),
     });
     return response.json();
@@ -63,7 +60,6 @@ export const api = {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify({ oobCode }),
     });
     return response.json();

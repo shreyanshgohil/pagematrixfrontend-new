@@ -43,7 +43,7 @@ const ForgotPassword = () => {
       // Also notify backend
       await api.forgotPassword(formData.email);
 
-      setSubmitStatus("success");
+        setSubmitStatus("success");
     } catch (error) {
       console.error("Forgot password error:", error);
       setSubmitStatus("error");

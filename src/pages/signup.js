@@ -28,8 +28,6 @@ import {
 const SignUp = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -75,9 +73,6 @@ const SignUp = () => {
       const response = await api.signup({
         email: formData.email,
         password: formData.password,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        phone: "", // Add phone field if needed
       });
 
       if (response.status === 201) {
@@ -315,47 +310,6 @@ const SignUp = () => {
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium text-brand-blue-800 mb-2">
-                            First Name
-                          </label>
-                          <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                              <FaUser className="h-5 w-5 text-brand-gray-400 group-focus-within:text-brand-theme transition-colors duration-300" />
-                            </div>
-                            <input
-                              type="text"
-                              name="firstName"
-                              value={formData.firstName}
-                              onChange={handleChange}
-                              required
-                              className="w-full pl-12 pr-4 py-4 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300 hover:border-brand-theme/50"
-                              placeholder="John"
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-brand-blue-800 mb-2">
-                            Last Name
-                          </label>
-                          <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                              <FaUser className="h-5 w-5 text-brand-gray-400 group-focus-within:text-brand-theme transition-colors duration-300" />
-                            </div>
-                            <input
-                              type="text"
-                              name="lastName"
-                              value={formData.lastName}
-                              onChange={handleChange}
-                              required
-                              className="w-full pl-12 pr-4 py-4 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300 hover:border-brand-theme/50"
-                              placeholder="Doe"
-                            />
-                          </div>
-                        </div>
-                      </div>
-
                       <div>
                         <label className="block text-sm font-medium text-brand-blue-800 mb-2">
                           Email Address
@@ -376,102 +330,69 @@ const SignUp = () => {
                         </div>
                       </div>
 
-                      <div>
-                        <label className="block text-sm font-medium text-brand-blue-800 mb-2">
-                          Password
-                        </label>
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <FaLock className="h-5 w-5 text-brand-gray-400 group-focus-within:text-brand-theme transition-colors duration-300" />
-                          </div>
-                          <input
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            className="w-full pl-12 pr-14 py-4 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300 hover:border-brand-theme/50"
-                            placeholder="Create a password"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute inset-y-0 right-0 pr-4 flex items-center hover:bg-brand-gray-50 rounded-r-xl transition-colors duration-300"
-                          >
-                            {showPassword ? (
-                              <FaEyeSlash className="h-5 w-5 text-brand-gray-400 hover:text-brand-theme transition-colors duration-300" />
-                            ) : (
-                              <FaEye className="h-5 w-5 text-brand-gray-400 hover:text-brand-theme transition-colors duration-300" />
-                            )}
-                          </button>
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-brand-blue-800 mb-2">
-                          Confirm Password
-                        </label>
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <FaLock className="h-5 w-5 text-brand-gray-400 group-focus-within:text-brand-theme transition-colors duration-300" />
-                          </div>
-                          <input
-                            type={showConfirmPassword ? "text" : "password"}
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            required
-                            className="w-full pl-12 pr-14 py-4 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300 hover:border-brand-theme/50"
-                            placeholder="Confirm your password"
-                          />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setShowConfirmPassword(!showConfirmPassword)
-                            }
-                            className="absolute inset-y-0 right-0 pr-4 flex items-center hover:bg-brand-gray-50 rounded-r-xl transition-colors duration-300"
-                          >
-                            {showConfirmPassword ? (
-                              <FaEyeSlash className="h-5 w-5 text-brand-gray-400 hover:text-brand-theme transition-colors duration-300" />
-                            ) : (
-                              <FaEye className="h-5 w-5 text-brand-gray-400 hover:text-brand-theme transition-colors duration-300" />
-                            )}
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <div className="flex items-center h-5">
-                          <input
-                            id="agree-terms"
-                            name="agreeToTerms"
-                            type="checkbox"
-                            checked={formData.agreeToTerms}
-                            onChange={handleChange}
-                            required
-                            className="h-4 w-4 text-brand-theme focus:ring-brand-theme border-brand-gray-300 rounded"
-                          />
-                        </div>
-                        <div className="ml-3 text-sm">
-                          <label
-                            htmlFor="agree-terms"
-                            className="text-brand-gray-500"
-                          >
-                            I agree to the{" "}
-                            <Link
-                              href="/terms-and-conditions"
-                              className="text-brand-theme hover:text-brand-theme-600 transition-colors duration-300"
-                            >
-                              Terms & Conditions
-                            </Link>{" "}
-                            and{" "}
-                            <Link
-                              href="/privacy"
-                              className="text-brand-theme hover:text-brand-theme-600 transition-colors duration-300"
-                            >
-                              Privacy Policy
-                            </Link>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-brand-blue-800 mb-2">
+                            Password
                           </label>
+                          <div className="relative group">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                              <FaLock className="h-5 w-5 text-brand-gray-400 group-focus-within:text-brand-theme transition-colors duration-300" />
+                            </div>
+                            <input
+                              type={showPassword ? "text" : "password"}
+                              name="password"
+                              value={formData.password}
+                              onChange={handleChange}
+                              required
+                              className="w-full pl-12 pr-14 py-4 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300 hover:border-brand-theme/50"
+                              placeholder="Create a password"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute inset-y-0 right-0 pr-4 flex items-center hover:bg-brand-gray-50 rounded-r-xl transition-colors duration-300"
+                            >
+                              {showPassword ? (
+                                <FaEyeSlash className="h-5 w-5 text-brand-gray-400 hover:text-brand-theme transition-colors duration-300" />
+                              ) : (
+                                <FaEye className="h-5 w-5 text-brand-gray-400 hover:text-brand-theme transition-colors duration-300" />
+                              )}
+                            </button>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-brand-blue-800 mb-2">
+                            Confirm Password
+                          </label>
+                          <div className="relative group">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                              <FaLock className="h-5 w-5 text-brand-gray-400 group-focus-within:text-brand-theme transition-colors duration-300" />
+                            </div>
+                            <input
+                              type={showConfirmPassword ? "text" : "password"}
+                              name="confirmPassword"
+                              value={formData.confirmPassword}
+                              onChange={handleChange}
+                              required
+                              className="w-full pl-12 pr-14 py-4 bg-white border-2 border-brand-gray-200 rounded-xl text-brand-blue-800 placeholder-brand-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-theme focus:border-brand-theme transition-all duration-300 hover:border-brand-theme/50"
+                              placeholder="Confirm your password"
+                            />
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setShowConfirmPassword(!showConfirmPassword)
+                              }
+                              className="absolute inset-y-0 right-0 pr-4 flex items-center hover:bg-brand-gray-50 rounded-r-xl transition-colors duration-300"
+                            >
+                              {showConfirmPassword ? (
+                                <FaEyeSlash className="h-5 w-5 text-brand-gray-400 hover:text-brand-theme transition-colors duration-300" />
+                              ) : (
+                                <FaEye className="h-5 w-5 text-brand-gray-400 hover:text-brand-theme transition-colors duration-300" />
+                              )}
+                            </button>
+                          </div>
                         </div>
                       </div>
 
@@ -501,11 +422,6 @@ const SignUp = () => {
                         <div className="absolute inset-0 flex items-center">
                           <div className="w-full border-t border-brand-gray-300"></div>
                         </div>
-                        <div className="relative flex justify-center text-sm">
-                          <span className="px-4 bg-white text-brand-gray-500">
-                            Or sign up with
-                          </span>
-                        </div>
                       </div>
 
                       <button
@@ -515,7 +431,7 @@ const SignUp = () => {
                         className={`w-full font-semibold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border-2 ${
                           isLoading || isGoogleLoading
                             ? "border-gray-300 text-gray-400 cursor-not-allowed"
-                            : "border-brand-gray-300 text-brand-blue-800 hover:border-brand-theme hover:bg-brand-theme/5"
+                            : " text-brand-blue-800 border-brand-theme/50 bg-brand-theme/10 hover:border-brand-theme hover:bg-brand-theme/5"
                         }`}
                       >
                         {isGoogleLoading ? (
